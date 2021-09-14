@@ -1,0 +1,17 @@
+D:\Visual Studio 2019\source\Personnel\A_UN_API\LoggerServices\bin\Release\net5.0\LoggerServices.deps.json
+D:\Visual Studio 2019\source\Personnel\A_UN_API\LoggerServices\bin\Release\net5.0\LoggerServices.dll
+D:\Visual Studio 2019\source\Personnel\A_UN_API\LoggerServices\bin\Release\net5.0\ref\LoggerServices.dll
+D:\Visual Studio 2019\source\Personnel\A_UN_API\LoggerServices\bin\Release\net5.0\LoggerServices.pdb
+D:\Visual Studio 2019\source\Personnel\A_UN_API\LoggerServices\bin\Release\net5.0\Contracts.dll
+D:\Visual Studio 2019\source\Personnel\A_UN_API\LoggerServices\bin\Release\net5.0\Entities.dll
+D:\Visual Studio 2019\source\Personnel\A_UN_API\LoggerServices\bin\Release\net5.0\Contracts.pdb
+D:\Visual Studio 2019\source\Personnel\A_UN_API\LoggerServices\bin\Release\net5.0\Entities.pdb
+D:\Visual Studio 2019\source\Personnel\A_UN_API\LoggerServices\obj\Release\net5.0\LoggerServices.csprojAssemblyReference.cache
+D:\Visual Studio 2019\source\Personnel\A_UN_API\LoggerServices\obj\Release\net5.0\LoggerServices.GeneratedMSBuildEditorConfig.editorconfig
+D:\Visual Studio 2019\source\Personnel\A_UN_API\LoggerServices\obj\Release\net5.0\LoggerServices.AssemblyInfoInputs.cache
+D:\Visual Studio 2019\source\Personnel\A_UN_API\LoggerServices\obj\Release\net5.0\LoggerServices.AssemblyInfo.cs
+D:\Visual Studio 2019\source\Personnel\A_UN_API\LoggerServices\obj\Release\net5.0\LoggerServices.csproj.CoreCompileInputs.cache
+D:\Visual Studio 2019\source\Personnel\A_UN_API\LoggerServices\obj\Release\net5.0\LoggerServices.csproj.CopyComplete
+D:\Visual Studio 2019\source\Personnel\A_UN_API\LoggerServices\obj\Release\net5.0\LoggerServices.dll
+D:\Visual Studio 2019\source\Personnel\A_UN_API\LoggerServices\obj\Release\net5.0\ref\LoggerServices.dll
+D:\Visual Studio 2019\source\Personnel\A_UN_API\LoggerServices\obj\Release\net5.0\LoggerServices.pdb

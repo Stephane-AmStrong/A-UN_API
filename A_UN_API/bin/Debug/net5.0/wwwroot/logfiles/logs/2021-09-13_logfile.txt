@@ -1,0 +1,10 @@
+2021-09-13 13:52:54.9290 INFO Authentication attempt
+2021-09-13 13:52:56.2239 INFO User Named: AmStrong has logged in successfully
+2021-09-13 14:05:41.1294 INFO Authentication attempt
+2021-09-13 14:05:42.3547 INFO User Named: AmStrong has logged in successfully
+2021-09-13 14:08:23.7121 INFO Authentication attempt
+2021-09-13 14:08:23.9649 INFO User Named: AmStrong has logged in successfully
+2021-09-13 14:11:03.0232 INFO Authentication attempt
+2021-09-13 14:11:03.9829 INFO User Named: AmStrong has logged in successfully
+2021-09-13 14:32:50.5945 INFO Authentication attempt
+2021-09-13 14:32:51.6634 INFO User Named: AmStrong has logged in successfully

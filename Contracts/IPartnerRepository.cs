@@ -1,0 +1,20 @@
+﻿
+using Entities.Models;
+using Entities.Models.QueryParameters;
+using System;
+using System.Threading.Tasks;
+
+namespace Contracts
+{
+    public interface IPartnerRepository
+    {
+        Task<PagedList<Partner>> GetAllPartnersAsync(QueryStringParameters paginationParameters);
+
+        Task<Partner> GetPartnerByIdAsync(Guid id);
+        Task<bool> PartnerExistAsync(Partner partner);
+
+        Task CreatePartnerAsync(Partner partner);
+        Task UpdatePartnerAsync(Partner partner);
+        Task DeletePartnerAsync(Partner partner);
+    }
+}
