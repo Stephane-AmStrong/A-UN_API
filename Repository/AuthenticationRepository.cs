@@ -2,7 +2,9 @@
 using Entities;
 using Entities.Models;
 using Entities.Models.QueryParameters;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -21,12 +23,15 @@ namespace Repository
         private readonly IConfiguration _configuration;
         private readonly UserManager<AppUser> _userManager;
         private readonly RoleManager<Workstation> _roleManager;
+        private readonly string _baseURL;
 
-        public AuthenticationRepository(RepositoryContext repositoryContext, UserManager<AppUser> userManager, RoleManager<Workstation> roleManager, IConfiguration configuration) : base(repositoryContext)
+
+        public AuthenticationRepository(RepositoryContext repositoryContext, UserManager<AppUser> userManager, RoleManager<Workstation> roleManager, IConfiguration configuration, IHttpContextAccessor httpContextAccessor) : base(repositoryContext)
         {
             _configuration = configuration;
             _userManager = userManager;
             _roleManager = roleManager;
+            _baseURL = string.Concat(httpContextAccessor.HttpContext.Request.Scheme, "://", httpContextAccessor.HttpContext.Request.Host);
         }
 
 
@@ -37,6 +42,124 @@ namespace Repository
                             paginationParameters.PageNumber,
                             paginationParameters.PageSize)
                         );
+        }
+
+
+        public async Task<AuthenticationResponse> RegisterUserAsync(AppUser user, string password)
+        {
+            if (user == null) throw new ArgumentNullException(nameof(user));
+            user.CreatedAt = DateTime.Now;
+            user.UpdatedAt = DateTime.Now;
+
+            var result = await _userManager.CreateAsync(user, password);
+
+            if (result.Succeeded)
+            {
+                var generatedToken = await GenerateEmailConfirmationTokenAsync(user);
+                var encodeToken = await EncodeTokenAsync(generatedToken);
+
+                return new AuthenticationResponse
+                {
+                    Token = encodeToken,
+                    IsSuccess = true,
+                };
+            }
+
+            return new AuthenticationResponse
+            {
+                Message = "AppUser is not created",
+                IsSuccess = false,
+                ErrorDetails = result.Errors.Select(errorDescription => errorDescription.Description)
+            };
+        }
+
+
+        /*public async Task<AuthenticationResponse> RegisterUserAsync(AppUser user, string password)
+        {
+            if (user == null) throw new ArgumentNullException(nameof(user));
+            user.CreatedAt = DateTime.Now;
+            user.UpdatedAt = DateTime.Now;
+
+            var result = await _userManager.CreateAsync(user, password);
+
+            if (result.Succeeded)
+            {
+                var confirmationToken = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+
+                var encodedEmailToken = Encoding.UTF8.GetBytes(confirmationToken);
+                var validEmailToken = WebEncoders.Base64UrlEncode(encodedEmailToken);
+
+
+                return new AuthenticationResponse
+                {
+                    Token = validEmailToken,
+                    IsSuccess = true,
+                };
+            }
+
+            return new AuthenticationResponse
+            {
+                Message = "AppUser is not created",
+                IsSuccess = false,
+                ErrorDetails = result.Errors.Select(errorDescription => errorDescription.Description)
+            };
+        }
+        */
+
+
+        public async Task<string> GenerateEmailConfirmationTokenAsync(AppUser appUser)
+        {
+            return await _userManager.GenerateEmailConfirmationTokenAsync(appUser);
+        }
+
+
+        public async Task<string> EncodeTokenAsync(string token)
+        {
+            var encodedEmailToken = await Task.Run(()=>Encoding.UTF8.GetBytes(token));
+            return await Task.Run(()=> WebEncoders.Base64UrlEncode(encodedEmailToken));
+        }
+
+
+        public async Task<string> DecodeTokenAsync(string encodedToken)
+        {
+            var decodedToken = await Task.Run(()=> WebEncoders.Base64UrlDecode(encodedToken));
+            return await Task.Run(()=> Encoding.UTF8.GetString(decodedToken));
+        }
+
+
+        public async Task<AuthenticationResponse> ConfirmEmailAsync(string userId, string token)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+
+            if (user == null)
+            {
+                return new AuthenticationResponse
+                {
+                    IsSuccess = false,
+                    Message = "User not found !"
+                };
+            }
+
+            var result = await _userManager.ConfirmEmailAsync(user, await DecodeTokenAsync(token));
+
+            var userInfo = user.ToDictionary();
+
+            if (result.Succeeded)
+            {
+                return new AuthenticationResponse
+                {
+                    IsSuccess = true,
+                    UserInfo = userInfo,
+                    Message = "Email confirmed successfuly!"
+                };
+            }
+
+            return new AuthenticationResponse
+            {
+                IsSuccess = false,
+                Message = "Email confirmation failed",
+                ErrorDetails = result.Errors.Select(ex=>ex.Description)
+            };
         }
 
 
@@ -65,14 +188,7 @@ namespace Repository
                     IsSuccess = false,
                 };
             }
-            
-            var privateClaims = new List<Claim>
-            {
-                new Claim(ClaimTypes.NameIdentifier, user.Id),
-                //new Claim("FullName", user.Firstname+ " "+ user.Name),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-            };
-            
+
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id),
@@ -88,8 +204,8 @@ namespace Repository
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["AuthSettings:Key"]));
 
             var token = new JwtSecurityToken(
-                issuer: _configuration["AuthSettings:Issuer"],
-                audience: _configuration["AuthSettings:Audience"],
+                issuer: _baseURL,
+                audience: _baseURL,
                 claims: claims,
                 expires: DateTime.Now.AddDays(1),
                 signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256)
@@ -97,16 +213,7 @@ namespace Repository
 
             string tokenString = new JwtSecurityTokenHandler().WriteToken(token);
 
-            var userInfo = new Dictionary<string, string>
-            {
-                { "ImgUrl", user.ImgUrl },
-                { "Name", user.Name},
-                { "Email", user.Email },
-                { "PhoneNumber", user.PhoneNumber },
-                { "CreatedAt", user.CreatedAt.ToString()},
-                { "UpdatedAt", user.UpdatedAt.ToString()},
-                { "DisabledAt", user.DisabledAt.ToString()},
-            };
+            var userInfo = user.ToDictionary();
 
             return new AuthenticationResponse
             {
@@ -119,27 +226,64 @@ namespace Repository
         }
 
 
-        public async Task<AuthenticationResponse> RegisterUserAsync(AppUser user, string password)
+        public async Task<AuthenticationResponse> ForgetPasswordAsync(string email)
         {
-            if (user == null) throw new ArgumentNullException(nameof(user));
-            user.CreatedAt = DateTime.Now;
-            user.UpdatedAt = DateTime.Now;
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null)
+            {
+                return new AuthenticationResponse
+                {
+                    IsSuccess = false,
+                    Message = "No user associated with this email",
+                };
+            }
 
-            var result = await _userManager.CreateAsync(user, password);
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+            var encodedToken = await EncodeTokenAsync(token);
 
+            var userInfo = user.ToDictionary();
+
+            return new AuthenticationResponse
+            {
+                Token = encodedToken,
+                IsSuccess = true,
+                UserInfo = userInfo,
+                Message = "Password reset url has been sent to your email successfully",
+            };
+
+        }
+
+
+        public async Task<AuthenticationResponse> ResetPasswordAsync(ResetPasswordViewModel model)
+        {
+            var user = await _userManager.FindByEmailAsync(model.Email);
+            if (user == null)
+            {
+                return new AuthenticationResponse
+                {
+                    IsSuccess = false,
+                    Message = "No user associated with this email",
+                };
+            }
+
+
+            var formerToken = await DecodeTokenAsync(model.Token);
+
+            var result = await _userManager.ResetPasswordAsync(user, formerToken, model.NewPassword);
             if (result.Succeeded)
             {
                 return new AuthenticationResponse
                 {
                     IsSuccess = true,
+                    Message = "Password reset was successful!",
                 };
             }
 
             return new AuthenticationResponse
             {
-                Message = "AppUser is not created",
                 IsSuccess = false,
-                ErrorDetails = result.Errors.Select(errorDescription => errorDescription.Description)
+                Message = "Something went wrong",
+                ErrorDetails = result.Errors.Select(e=>e.Description),
             };
         }
 
@@ -166,6 +310,7 @@ namespace Repository
                 ErrorDetails = result.Errors.Select(errorDescription => errorDescription.Description)
             };
         }
+
 
         public async Task<AuthenticationResponse> RemoveFromWorkstationAsync(AppUser user, Workstation role)
         {
@@ -202,10 +347,28 @@ namespace Repository
             return await FindAll().CountAsync();
         }
 
+
         public async Task<string> GetUserId(ClaimsPrincipal user)
         {
             return await (Task.Run(() => _userManager.GetUserId(user)));
             //return await _userManager.GetUserIdAsync(user);
+        }
+    }
+
+    public static class AppUserExtension
+    {
+        public static Dictionary<string, string> ToDictionary(this AppUser appUser)
+        {
+            return new Dictionary<string, string>
+                {
+                    { "ImgUrl", appUser.ImgUrl },
+                    { "Name", appUser.Name +" "+appUser.Firstname},
+                    { "Email", appUser.Email },
+                    { "PhoneNumber", appUser.PhoneNumber },
+                    { "CreatedAt", appUser.CreatedAt.ToString()},
+                    { "UpdatedAt", appUser.UpdatedAt.ToString()},
+                    { "DisabledAt", appUser.DisabledAt.ToString()},
+                };
         }
     }
 }

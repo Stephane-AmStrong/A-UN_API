@@ -41,13 +41,16 @@ namespace A_UN_API
             services.ConfigureAuthenticationService(Configuration);
             services.ConfigureAuthorizationService();
             services.ConfigureNewtonsoftJson();
+            services.ConfigureMailService(Configuration);
 
             services.AddAutoMapper(typeof(Startup));
 
             services.AddControllers();
+            services.AddRazorPages();
+
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "A_UN_API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "A UN API", Version = "v1" });
 
                 c.AddSecurityDefinition("Bearer", OpenApiOperationFilter.SecuritySchema);
 
@@ -62,12 +65,12 @@ namespace A_UN_API
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "A_UN_API v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "A UN API v1"));
             }
 
             app.UseDeveloperExceptionPage();
             app.UseSwagger();
-            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "A_UN_API v1"));
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "A UN API v1"));
 
             app.UseHttpsRedirection();
 
@@ -89,6 +92,7 @@ namespace A_UN_API
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapRazorPages();
                 endpoints.MapControllers();
             });
         }

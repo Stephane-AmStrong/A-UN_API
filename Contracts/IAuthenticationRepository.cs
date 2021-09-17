@@ -13,8 +13,15 @@ namespace Contracts
     {
         Task<PagedList<AppUser>> GetAllUsersAsync(QueryStringParameters paginationParameters);
         Task<int> CountUsersAsync();
-        Task<AuthenticationResponse> RegisterUserAsync(AppUser AppUser, string password);
+        Task<AuthenticationResponse> RegisterUserAsync(AppUser appUser, string password);
+        Task<AuthenticationResponse> ConfirmEmailAsync(string userId, string token);
+        Task<string> GenerateEmailConfirmationTokenAsync(AppUser appUser);
+        //Task<string> GenerateEmailConfirmationTokenAsync(string userId);
+        Task<string> EncodeTokenAsync(string token);
+        Task<string> DecodeTokenAsync(string encodedToken);
         Task<AuthenticationResponse> LoginWithUserNameAsync(LoginRequest loginRequest, string password);
+        Task<AuthenticationResponse> ForgetPasswordAsync(string email);
+        Task<AuthenticationResponse> ResetPasswordAsync(ResetPasswordViewModel model);
         Task<string> GetUserId (ClaimsPrincipal user);
 
         Task<ICollection<string>> GetUsersWorkstationsAsync(AppUser user);

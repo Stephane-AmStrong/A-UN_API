@@ -32,7 +32,7 @@ namespace Repository
                 );
         }
 
-        public async Task<AppUser> GetAppUserByIdAsync(Guid id)
+        public async Task<AppUser> GetAppUserByIdAsync(string id)
         {
             return await _userManager.Users.Where(appUser => appUser.Id.Equals(id))
                 .OrderBy(x => x.Name)

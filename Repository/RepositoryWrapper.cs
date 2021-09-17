@@ -1,10 +1,12 @@
 ﻿using Contracts;
 using Entities;
 using Entities.Models;
+using Entities.Models.QueryParameters;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +26,7 @@ namespace Repository
         private IBranchLevelRepository _branchLevel;
         private IFileRepository _file;
         private IObjectiveRepository _objective;
+        private IMailRepository _mail;
         private IPartnerRepository _partner;
         private IPaymentRepository _payment;
         private IPaymentTypeRepository _paymentType;
@@ -45,6 +48,7 @@ namespace Repository
         private RepositoryContext _repoContext;
         private UserManager<AppUser> _userManager;
         private RoleManager<Workstation> _roleManager;
+        private IOptions<EmailSettings> _emailSettings;
 
         private string folderName;
         public string FolderName
@@ -70,7 +74,7 @@ namespace Repository
             {
                 if (_authenticationRepository == null)
                 {
-                    _authenticationRepository = new AuthenticationRepository(_repoContext, _userManager, _roleManager, _configuration);
+                    _authenticationRepository = new AuthenticationRepository(_repoContext, _userManager, _roleManager, _configuration, _httpContextAccessor);
                 }
                 return _authenticationRepository;
             }
@@ -133,6 +137,18 @@ namespace Repository
                     _file = new FileRepository(_repoContext);
                 }
                 return _file;
+            }
+        }
+        
+        public IMailRepository Mail
+        {
+            get
+            {
+                if (_mail == null)
+                {
+                    _mail = new MailRepository(_emailSettings);
+                }
+                return _mail;
             }
         }
 
@@ -271,12 +287,13 @@ namespace Repository
 
 
 
-        public RepositoryWrapper(UserManager<AppUser> userManager, RoleManager<Workstation> roleManager, RepositoryContext repositoryContext, IWebHostEnvironment webHostEnvironment, IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
+        public RepositoryWrapper(UserManager<AppUser> userManager, RoleManager<Workstation> roleManager, RepositoryContext repositoryContext, IOptions<EmailSettings> options, IWebHostEnvironment webHostEnvironment, IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _configuration = configuration;
             _repoContext = repositoryContext;
+            _emailSettings = options;
             _webHostEnvironment = webHostEnvironment;
             _httpContextAccessor = httpContextAccessor;
         }

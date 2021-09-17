@@ -10,7 +10,7 @@ namespace Contracts
     {
         Task<PagedList<AppUser>> GetAllAppUsersAsync(QueryStringParameters paginationParameters);
 
-        Task<AppUser> GetAppUserByIdAsync(Guid id);
+        Task<AppUser> GetAppUserByIdAsync(string id);
         Task<bool> AppUserExistAsync(AppUser appUser);
 
         Task UpdateAppUserAsync(AppUser appUser);

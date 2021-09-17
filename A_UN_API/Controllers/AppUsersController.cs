@@ -60,7 +60,7 @@ namespace GesProdAPI.Controllers
 
 
         [HttpGet("{id}", Name = "AppUserById")]
-        public async Task<ActionResult<AppUserReadDto>> GetAppUserById(Guid id)
+        public async Task<ActionResult<AppUserReadDto>> GetAppUserById(string id)
         {
             var appUser = await _repository.AppUser.GetAppUserByIdAsync(id);
 
@@ -81,7 +81,7 @@ namespace GesProdAPI.Controllers
 
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<AppUserReadDto>> UpdateAppUser(Guid id, [FromBody] AppUserWriteDto appUserWriteDto)
+        public async Task<ActionResult<AppUserReadDto>> UpdateAppUser(string id, [FromBody] AppUserWriteDto appUserWriteDto)
         {
             if (appUserWriteDto == null)
             {
@@ -116,7 +116,7 @@ namespace GesProdAPI.Controllers
 
 
         [HttpPatch("{id}")]
-        public async Task<ActionResult> PartialAppUserUpdate(Guid Id, JsonPatchDocument<AppUserWriteDto> patchDoc)
+        public async Task<ActionResult> PartialAppUserUpdate(string Id, JsonPatchDocument<AppUserWriteDto> patchDoc)
         {
             var appUserModelFromRepository = await _repository.AppUser.GetAppUserByIdAsync(Id);
             if (appUserModelFromRepository == null) return NotFound();
@@ -142,7 +142,7 @@ namespace GesProdAPI.Controllers
 
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteAppUser(Guid id)
+        public async Task<ActionResult> DeleteAppUser(string id)
         {
             var appUser = await _repository.AppUser.GetAppUserByIdAsync(id);
 

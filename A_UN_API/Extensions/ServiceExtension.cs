@@ -50,7 +50,7 @@ namespace A_UN_API.Extensions
 
         public static void ConfigureRepositoryContext(this IServiceCollection services, IConfiguration config)
         {
-            var connectionString = config["ConnectionStrings:GesProdConnection"];
+            var connectionString = config["ConnectionStrings:DbConnection"];
             IServiceCollection serviceCollections = services.AddDbContext<RepositoryContext>(options => options.UseSqlServer(connectionString));
         }
 

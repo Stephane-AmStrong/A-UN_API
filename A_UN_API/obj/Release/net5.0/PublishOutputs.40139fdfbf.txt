@@ -10,6 +10,7 @@ D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Release\net5.0\PubT
 D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Release\net5.0\PubTmp\Out\A_UN_API.pdb
 D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Release\net5.0\PubTmp\Out\AutoMapper.dll
 D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Release\net5.0\PubTmp\Out\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Release\net5.0\PubTmp\Out\MailKit.dll
 D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Release\net5.0\PubTmp\Out\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Release\net5.0\PubTmp\Out\Microsoft.AspNetCore.Authentication.OpenIdConnect.dll
 D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Release\net5.0\PubTmp\Out\Microsoft.AspNetCore.Cryptography.Internal.dll
@@ -32,11 +33,13 @@ D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Release\net5.0\PubT
 D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Release\net5.0\PubTmp\Out\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Release\net5.0\PubTmp\Out\Microsoft.IdentityModel.Tokens.dll
 D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Release\net5.0\PubTmp\Out\Microsoft.OpenApi.dll
+D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Release\net5.0\PubTmp\Out\MimeKit.dll
 D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Release\net5.0\PubTmp\Out\Newtonsoft.Json.dll
 D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Release\net5.0\PubTmp\Out\Newtonsoft.Json.Bson.dll
 D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Release\net5.0\PubTmp\Out\NLog.dll
 D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Release\net5.0\PubTmp\Out\NLog.Extensions.Logging.dll
 D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Release\net5.0\PubTmp\Out\NLog.Web.AspNetCore.dll
+D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Release\net5.0\PubTmp\Out\BouncyCastle.Crypto.dll
 D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Release\net5.0\PubTmp\Out\Swashbuckle.AspNetCore.Swagger.dll
 D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Release\net5.0\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerGen.dll
 D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Release\net5.0\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerUI.dll
@@ -65,4 +68,6 @@ D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Release\net5.0\PubT
 D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Release\net5.0\PubTmp\Out\Repository.pdb
 D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Release\net5.0\PubTmp\Out\Contracts.pdb
 D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Release\net5.0\PubTmp\Out\Entities.pdb
+D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Release\net5.0\PubTmp\Out\A_UN_API.Views.dll
+D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Release\net5.0\PubTmp\Out\A_UN_API.Views.pdb
 D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Release\net5.0\PubTmp\Out\A_UN_API.deps.json

@@ -8,7 +8,6 @@ namespace Contracts
 {
     public interface IMailRepository
     {
-        bool SendEmail(EmailData emailData);
-        Task SendEmailAsync();
+        Task SendEmailAsync(EmailData emailData);
     }
 }

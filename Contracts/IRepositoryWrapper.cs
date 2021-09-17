@@ -25,6 +25,8 @@ namespace Contracts
         ITechnicalThemeRepository TechnicalTheme { get; }
         IUniversityRepository University { get; }
         IWorkstationRepository Workstation { get; }
+        IMailRepository Mail { get; }
+
         string FolderName { set; }
 
         Task SaveAsync();
