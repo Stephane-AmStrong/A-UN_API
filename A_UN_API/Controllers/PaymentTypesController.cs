@@ -38,17 +38,7 @@ namespace GesProdAPI.Controllers
         {
             var paymentTypes = await _repository.PaymentType.GetAllPaymentTypesAsync(paginationParameters);
 
-            var metadata = new
-            {
-                paymentTypes.TotalCount,
-                paymentTypes.PageSize,
-                paymentTypes.CurrentPage,
-                paymentTypes.TotalPages,
-                paymentTypes.HasNext,
-                paymentTypes.HasPrevious
-            };
-
-            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
+            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(paymentTypes.MetaData));
 
             _logger.LogInfo($"Returned all paymentTypes from database.");
 

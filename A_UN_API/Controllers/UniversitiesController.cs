@@ -19,13 +19,13 @@ namespace GesProdAPI.Controllers
     [ApiController]
     [Route("api/[controller]")]
     [Authorize]
-    public class UniversitiesController : ControllerBase
+    public class universitiesController : ControllerBase
     {
         private readonly ILoggerManager _logger;
         private readonly IRepositoryWrapper _repository;
         private readonly IMapper _mapper;
 
-        public UniversitiesController(ILoggerManager logger, IRepositoryWrapper repository, IMapper mapper)
+        public universitiesController(ILoggerManager logger, IRepositoryWrapper repository, IMapper mapper)
         {
             _logger = logger;
             _repository = repository;
@@ -34,27 +34,17 @@ namespace GesProdAPI.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UniversityReadDto>>> GetAllUniversities([FromQuery] QueryStringParameters paginationParameters)
+        public async Task<ActionResult<IEnumerable<UniversityReadDto>>> GetAlluniversities([FromQuery] QueryStringParameters paginationParameters)
         {
-            var Universities = await _repository.University.GetAllUniversitiesAsync(paginationParameters);
+            var universities = await _repository.University.GetAllUniversitiesAsync(paginationParameters);
 
-            var metadata = new
-            {
-                Universities.TotalCount,
-                Universities.PageSize,
-                Universities.CurrentPage,
-                Universities.TotalPages,
-                Universities.HasNext,
-                Universities.HasPrevious
-            };
+            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(universities.MetaData));
 
-            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
+            _logger.LogInfo($"Returned all universities from database.");
 
-            _logger.LogInfo($"Returned all Universities from database.");
+            var universitiesReadDto = _mapper.Map<IEnumerable<UniversityReadDto>>(universities);
 
-            var UniversitiesReadDto = _mapper.Map<IEnumerable<UniversityReadDto>>(Universities);
-
-            return Ok(UniversitiesReadDto);
+            return Ok(universitiesReadDto);
         }
 
 

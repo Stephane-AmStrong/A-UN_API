@@ -21,8 +21,8 @@ namespace Entities.Models.QueryParameters
             new Claim("readBranchLevel", "Read BranchLevels"),
             new Claim("writeBranchLevel", "Write BranchLevels"),
 
-            new Claim("readFile", "Read Files"),
-            new Claim("writeFile", "Write Files"),
+            new Claim("readPersonalFile", "Read PersonalFiles"),
+            new Claim("writePersonalFile", "Write PersonalFiles"),
 
             new Claim("readObjective", "Read Objectives"),
             new Claim("writeObjective", "Write Objectives"),

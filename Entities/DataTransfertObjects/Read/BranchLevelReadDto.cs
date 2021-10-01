@@ -15,6 +15,7 @@ namespace Entities.DataTransfertObjects
         public Guid TechnicalThemeId { get; set; }
 
         public string Name { get; set; }
+        public string ImgLink { get; set; }
 
 
         public virtual BranchReadDto Branch { get; set; }

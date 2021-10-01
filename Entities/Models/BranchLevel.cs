@@ -20,6 +20,7 @@ namespace Entities.Models
         public Guid TechnicalThemeId { get; set; }
         [Required]
         public string Name { get; set; }
+        public string ImgLink { get; set; }
 
 
         [ForeignKey("BranchId")]

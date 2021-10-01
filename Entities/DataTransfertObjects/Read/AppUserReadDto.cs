@@ -10,7 +10,7 @@ namespace Entities.DataTransfertObjects
     public class AppUserReadDto
     {
         public string Id { get; set; }
-        public string ImgUrl { get; set; }
+        public string ImgLink { get; set; }
         public string Firstname { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
@@ -20,7 +20,7 @@ namespace Entities.DataTransfertObjects
         public DateTime? UpdatedAt { get; set; }
         public DateTime? DisabledAt { get; set; }
 
-        public virtual FileReadDto[] Files { get; set; }
+        public virtual PersonalFileReadDto[] PersonalFiles { get; set; }
         public virtual SubscriptionReadDto[] Subscriptions { get; set; }
     }
 }

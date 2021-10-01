@@ -38,17 +38,7 @@ namespace GesProdAPI.Controllers
         {
             var technicalThemes = await _repository.TechnicalTheme.GetAllTechnicalThemesAsync(paginationParameters);
 
-            var metadata = new
-            {
-                technicalThemes.TotalCount,
-                technicalThemes.PageSize,
-                technicalThemes.CurrentPage,
-                technicalThemes.TotalPages,
-                technicalThemes.HasNext,
-                technicalThemes.HasPrevious
-            };
-
-            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
+            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(technicalThemes.MetaData));
 
             _logger.LogInfo($"Returned all technicalThemes from database.");
 

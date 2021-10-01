@@ -13,7 +13,7 @@ namespace Entities.DataTransfertObjects
 
         [Required]
         public string Name { get; set; }
-        public Guid FileId { get; set; }
+        public Guid PersonalFileId { get; set; }
         public Guid RegistrationFormLineId { get; set; }
         public Guid SubscriptionId { get; set; }
     }

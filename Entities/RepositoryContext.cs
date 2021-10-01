@@ -17,7 +17,7 @@ namespace Entities
         public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<Branch> Branches { get; set; }
         public DbSet<BranchLevel> BranchLevels { get; set; }
-        public DbSet<File> Files { get; set; }
+        public DbSet<PersonalFile> PersonalFiles { get; set; }
         public DbSet<Objective> Objectives { get; set; }
         public DbSet<Partner> Partners { get; set; }
         public DbSet<Payment> Payments { get; set; }

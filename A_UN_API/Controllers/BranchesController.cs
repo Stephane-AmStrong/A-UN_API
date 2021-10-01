@@ -24,12 +24,15 @@ namespace GesProdAPI.Controllers
         private readonly ILoggerManager _logger;
         private readonly IRepositoryWrapper _repository;
         private readonly IMapper _mapper;
+        private readonly string _baseURL;
 
-        public BranchesController(ILoggerManager logger, IRepositoryWrapper repository, IMapper mapper)
+        public BranchesController(ILoggerManager logger, IRepositoryWrapper repository, IMapper mapper, IHttpContextAccessor httpContextAccessor)
         {
             _logger = logger;
             _repository = repository;
             _mapper = mapper;
+            _repository.Path = "/pictures/Branch";
+            _baseURL = string.Concat(httpContextAccessor.HttpContext.Request.Scheme, "://", httpContextAccessor.HttpContext.Request.Host);
         }
 
 
@@ -38,21 +41,16 @@ namespace GesProdAPI.Controllers
         {
             var branches = await _repository.Branch.GetAllBranchesAsync(paginationParameters);
 
-            var metadata = new
-            {
-                branches.TotalCount,
-                branches.PageSize,
-                branches.CurrentPage,
-                branches.TotalPages,
-                branches.HasNext,
-                branches.HasPrevious
-            };
-
-            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
+            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(branches.MetaData));
 
             _logger.LogInfo($"Returned all branches from database.");
 
             var branchesReadDto = _mapper.Map<IEnumerable<BranchReadDto>>(branches);
+
+            branchesReadDto.ToList().ForEach(branchReadDto =>
+            {
+                if (!string.IsNullOrWhiteSpace(branchReadDto.ImgLink)) branchReadDto.ImgLink = $"{_baseURL}{branchReadDto.ImgLink}";
+            });
 
             return Ok(branchesReadDto);
         }
@@ -74,7 +72,9 @@ namespace GesProdAPI.Controllers
                 _logger.LogInfo($"Returned branchWriteDto with id: {id}");
 
                 var branchReadDto = _mapper.Map<BranchReadDto>(branch);
-                
+
+                if (!string.IsNullOrWhiteSpace(branchReadDto.ImgLink)) branchReadDto.ImgLink = $"{_baseURL}{branchReadDto.ImgLink}";
+
                 return Ok(branchReadDto);
             }
         }
@@ -143,11 +143,14 @@ namespace GesProdAPI.Controllers
             await _repository.SaveAsync();
 
             var branchReadDto = _mapper.Map<BranchReadDto>(branchEntity);
+
+            if (!string.IsNullOrWhiteSpace(branchReadDto.ImgLink)) branchReadDto.ImgLink = $"{_baseURL}{branchReadDto.ImgLink}";
+
             return Ok(branchReadDto);
         }
 
 
-        // PATCH api/branches/{id}
+
         [HttpPatch("{id}")]
         public async Task<ActionResult> PartialBranchUpdate(Guid Id, JsonPatchDocument<BranchWriteDto> patchDoc)
         {
@@ -169,6 +172,42 @@ namespace GesProdAPI.Controllers
             await _repository.SaveAsync();
 
             return NoContent();
+        }
+
+
+
+        [HttpPut("{id}/upload-picture")]
+        public async Task<ActionResult<BranchReadDto>> UploadPicture(Guid id, [FromForm] IFormFile file)
+        {
+            var branchEntity = await _repository.Branch.GetBranchByIdAsync(id);
+            if (branchEntity == null) return NotFound();
+
+            if (file != null)
+            {
+                _repository.File.FilePath = id.ToString();
+
+                var uploadResult = await _repository.File.UploadFile(file);
+
+                if (uploadResult == null)
+                {
+                    ModelState.AddModelError("", "something went wrong when uploading the picture");
+                    return ValidationProblem(ModelState);
+                }
+                else
+                {
+                    branchEntity.ImgLink = uploadResult;
+                }
+            }
+
+            await _repository.Branch.UpdateBranchAsync(branchEntity);
+
+            await _repository.SaveAsync();
+
+            var branchReadDto = _mapper.Map<BranchReadDto>(branchEntity);
+
+            if (!string.IsNullOrWhiteSpace(branchReadDto.ImgLink)) branchReadDto.ImgLink = $"{_baseURL}{branchReadDto.ImgLink}";
+
+            return Ok(branchReadDto);
         }
 
 

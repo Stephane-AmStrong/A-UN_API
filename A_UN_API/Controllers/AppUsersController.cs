@@ -24,12 +24,15 @@ namespace GesProdAPI.Controllers
         private readonly ILoggerManager _logger;
         private readonly IRepositoryWrapper _repository;
         private readonly IMapper _mapper;
+        private readonly string _baseURL;
 
-        public AppUsersController(ILoggerManager logger, IRepositoryWrapper repository, IMapper mapper)
+        public AppUsersController(ILoggerManager logger, IRepositoryWrapper repository, IMapper mapper, IHttpContextAccessor httpContextAccessor)
         {
             _logger = logger;
             _repository = repository;
             _mapper = mapper;
+            _repository.Path = "/pictures/AppUser";
+            _baseURL = string.Concat(httpContextAccessor.HttpContext.Request.Scheme, "://", httpContextAccessor.HttpContext.Request.Host);
         }
 
 
@@ -38,21 +41,16 @@ namespace GesProdAPI.Controllers
         {
             var appUsers = await _repository.AppUser.GetAllAppUsersAsync(paginationParameters);
 
-            var metadata = new
-            {
-                appUsers.TotalCount,
-                appUsers.PageSize,
-                appUsers.CurrentPage,
-                appUsers.TotalPages,
-                appUsers.HasNext,
-                appUsers.HasPrevious
-            };
-
-            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
+            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(appUsers.MetaData));
 
             _logger.LogInfo($"Returned all appUsers from database.");
 
             var appUsersReadDto = _mapper.Map<IEnumerable<AppUserReadDto>>(appUsers);
+
+            appUsersReadDto.ToList().ForEach(appUserReadDto =>
+            {
+                if (!string.IsNullOrWhiteSpace(appUserReadDto.ImgLink)) appUserReadDto.ImgLink = $"{_baseURL}{appUserReadDto.ImgLink}";
+            });
 
             return Ok(appUsersReadDto);
         }
@@ -74,7 +72,9 @@ namespace GesProdAPI.Controllers
                 _logger.LogInfo($"Returned appUserWriteDto with id: {id}");
 
                 var appUserReadDto = _mapper.Map<AppUserReadDto>(appUser);
-                
+
+                if (!string.IsNullOrWhiteSpace(appUserReadDto.ImgLink)) appUserReadDto.ImgLink = $"{_baseURL}{appUserReadDto.ImgLink}";
+
                 return Ok(appUserReadDto);
             }
         }
@@ -109,6 +109,9 @@ namespace GesProdAPI.Controllers
             await _repository.SaveAsync();
 
             var appUserReadDto = _mapper.Map<AppUserReadDto>(appUserEntity);
+            
+            if (!string.IsNullOrWhiteSpace(appUserReadDto.ImgLink)) appUserReadDto.ImgLink = $"{_baseURL}{appUserReadDto.ImgLink}";
+            
             return Ok(appUserReadDto);
         }
 
@@ -136,6 +139,43 @@ namespace GesProdAPI.Controllers
             await _repository.SaveAsync();
 
             return NoContent();
+        }
+
+
+
+
+        [HttpPut("{id}/upload-picture")]
+        public async Task<ActionResult<AppUserReadDto>> UploadPicture(string id, [FromForm] IFormFile file)
+        {
+            var appUserEntity = await _repository.AppUser.GetAppUserByIdAsync(id);
+            if (appUserEntity == null) return NotFound();
+
+            if (file != null)
+            {
+                _repository.File.FilePath = id.ToString();
+
+                var uploadResult = await _repository.File.UploadFile(file);
+
+                if (uploadResult == null)
+                {
+                    ModelState.AddModelError("", "something went wrong when uploading the picture");
+                    return ValidationProblem(ModelState);
+                }
+                else
+                {
+                    appUserEntity.ImgLink = uploadResult;
+                }
+            }
+
+            await _repository.AppUser.UpdateAppUserAsync(appUserEntity);
+
+            await _repository.SaveAsync();
+
+            var appUserReadDto = _mapper.Map<AppUserReadDto>(appUserEntity);
+
+            if (!string.IsNullOrWhiteSpace(appUserReadDto.ImgLink)) appUserReadDto.ImgLink = $"{_baseURL}{appUserReadDto.ImgLink}";
+
+            return Ok(appUserReadDto);
         }
 
 

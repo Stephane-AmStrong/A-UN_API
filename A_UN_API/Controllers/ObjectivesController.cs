@@ -38,17 +38,7 @@ namespace GesProdAPI.Controllers
         {
             var objectives = await _repository.Objective.GetAllObjectivesAsync(paginationParameters);
 
-            var metadata = new
-            {
-                objectives.TotalCount,
-                objectives.PageSize,
-                objectives.CurrentPage,
-                objectives.TotalPages,
-                objectives.HasNext,
-                objectives.HasPrevious
-            };
-
-            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
+            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(objectives.MetaData));
 
             _logger.LogInfo($"Returned all objectives from database.");
 

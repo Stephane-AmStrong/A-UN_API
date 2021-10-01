@@ -43,17 +43,7 @@ namespace GesProdAPI.Controllers
 
             //var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            var metadata = new
-            {
-                workstations.TotalCount,
-                workstations.PageSize,
-                workstations.CurrentPage,
-                workstations.TotalPages,
-                workstations.HasNext,
-                workstations.HasPrevious
-            };
-
-            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
+            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(workstations.MetaData));
 
             _logger.LogInfo($"Returned all workstations from database.");
 

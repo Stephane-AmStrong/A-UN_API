@@ -12,7 +12,7 @@ namespace Entities.DataTransfertObjects
     public class AppUserWriteDto
     {
         [JsonIgnore]
-        public string ImgUrl { get; set; }
+        public string ImgLink { get; set; }
         [Required]
         public string Firstname { get; set; }
         [Required]

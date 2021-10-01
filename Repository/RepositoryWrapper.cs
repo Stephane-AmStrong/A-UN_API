@@ -17,14 +17,14 @@ namespace Repository
 {
     public class RepositoryWrapper : IRepositoryWrapper
     {
-        private IImageRepository _imageRepository;
+        private IFileRepository _fileRepository;
         private IAuthenticationRepository _authenticationRepository;
         private IAcademicYearRepository _academicYearRepository;
 
         private IAppUserRepository _appUser;
         private IBranchRepository _branche;
         private IBranchLevelRepository _branchLevel;
-        private IFileRepository _file;
+        private IPersonalFileRepository _personalFile;
         private IObjectiveRepository _objective;
         private IMailRepository _mail;
         private IPartnerRepository _partner;
@@ -50,21 +50,21 @@ namespace Repository
         private RoleManager<Workstation> _roleManager;
         private IOptions<EmailSettings> _emailSettings;
 
-        private string folderName;
-        public string FolderName
+        private string filePath;
+        public string Path
         {
-            set { folderName = value; }
+            set { filePath = value; }
         }
 
-        public IImageRepository Image
+        public IFileRepository File
         {
             get
             {
-                if (_imageRepository == null)
+                if (_fileRepository == null)
                 {
-                    _imageRepository = new ImageRepository(_webHostEnvironment, folderName);
+                    _fileRepository = new FileRepository(_webHostEnvironment, filePath);
                 }
-                return _imageRepository;
+                return _fileRepository;
             }
         }
 
@@ -74,7 +74,7 @@ namespace Repository
             {
                 if (_authenticationRepository == null)
                 {
-                    _authenticationRepository = new AuthenticationRepository(_repoContext, _userManager, _roleManager, _configuration, _httpContextAccessor);
+                    _authenticationRepository = new AuthenticationRepository(_repoContext, _userManager, _roleManager, _configuration);
                 }
                 return _authenticationRepository;
             }
@@ -128,15 +128,15 @@ namespace Repository
             }
         }
 
-        public IFileRepository File
+        public IPersonalFileRepository PersonalFile
         {
             get
             {
-                if (_file == null)
+                if (_personalFile == null)
                 {
-                    _file = new FileRepository(_repoContext);
+                    _personalFile = new PersonalFileRepository(_repoContext);
                 }
-                return _file;
+                return _personalFile;
             }
         }
         

@@ -18,6 +18,7 @@ namespace Entities.Models
         public Guid TechnicalThemeId { get; set; }
         [Required]
         public string Name { get; set; }
+        public string ImgLink { get; set; }
         public Guid BranchLevelId { get; set; }
 
 

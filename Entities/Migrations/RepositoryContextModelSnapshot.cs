@@ -70,7 +70,7 @@ namespace Entities.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImgUrl")
+                    b.Property<string>("ImgLink")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
@@ -135,6 +135,9 @@ namespace Entities.Migrations
                     b.Property<Guid>("BranchLevelId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("ImgLink")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -163,6 +166,9 @@ namespace Entities.Migrations
                     b.Property<Guid>("BranchId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("ImgLink")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -177,30 +183,6 @@ namespace Entities.Migrations
                     b.HasIndex("TechnicalThemeId");
 
                     b.ToTable("BranchLevels");
-                });
-
-            modelBuilder.Entity("Entities.Models.File", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("AppUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Link")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AppUserId");
-
-                    b.ToTable("Files");
                 });
 
             modelBuilder.Entity("Entities.Models.Objective", b =>
@@ -223,6 +205,9 @@ namespace Entities.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ImgLink")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -317,6 +302,30 @@ namespace Entities.Migrations
                     b.ToTable("PaymentTypes");
                 });
 
+            modelBuilder.Entity("Entities.Models.PersonalFile", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AppUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Link")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("PersonalFiles");
+                });
+
             modelBuilder.Entity("Entities.Models.RegistrationForm", b =>
                 {
                     b.Property<Guid>("Id")
@@ -325,6 +334,9 @@ namespace Entities.Migrations
 
                     b.Property<Guid>("FieldLevelId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ImgLink")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -393,12 +405,12 @@ namespace Entities.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("FileId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("PersonalFileId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("RegistrationFormLineId")
                         .HasColumnType("uniqueidentifier");
@@ -408,7 +420,7 @@ namespace Entities.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FileId");
+                    b.HasIndex("PersonalFileId");
 
                     b.HasIndex("RegistrationFormLineId");
 
@@ -647,17 +659,6 @@ namespace Entities.Migrations
                     b.Navigation("TechnicalTheme");
                 });
 
-            modelBuilder.Entity("Entities.Models.File", b =>
-                {
-                    b.HasOne("Entities.Models.AppUser", "AppUser")
-                        .WithMany("Files")
-                        .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AppUser");
-                });
-
             modelBuilder.Entity("Entities.Models.Payment", b =>
                 {
                     b.HasOne("Entities.Models.PaymentType", "PaymentType")
@@ -675,6 +676,17 @@ namespace Entities.Migrations
                     b.Navigation("PaymentType");
 
                     b.Navigation("Subscription");
+                });
+
+            modelBuilder.Entity("Entities.Models.PersonalFile", b =>
+                {
+                    b.HasOne("Entities.Models.AppUser", "AppUser")
+                        .WithMany("PersonalFiles")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
                 });
 
             modelBuilder.Entity("Entities.Models.RegistrationForm", b =>
@@ -712,9 +724,9 @@ namespace Entities.Migrations
 
             modelBuilder.Entity("Entities.Models.SubscriptionLine", b =>
                 {
-                    b.HasOne("Entities.Models.File", "File")
+                    b.HasOne("Entities.Models.PersonalFile", "PersonalFile")
                         .WithMany()
-                        .HasForeignKey("FileId")
+                        .HasForeignKey("PersonalFileId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -730,7 +742,7 @@ namespace Entities.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("File");
+                    b.Navigation("PersonalFile");
 
                     b.Navigation("RegistrationFormLine");
 
@@ -799,7 +811,7 @@ namespace Entities.Migrations
 
             modelBuilder.Entity("Entities.Models.AppUser", b =>
                 {
-                    b.Navigation("Files");
+                    b.Navigation("PersonalFiles");
 
                     b.Navigation("Subscriptions");
                 });

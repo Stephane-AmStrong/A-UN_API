@@ -24,12 +24,15 @@ namespace GesProdAPI.Controllers
         private readonly ILoggerManager _logger;
         private readonly IRepositoryWrapper _repository;
         private readonly IMapper _mapper;
+        private readonly string _baseURL;
 
-        public PartnersController(ILoggerManager logger, IRepositoryWrapper repository, IMapper mapper)
+        public PartnersController(ILoggerManager logger, IRepositoryWrapper repository, IMapper mapper, IHttpContextAccessor httpContextAccessor)
         {
             _logger = logger;
             _repository = repository;
             _mapper = mapper;
+            _repository.Path = "/pictures/Partner";
+            _baseURL = string.Concat(httpContextAccessor.HttpContext.Request.Scheme, "://", httpContextAccessor.HttpContext.Request.Host);
         }
 
 
@@ -38,21 +41,16 @@ namespace GesProdAPI.Controllers
         {
             var partners = await _repository.Partner.GetAllPartnersAsync(paginationParameters);
 
-            var metadata = new
-            {
-                partners.TotalCount,
-                partners.PageSize,
-                partners.CurrentPage,
-                partners.TotalPages,
-                partners.HasNext,
-                partners.HasPrevious
-            };
-
-            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
+            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(partners.MetaData));
 
             _logger.LogInfo($"Returned all partners from database.");
 
             var partnersReadDto = _mapper.Map<IEnumerable<PartnerReadDto>>(partners);
+
+            partnersReadDto.ToList().ForEach(partnerReadDto =>
+            {
+                if (!string.IsNullOrWhiteSpace(partnerReadDto.ImgLink)) partnerReadDto.ImgLink = $"{_baseURL}{partnerReadDto.ImgLink}";
+            });
 
             return Ok(partnersReadDto);
         }
@@ -74,7 +72,9 @@ namespace GesProdAPI.Controllers
                 _logger.LogInfo($"Returned partnerWriteDto with id: {id}");
 
                 var partnerReadDto = _mapper.Map<PartnerReadDto>(partner);
-                
+
+                if (!string.IsNullOrWhiteSpace(partnerReadDto.ImgLink)) partnerReadDto.ImgLink = $"{_baseURL}{partnerReadDto.ImgLink}";
+
                 return Ok(partnerReadDto);
             }
         }
@@ -143,6 +143,70 @@ namespace GesProdAPI.Controllers
             await _repository.SaveAsync();
 
             var partnerReadDto = _mapper.Map<PartnerReadDto>(partnerEntity);
+
+            if (!string.IsNullOrWhiteSpace(partnerReadDto.ImgLink)) partnerReadDto.ImgLink = $"{_baseURL}{partnerReadDto.ImgLink}";
+
+            return Ok(partnerReadDto);
+        }
+
+
+
+        [HttpPatch("{id}")]
+        public async Task<ActionResult> PartialBranchUpdate(Guid Id, JsonPatchDocument<BranchWriteDto> patchDoc)
+        {
+            var branchModelFromRepository = await _repository.Branch.GetBranchByIdAsync(Id);
+            if (branchModelFromRepository == null) return NotFound();
+
+            var branchToPatch = _mapper.Map<BranchWriteDto>(branchModelFromRepository);
+            patchDoc.ApplyTo(branchToPatch, ModelState);
+
+            if (!TryValidateModel(branchToPatch))
+            {
+                return ValidationProblem(ModelState);
+            }
+
+            _mapper.Map(branchToPatch, branchModelFromRepository);
+
+            await _repository.Branch.UpdateBranchAsync(branchModelFromRepository);
+
+            await _repository.SaveAsync();
+
+            return NoContent();
+        }
+
+
+
+        [HttpPut("{id}/upload-picture")]
+        public async Task<ActionResult<PartnerReadDto>> UploadPicture(Guid id, [FromForm] IFormFile file)
+        {
+            var partnerEntity = await _repository.Partner.GetPartnerByIdAsync(id);
+            if (partnerEntity == null) return NotFound();
+
+            if (file != null)
+            {
+                _repository.File.FilePath = id.ToString();
+
+                var uploadResult = await _repository.File.UploadFile(file);
+
+                if (uploadResult == null)
+                {
+                    ModelState.AddModelError("", "something went wrong when uploading the picture");
+                    return ValidationProblem(ModelState);
+                }
+                else
+                {
+                    partnerEntity.ImgLink = uploadResult;
+                }
+            }
+
+            await _repository.Partner.UpdatePartnerAsync(partnerEntity);
+
+            await _repository.SaveAsync();
+
+            var partnerReadDto = _mapper.Map<PartnerReadDto>(partnerEntity);
+
+            if (!string.IsNullOrWhiteSpace(partnerReadDto.ImgLink)) partnerReadDto.ImgLink = $"{_baseURL}{partnerReadDto.ImgLink}";
+
             return Ok(partnerReadDto);
         }
 

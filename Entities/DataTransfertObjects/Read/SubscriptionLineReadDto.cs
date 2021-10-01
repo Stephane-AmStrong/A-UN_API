@@ -13,12 +13,12 @@ namespace Entities.DataTransfertObjects
         public Guid Id { get; set; }
 
         public string Name { get; set; }
-        public Guid FileId { get; set; }
+        public Guid PersonalFileId { get; set; }
         public Guid RegistrationFormLineId { get; set; }
         public Guid SubscriptionId { get; set; }
 
 
-        public virtual FileReadDto File { get; set; }
+        public virtual PersonalFileReadDto PersonalFile { get; set; }
         public virtual RegistrationFormLineWriteDto RegistrationFormLine { get; set; }
         public virtual SubscriptionReadDto Subscription { get; set; }
     }

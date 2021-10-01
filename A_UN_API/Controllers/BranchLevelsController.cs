@@ -24,12 +24,15 @@ namespace GesProdAPI.Controllers
         private readonly ILoggerManager _logger;
         private readonly IRepositoryWrapper _repository;
         private readonly IMapper _mapper;
+        private readonly string _baseURL;
 
-        public BranchLevelsController(ILoggerManager logger, IRepositoryWrapper repository, IMapper mapper)
+        public BranchLevelsController(ILoggerManager logger, IRepositoryWrapper repository, IMapper mapper, IHttpContextAccessor httpContextAccessor)
         {
             _logger = logger;
             _repository = repository;
             _mapper = mapper;
+            _repository.Path = "/pictures/BranchLevel";
+            _baseURL = string.Concat(httpContextAccessor.HttpContext.Request.Scheme, "://", httpContextAccessor.HttpContext.Request.Host);
         }
 
 
@@ -38,21 +41,16 @@ namespace GesProdAPI.Controllers
         {
             var branchLevels = await _repository.BranchLevel.GetAllBranchLevelsAsync(paginationParameters);
 
-            var metadata = new
-            {
-                branchLevels.TotalCount,
-                branchLevels.PageSize,
-                branchLevels.CurrentPage,
-                branchLevels.TotalPages,
-                branchLevels.HasNext,
-                branchLevels.HasPrevious
-            };
-
-            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
+            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(branchLevels.MetaData));
 
             _logger.LogInfo($"Returned all branchLevels from database.");
 
             var branchLevelsReadDto = _mapper.Map<IEnumerable<BranchLevelReadDto>>(branchLevels);
+
+            branchLevelsReadDto.ToList().ForEach(branchLevelReadDto =>
+            {
+                if (!string.IsNullOrWhiteSpace(branchLevelReadDto.ImgLink)) branchLevelReadDto.ImgLink = $"{_baseURL}{branchLevelReadDto.ImgLink}";
+            });
 
             return Ok(branchLevelsReadDto);
         }
@@ -74,7 +72,9 @@ namespace GesProdAPI.Controllers
                 _logger.LogInfo($"Returned branchLevelWriteDto with id: {id}");
 
                 var branchLevelReadDto = _mapper.Map<BranchLevelReadDto>(branchLevel);
-                
+
+                if (!string.IsNullOrWhiteSpace(branchLevelReadDto.ImgLink)) branchLevelReadDto.ImgLink = $"{_baseURL}{branchLevelReadDto.ImgLink}";
+
                 return Ok(branchLevelReadDto);
             }
         }
@@ -143,6 +143,9 @@ namespace GesProdAPI.Controllers
             await _repository.SaveAsync();
 
             var branchLevelReadDto = _mapper.Map<BranchLevelReadDto>(branchLevelEntity);
+
+            if (!string.IsNullOrWhiteSpace(branchLevelReadDto.ImgLink)) branchLevelReadDto.ImgLink = $"{_baseURL}{branchLevelReadDto.ImgLink}";
+
             return Ok(branchLevelReadDto);
         }
 
@@ -170,6 +173,42 @@ namespace GesProdAPI.Controllers
             await _repository.SaveAsync();
 
             return NoContent();
+        }
+
+
+
+        [HttpPut("{id}/upload-picture")]
+        public async Task<ActionResult<BranchLevelReadDto>> UploadPicture(Guid id, [FromForm] IFormFile file)
+        {
+            var branchLevelEntity = await _repository.BranchLevel.GetBranchLevelByIdAsync(id);
+            if (branchLevelEntity == null) return NotFound();
+
+            if (file != null)
+            {
+                _repository.File.FilePath = id.ToString();
+
+                var uploadResult = await _repository.File.UploadFile(file);
+
+                if (uploadResult == null)
+                {
+                    ModelState.AddModelError("", "something went wrong when uploading the picture");
+                    return ValidationProblem(ModelState);
+                }
+                else
+                {
+                    branchLevelEntity.ImgLink = uploadResult;
+                }
+            }
+
+            await _repository.BranchLevel.UpdateBranchLevelAsync(branchLevelEntity);
+
+            await _repository.SaveAsync();
+
+            var branchLevelReadDto = _mapper.Map<BranchLevelReadDto>(branchLevelEntity);
+
+            if (!string.IsNullOrWhiteSpace(branchLevelReadDto.ImgLink)) branchLevelReadDto.ImgLink = $"{_baseURL}{branchLevelReadDto.ImgLink}";
+
+            return Ok(branchLevelReadDto);
         }
 
 

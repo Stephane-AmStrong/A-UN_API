@@ -1,20 +1,18 @@
-﻿
-using Entities.Models;
-using Entities.Models.QueryParameters;
+﻿using Microsoft.AspNetCore.Http;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Contracts
 {
     public interface IFileRepository
     {
-        Task<PagedList<File>> GetAllFilesAsync(QueryStringParameters paginationParameters);
+        public string FilePath { set; }
 
-        Task<File> GetFileByIdAsync(Guid id);
-        Task<bool> FileExistAsync(File file);
+        public Task<string> UploadFile(IFormFile file);
 
-        Task CreateFileAsync(File file);
-        Task UpdateFileAsync(File file);
-        Task DeleteFileAsync(File file);
+        public Task DeleteFile(string filePath);
     }
 }

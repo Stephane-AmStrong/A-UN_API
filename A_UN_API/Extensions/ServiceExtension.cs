@@ -25,10 +25,18 @@ namespace A_UN_API.Extensions
         {
             services.AddCors(options =>
             {
+                options.AddPolicy("CorsPolicy",builder => builder
+                    .WithOrigins("http://localhost:5768", "")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .WithExposedHeaders("X-Pagination"));
+                
+                /*
                 options.AddPolicy("CorsPolicy",
                     builder => builder.AllowAnyOrigin()
                     .AllowAnyMethod()
                     .AllowAnyHeader());
+                */
             });
         }
 

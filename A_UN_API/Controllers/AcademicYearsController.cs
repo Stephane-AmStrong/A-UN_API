@@ -38,17 +38,7 @@ namespace GesProdAPI.Controllers
         {
             var academicYears = await _repository.AcademicYear.GetAllAcademicYearsAsync(paginationParameters);
 
-            var metadata = new
-            {
-                academicYears.TotalCount,
-                academicYears.PageSize,
-                academicYears.CurrentPage,
-                academicYears.TotalPages,
-                academicYears.HasNext,
-                academicYears.HasPrevious
-            };
-
-            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
+            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(academicYears.MetaData));
 
             _logger.LogInfo($"Returned all academicYears from database.");
 

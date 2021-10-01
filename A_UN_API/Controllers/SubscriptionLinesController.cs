@@ -38,17 +38,7 @@ namespace GesProdAPI.Controllers
         {
             var subscriptionLines = await _repository.SubscriptionLine.GetAllSubscriptionLinesAsync(paginationParameters);
 
-            var metadata = new
-            {
-                subscriptionLines.TotalCount,
-                subscriptionLines.PageSize,
-                subscriptionLines.CurrentPage,
-                subscriptionLines.TotalPages,
-                subscriptionLines.HasNext,
-                subscriptionLines.HasPrevious
-            };
-
-            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
+            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(subscriptionLines.MetaData));
 
             _logger.LogInfo($"Returned all subscriptionLines from database.");
 

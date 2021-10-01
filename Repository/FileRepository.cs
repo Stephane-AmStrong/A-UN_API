@@ -1,58 +1,80 @@
 ﻿using Contracts;
-using Entities;
-using Entities.Models;
-using Entities.Models.QueryParameters;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Repository
 {
-    public class FileRepository : RepositoryBase<File>, IFileRepository
+    public class FileRepository : IFileRepository
     {
-        public FileRepository(RepositoryContext repositoryContext) : base(repositoryContext)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        private string absoluteFilePath;
+        private string relativeFilePath;
+
+        public string AbsoluteFilePath
         {
+            get { return absoluteFilePath; }
+            //set { folderName = value; }
         }
 
-        public async Task<PagedList<File>> GetAllFilesAsync(QueryStringParameters paginationParameters)
+        private string fileName;
+        public string FilePath { set => fileName = value; }
+
+
+
+        public FileRepository(IWebHostEnvironment webHostEnvironment, string folderName)
         {
-            return await Task.Run(() =>
-                PagedList<File>.ToPagedList(FindAll().OrderBy(x => x.Name),
-                    paginationParameters.PageNumber,
-                    paginationParameters.PageSize)
-                );
+            _webHostEnvironment = webHostEnvironment;
+            this.absoluteFilePath = $"{_webHostEnvironment.WebRootPath}/{folderName}";
+
+            relativeFilePath = $"/{folderName}";
         }
 
-        public async Task<File> GetFileByIdAsync(Guid id)
+
+
+        public async Task DeleteFile(string filePath)
         {
-            return await FindByCondition(file => file.Id.Equals(id))
-                
-                .OrderBy(x => x.Name)
-                .FirstOrDefaultAsync();
+            try
+            {
+                await Task.Run(()=> File.Delete(filePath));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
-        public async Task<bool> FileExistAsync(Entities.Models.File file)
+        public async Task<string> UploadFile(IFormFile file)
         {
-            return await FindByCondition(x => x.Name == file.Name)
-                .AnyAsync();
-        }
+            try
+            {
+                if (!System.IO.Directory.Exists(absoluteFilePath)) Directory.CreateDirectory(absoluteFilePath);
 
-        public async Task CreateFileAsync(Entities.Models.File file)
-        {
-            await CreateAsync(file);
-        }
 
-        public async Task UpdateFileAsync(Entities.Models.File file)
-        {
-            await UpdateAsync(file);
-        }
+                if (file.Length > 0)
+                {
+                    string extention = file.FileName.Split('.').Last();
 
-        public async Task DeleteFileAsync(Entities.Models.File file)
-        {
-            await DeleteAsync(file);
+                    var fullPath = $"{this.absoluteFilePath}/{fileName}.{extention}";
+                    var relativePath = $"{this.relativeFilePath}/{fileName}.{extention}";
+                    using (var stream = File.Create(fullPath))
+                    {
+                        await file.CopyToAsync(stream);
+                        await stream.FlushAsync();
+                        return relativePath;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return null;
         }
     }
 }

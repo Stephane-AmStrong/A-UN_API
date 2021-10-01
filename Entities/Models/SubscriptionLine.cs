@@ -13,13 +13,13 @@ namespace Entities.Models
         public Guid Id { get; set; }
         [Required]
         public string Name { get; set; }
-        public Guid FileId { get; set; }
+        public Guid PersonalFileId { get; set; }
         public Guid RegistrationFormLineId { get; set; }
         public Guid SubscriptionId { get; set; }
 
 
-        [ForeignKey ("FileId")]
-        public virtual File File { get; set; }
+        [ForeignKey ("PersonalFileId")]
+        public virtual PersonalFile PersonalFile { get; set; }
         
         [ForeignKey ("RegistrationFormLineId")]
         public virtual RegistrationFormLine RegistrationFormLine { get; set; }

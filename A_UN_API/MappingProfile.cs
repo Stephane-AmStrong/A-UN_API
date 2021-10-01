@@ -36,9 +36,6 @@ namespace GesProdAPI
             CreateMap<BranchLevel, BranchLevelReadDto>();
             CreateMap<BranchLevelWriteDto, BranchLevel>();
 
-            CreateMap<File, FileReadDto>();
-            CreateMap<FileWriteDto, File>();
-
             CreateMap<Objective, ObjectiveReadDto>();
             CreateMap<ObjectiveWriteDto, Objective>();
 
@@ -50,6 +47,9 @@ namespace GesProdAPI
 
             CreateMap<PaymentType, PaymentTypeReadDto>();
             CreateMap<PaymentTypeWriteDto, PaymentType>();
+
+            CreateMap<PersonalFile, PersonalFileReadDto>();
+            CreateMap<PersonalFileWriteDto, PersonalFile>();
 
             CreateMap<RegistrationForm, RegistrationFormReadDto>();
             CreateMap<RegistrationFormWriteDto, RegistrationForm>();

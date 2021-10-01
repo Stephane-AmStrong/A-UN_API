@@ -11,11 +11,11 @@ namespace Entities.Models
     {
         public AppUser()
         {
-            Files = new HashSet<File>();
+            PersonalFiles = new HashSet<PersonalFile>();
             Subscriptions = new HashSet<Subscription>();
         }
 
-        public string ImgUrl { get; set; }
+        public string ImgLink { get; set; }
         [Required]
         public string Firstname { get; set; }
         [Required]
@@ -27,7 +27,7 @@ namespace Entities.Models
         public DateTime? UpdatedAt { get; set; }
         public DateTime? DisabledAt { get; set; }
 
-        public virtual ICollection<File> Files { get; set; }
+        public virtual ICollection<PersonalFile> PersonalFiles { get; set; }
         public virtual ICollection<Subscription> Subscriptions { get; set; }
     }
 }

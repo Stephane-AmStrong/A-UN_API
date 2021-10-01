@@ -7,13 +7,14 @@ namespace Contracts
 {
     public interface IRepositoryWrapper
     {
-        IImageRepository Image { get; }
+        IFileRepository File { get; }
+
         IAuthenticationRepository Authentication { get; }
         IAcademicYearRepository AcademicYear { get; }
         IAppUserRepository AppUser { get; }
         IBranchRepository Branch { get; }
         IBranchLevelRepository BranchLevel { get; }
-        IFileRepository File { get; }
+        IPersonalFileRepository PersonalFile { get; }
         IObjectiveRepository Objective { get; }
         IPartnerRepository Partner { get; }
         IPaymentRepository Payment { get; }
@@ -27,7 +28,7 @@ namespace Contracts
         IWorkstationRepository Workstation { get; }
         IMailRepository Mail { get; }
 
-        string FolderName { set; }
+        string Path { set; }
 
         Task SaveAsync();
     }

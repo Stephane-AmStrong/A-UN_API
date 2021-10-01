@@ -96,28 +96,28 @@ namespace Entities.Extensions
         }
     }
 
-    public static class CloneExtension
-    {
+    //public static class CloneExtension
+    //{
 
 
-        public static T Clone<T>(this object item)
-        {
-            if (item != null)
-            {
-                BinaryFormatter formatter = new BinaryFormatter();
-                MemoryStream stream = new MemoryStream();
+    //    public static T Clone<T>(this object item)
+    //    {
+    //        if (item != null)
+    //        {
+    //            BinaryFormatter formatter = new BinaryFormatter();
+    //            MemoryStream stream = new MemoryStream();
 
-                formatter.Serialize(stream, item);
-                stream.Seek(0, SeekOrigin.Begin);
+    //            formatter.Serialize(stream, item);
+    //            stream.Seek(0, SeekOrigin.Begin);
 
-                T result = (T)formatter.Deserialize(stream);
+    //            T result = (T)formatter.Deserialize(stream);
 
-                stream.Close();
+    //            stream.Close();
 
-                return result;
-            }
-            else
-                return default(T);
-        }
-    }
+    //            return result;
+    //        }
+    //        else
+    //            return default(T);
+    //    }
+    //}
 }

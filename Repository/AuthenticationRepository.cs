@@ -23,15 +23,15 @@ namespace Repository
         private readonly IConfiguration _configuration;
         private readonly UserManager<AppUser> _userManager;
         private readonly RoleManager<Workstation> _roleManager;
-        private readonly string _baseURL;
+        //private readonly string _baseURL;
 
 
-        public AuthenticationRepository(RepositoryContext repositoryContext, UserManager<AppUser> userManager, RoleManager<Workstation> roleManager, IConfiguration configuration, IHttpContextAccessor httpContextAccessor) : base(repositoryContext)
+        public AuthenticationRepository(RepositoryContext repositoryContext, UserManager<AppUser> userManager, RoleManager<Workstation> roleManager, IConfiguration configuration) : base(repositoryContext)
         {
             _configuration = configuration;
             _userManager = userManager;
             _roleManager = roleManager;
-            _baseURL = string.Concat(httpContextAccessor.HttpContext.Request.Scheme, "://", httpContextAccessor.HttpContext.Request.Host);
+            //_baseURL = string.Concat(httpContextAccessor.HttpContext.Request.Scheme, "://", httpContextAccessor.HttpContext.Request.Host);
         }
 
 
@@ -192,7 +192,9 @@ namespace Repository
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id),
-                //new Claim("FullName", user.Firstname+ " "+ user.Name),
+                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.GivenName, user.Firstname),
+                new Claim(ClaimTypes.Surname, user.Name),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 
@@ -204,8 +206,8 @@ namespace Repository
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["AuthSettings:Key"]));
 
             var token = new JwtSecurityToken(
-                issuer: _baseURL,
-                audience: _baseURL,
+                issuer: _configuration["AuthSettings:Issuer"],
+                audience: _configuration["AuthSettings:Audience"],
                 claims: claims,
                 expires: DateTime.Now.AddDays(1),
                 signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256)
@@ -361,7 +363,7 @@ namespace Repository
         {
             return new Dictionary<string, string>
                 {
-                    { "ImgUrl", appUser.ImgUrl },
+                    { "ImgUrl", appUser.ImgLink },
                     { "Name", appUser.Name +" "+appUser.Firstname},
                     { "Email", appUser.Email },
                     { "PhoneNumber", appUser.PhoneNumber },

@@ -38,17 +38,7 @@ namespace GesProdAPI.Controllers
         {
             var registrationFormLines = await _repository.RegistrationFormLine.GetAllRegistrationFormLinesAsync(paginationParameters);
 
-            var metadata = new
-            {
-                registrationFormLines.TotalCount,
-                registrationFormLines.PageSize,
-                registrationFormLines.CurrentPage,
-                registrationFormLines.TotalPages,
-                registrationFormLines.HasNext,
-                registrationFormLines.HasPrevious
-            };
-
-            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
+            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(registrationFormLines.MetaData));
 
             _logger.LogInfo($"Returned all registrationFormLines from database.");
 
