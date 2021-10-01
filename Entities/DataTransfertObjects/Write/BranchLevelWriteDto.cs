@@ -14,9 +14,6 @@ namespace Entities.DataTransfertObjects
         public Guid TechnicalThemeId { get; set; }
         [Required]
         public string Name { get; set; }
-        public string ImgLink { get; set; }
-
-
         public virtual TechnicalThemeWriteDto TechnicalTheme { get; set; }
 
         public virtual RegistrationFormWriteDto[] RegistrationForms { get; set; }

@@ -10,7 +10,6 @@ namespace Entities.DataTransfertObjects
     public class UniversityWriteDto
     {
         public string Name { get; set; }
-        public string ImgLink { get; set; }
         public long Price { get; set; }
         public string AppUserId { get; set; }
         public DateTime Birthday { get; set; }

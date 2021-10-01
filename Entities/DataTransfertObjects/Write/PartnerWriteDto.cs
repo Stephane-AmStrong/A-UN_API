@@ -12,6 +12,5 @@ namespace Entities.DataTransfertObjects
 
         [Required]
         public string Name { get; set; }
-        public string ImgLink { get; set; }
     }
 }

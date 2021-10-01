@@ -19,13 +19,13 @@ namespace GesProdAPI.Controllers
     [ApiController]
     [Route("api/[controller]")]
     [Authorize]
-    public class universitiesController : ControllerBase
+    public class UniversitiesController : ControllerBase
     {
         private readonly ILoggerManager _logger;
         private readonly IRepositoryWrapper _repository;
         private readonly IMapper _mapper;
 
-        public universitiesController(ILoggerManager logger, IRepositoryWrapper repository, IMapper mapper)
+        public UniversitiesController(ILoggerManager logger, IRepositoryWrapper repository, IMapper mapper)
         {
             _logger = logger;
             _repository = repository;
@@ -34,7 +34,7 @@ namespace GesProdAPI.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UniversityReadDto>>> GetAlluniversities([FromQuery] QueryStringParameters paginationParameters)
+        public async Task<ActionResult<IEnumerable<UniversityReadDto>>> GetAllUniversities([FromQuery] QueryStringParameters paginationParameters)
         {
             var universities = await _repository.University.GetAllUniversitiesAsync(paginationParameters);
 

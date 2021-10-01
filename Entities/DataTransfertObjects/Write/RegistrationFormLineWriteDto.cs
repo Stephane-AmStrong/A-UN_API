@@ -14,7 +14,6 @@ namespace Entities.DataTransfertObjects
         public int NumOrder { get; set; }
         [Required]
         public string Name { get; set; }
-        public string ImgLink { get; set; }
         public bool IsProgram { get; set; }
     }
 }
