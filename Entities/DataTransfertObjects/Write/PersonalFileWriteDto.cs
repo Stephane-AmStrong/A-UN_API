@@ -9,12 +9,13 @@ using System.Threading.Tasks;
 
 namespace Entities.DataTransfertObjects
 {
-    public class SubscriptionWriteDto
+    public class PersonalFileWriteDto
     {
+
         [Required]
         public string Name { get; set; }
+        public string Link { get; set; }
         [JsonIgnore]
         public string AppUserId { get; set; }
-        //public virtual SubscriptionLineWriteDto[] SubscriptionLines { get; set; }
     }
 }
