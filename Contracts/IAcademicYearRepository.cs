@@ -1,6 +1,6 @@
 ﻿
 using Entities.Models;
-using Entities.Models.QueryParameters;
+using Entities.RequestFeatures;
 using System;
 using System.Threading.Tasks;
 

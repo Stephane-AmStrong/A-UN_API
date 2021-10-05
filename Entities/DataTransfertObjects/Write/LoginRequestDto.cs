@@ -11,7 +11,7 @@ namespace Entities.DataTransfertObjects
     public class LoginRequestDto
     {
         [Required]
-        [EmailField]
+        [EmailAddress]
         public string Email { get; set; }
         [Required]
         [DataType(DataType.Password)]

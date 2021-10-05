@@ -15,6 +15,5 @@ namespace Entities.DataTransfertObjects
         [JsonIgnore]
         public string AppUserId { get; set; }
         public DateTime Birthday { get; set; }
-        public DateTime CreateAt { get; set; }
     }
 }

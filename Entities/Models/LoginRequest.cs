@@ -11,7 +11,7 @@ namespace Entities.Models
     public class LoginRequest
     {
         [Required]
-        [EmailField]
+        [EmailAddress]
         public string Email { get; set; }
         [Required]
         [DataType(DataType.Password)]

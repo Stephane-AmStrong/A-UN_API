@@ -1,3 +1,11 @@
+D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.csprojAssemblyReference.cache
+D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.GeneratedMSBuildEditorConfig.editorconfig
+D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.AssemblyInfoInputs.cache
+D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.AssemblyInfo.cs
+D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.csproj.CoreCompileInputs.cache
+D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.MvcApplicationPartsAssemblyInfo.cache
+D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.RazorAssemblyInfo.cache
+D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.RazorAssemblyInfo.cs
 D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\bin\Debug\net5.0\appsettings.Development.json
 D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\bin\Debug\net5.0\appsettings.json
 D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\bin\Debug\net5.0\A_UN_API.exe
@@ -49,6 +57,7 @@ D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\bin\Debug\net5.0\Swashb
 D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\bin\Debug\net5.0\System.Configuration.ConfigurationManager.dll
 D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\bin\Debug\net5.0\System.Diagnostics.DiagnosticSource.dll
 D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\bin\Debug\net5.0\System.IdentityModel.Tokens.Jwt.dll
+D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\bin\Debug\net5.0\System.Linq.Dynamic.Core.dll
 D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\bin\Debug\net5.0\System.Runtime.Caching.dll
 D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\bin\Debug\net5.0\System.Security.Cryptography.ProtectedData.dll
 D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\bin\Debug\net5.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
@@ -71,15 +80,7 @@ D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\bin\Debug\net5.0\Logger
 D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\bin\Debug\net5.0\Repository.pdb
 D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\bin\Debug\net5.0\Contracts.pdb
 D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\bin\Debug\net5.0\Entities.pdb
-D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.csprojAssemblyReference.cache
-D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.GeneratedMSBuildEditorConfig.editorconfig
-D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.AssemblyInfoInputs.cache
-D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.AssemblyInfo.cs
-D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.csproj.CoreCompileInputs.cache
 D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.MvcApplicationPartsAssemblyInfo.cs
-D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.MvcApplicationPartsAssemblyInfo.cache
-D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.RazorAssemblyInfo.cache
-D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.RazorAssemblyInfo.cs
 D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Debug\net5.0\staticwebassets\A_UN_API.StaticWebAssets.Manifest.cache
 D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Debug\net5.0\staticwebassets\A_UN_API.StaticWebAssets.xml
 D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Debug\net5.0\scopedcss\bundle\A_UN_API.styles.css

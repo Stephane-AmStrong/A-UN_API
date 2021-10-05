@@ -2,7 +2,7 @@
 using Contracts;
 using Entities.DataTransfertObjects;
 using Entities.Models;
-using Entities.Models.QueryParameters;
+using Entities.RequestFeatures;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace GesProdAPI.Controllers
@@ -86,6 +87,9 @@ namespace GesProdAPI.Controllers
                 return BadRequest("Invalid model object");
             }
 
+            //If the AppUserId is not provided, then affect the currenct logged In User Id
+            if (string.IsNullOrWhiteSpace(subscription.AppUserId)) subscription.AppUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
             var subscriptionEntity = _mapper.Map<Subscription>(subscription);
 
             if (await _repository.Subscription.SubscriptionExistAsync(subscriptionEntity))
@@ -126,8 +130,10 @@ namespace GesProdAPI.Controllers
                 return NotFound();
             }
 
-            _mapper.Map(subscriptionWriteDto, subscriptionEntity);
+            //If the AppUserId is not provided, then affect the currenct logged In User Id
+            if (string.IsNullOrWhiteSpace(subscriptionWriteDto.AppUserId)) subscriptionWriteDto.AppUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
+            _mapper.Map(subscriptionWriteDto, subscriptionEntity);
 
             await _repository.Subscription.UpdateSubscriptionAsync(subscriptionEntity);
             await _repository.SaveAsync();

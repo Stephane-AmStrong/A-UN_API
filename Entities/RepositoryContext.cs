@@ -1,5 +1,5 @@
 ﻿using Entities.Models;
-using Entities.Models.QueryParameters;
+using Entities.RequestFeatures;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;

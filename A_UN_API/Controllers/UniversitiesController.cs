@@ -2,7 +2,7 @@
 using Contracts;
 using Entities.DataTransfertObjects;
 using Entities.Models;
-using Entities.Models.QueryParameters;
+using Entities.RequestFeatures;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace GesProdAPI.Controllers
@@ -24,25 +25,40 @@ namespace GesProdAPI.Controllers
         private readonly ILoggerManager _logger;
         private readonly IRepositoryWrapper _repository;
         private readonly IMapper _mapper;
+        private readonly string _baseURL;
 
-        public UniversitiesController(ILoggerManager logger, IRepositoryWrapper repository, IMapper mapper)
+        public UniversitiesController(ILoggerManager logger, IRepositoryWrapper repository, IMapper mapper, IHttpContextAccessor httpContextAccessor)
         {
             _logger = logger;
             _repository = repository;
             _mapper = mapper;
+            _repository.Path = "/pictures/University";
+            _baseURL = string.Concat(httpContextAccessor.HttpContext.Request.Scheme, "://", httpContextAccessor.HttpContext.Request.Host);
         }
 
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UniversityReadDto>>> GetAllUniversities([FromQuery] QueryStringParameters paginationParameters)
+        public async Task<ActionResult<IEnumerable<UniversityReadDto>>> GetAllUniversities([FromQuery] UniversityParameters universityParameters)
         {
-            var universities = await _repository.University.GetAllUniversitiesAsync(paginationParameters);
+            //if (!universityParameters.ValidBirthdayRange) return BadRequest("Max birthday cannot be less than min birthday");
+
+            //if (!universityParameters.ValidCreateAtRange) return BadRequest("Max create day cannot be less than min create day");
+
+
+
+
+            var universities = await _repository.University.GetAllUniversitiesAsync(universityParameters);
 
             Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(universities.MetaData));
 
             _logger.LogInfo($"Returned all universities from database.");
 
             var universitiesReadDto = _mapper.Map<IEnumerable<UniversityReadDto>>(universities);
+
+            universitiesReadDto.ToList().ForEach(universityReadDto =>
+            {
+                if (!string.IsNullOrWhiteSpace(universityReadDto.ImgLink)) universityReadDto.ImgLink = $"{_baseURL}{universityReadDto.ImgLink}";
+            });
 
             return Ok(universitiesReadDto);
         }
@@ -64,7 +80,9 @@ namespace GesProdAPI.Controllers
                 _logger.LogInfo($"Returned universityWriteDto with id: {id}");
 
                 var universityReadDto = _mapper.Map<UniversityReadDto>(university);
-                
+
+                if (!string.IsNullOrWhiteSpace(universityReadDto.ImgLink)) universityReadDto.ImgLink = $"{_baseURL}{universityReadDto.ImgLink}";
+
                 return Ok(universityReadDto);
             }
         }
@@ -86,6 +104,9 @@ namespace GesProdAPI.Controllers
                 return BadRequest("Invalid model object");
             }
 
+            //If the AppUserId is not provided, then affect the currenct logged In User Id
+            if (string.IsNullOrWhiteSpace(university.AppUserId)) university.AppUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
             var universityEntity = _mapper.Map<University>(university);
 
             if (await _repository.University.UniversityExistAsync(universityEntity))
@@ -99,6 +120,9 @@ namespace GesProdAPI.Controllers
             await _repository.SaveAsync();
 
             var universityReadDto = _mapper.Map<UniversityReadDto>(universityEntity);
+
+            if (!string.IsNullOrWhiteSpace(universityReadDto.ImgLink)) universityReadDto.ImgLink = $"{_baseURL}{universityReadDto.ImgLink}";
+            
             return CreatedAtRoute("UniversityById", new { id = universityReadDto.Id }, universityReadDto);
         }
 
@@ -125,14 +149,19 @@ namespace GesProdAPI.Controllers
                 _logger.LogError($"University with id: {id}, hasn't been found.");
                 return NotFound();
             }
+            
+            //If the AppUserId is not provided, then affect the currenct logged In User Id
+            if (string.IsNullOrWhiteSpace(universityWriteDto.AppUserId)) universityWriteDto.AppUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             _mapper.Map(universityWriteDto, universityEntity);
-
 
             await _repository.University.UpdateUniversityAsync(universityEntity);
             await _repository.SaveAsync();
 
             var universityReadDto = _mapper.Map<UniversityReadDto>(universityEntity);
+
+            if (!string.IsNullOrWhiteSpace(universityReadDto.ImgLink)) universityReadDto.ImgLink = $"{_baseURL}{universityReadDto.ImgLink}";
+
             return Ok(universityReadDto);
         }
 
@@ -160,6 +189,43 @@ namespace GesProdAPI.Controllers
             await _repository.SaveAsync();
 
             return NoContent();
+        }
+
+
+
+
+        [HttpPut("{id}/upload-picture")]
+        public async Task<ActionResult<UniversityReadDto>> UploadPicture(Guid id, [FromForm] IFormFile file)
+        {
+            var universityEntity = await _repository.University.GetUniversityByIdAsync(id);
+            if (universityEntity == null) return NotFound();
+
+            if (file != null)
+            {
+                _repository.File.FilePath = id.ToString();
+
+                var uploadResult = await _repository.File.UploadFile(file);
+
+                if (uploadResult == null)
+                {
+                    ModelState.AddModelError("", "something went wrong when uploading the picture");
+                    return ValidationProblem(ModelState);
+                }
+                else
+                {
+                    universityEntity.ImgLink = uploadResult;
+                }
+            }
+
+            await _repository.University.UpdateUniversityAsync(universityEntity);
+
+            await _repository.SaveAsync();
+
+            var universityReadDto = _mapper.Map<UniversityReadDto>(universityEntity);
+
+            if (!string.IsNullOrWhiteSpace(universityReadDto.ImgLink)) universityReadDto.ImgLink = $"{_baseURL}{universityReadDto.ImgLink}";
+
+            return Ok(universityReadDto);
         }
 
 

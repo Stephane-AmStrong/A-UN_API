@@ -3,6 +3,7 @@ D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Release\net5.0\PubT
 D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Release\net5.0\PubTmp\Out\wwwroot\js\signalr\dist\browser\signalr.min.js
 D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Release\net5.0\PubTmp\Out\wwwroot\logfiles\internal_logs\internallog.txt
 D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Release\net5.0\PubTmp\Out\wwwroot\logfiles\nlog.config
+D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Release\net5.0\PubTmp\Out\wwwroot\pictures\University\eb15be6a-7e2b-4e75-d444-08d984f1c5da.webp
 D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Release\net5.0\PubTmp\Out\appsettings.Development.json
 D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Release\net5.0\PubTmp\Out\appsettings.json
 D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Release\net5.0\PubTmp\Out\A_UN_API.dll

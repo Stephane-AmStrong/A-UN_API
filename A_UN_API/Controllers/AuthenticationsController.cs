@@ -2,7 +2,7 @@
 using Contracts;
 using Entities.DataTransfertObjects;
 using Entities.Models;
-using Entities.Models.QueryParameters;
+using Entities.RequestFeatures;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

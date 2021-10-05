@@ -1,7 +1,7 @@
 ﻿using Contracts;
 using Entities;
 using Entities.Models;
-using Entities.Models.QueryParameters;
+using Entities.RequestFeatures;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;

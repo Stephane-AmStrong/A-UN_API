@@ -2,7 +2,7 @@
 using Contracts;
 using Entities.DataTransfertObjects;
 using Entities.Models;
-using Entities.Models.QueryParameters;
+using Entities.RequestFeatures;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace GesProdAPI.Controllers
@@ -96,6 +97,9 @@ namespace GesProdAPI.Controllers
                 return BadRequest("Invalid model object");
             }
 
+            //If the AppUserId is not provided, then affect the currenct logged In User Id
+            if (string.IsNullOrWhiteSpace(personalFile.AppUserId)) personalFile.AppUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
             var personalFileEntity = _mapper.Map<PersonalFile>(personalFile);
 
             if (await _repository.PersonalFile.PersonalFileExistAsync(personalFileEntity))
@@ -129,20 +133,22 @@ namespace GesProdAPI.Controllers
                 return BadRequest("Invalid model object");
             }
 
-            var personalFileEntity = await _repository.PersonalFile.GetPersonalFileByIdAsync(id);
-            if (personalFileEntity == null)
+            var personalFile = await _repository.PersonalFile.GetPersonalFileByIdAsync(id);
+            if (personalFile == null)
             {
                 _logger.LogError($"PersonalFile with id: {id}, hasn't been found.");
                 return NotFound();
             }
 
-            _mapper.Map(personalFileWriteDto, personalFileEntity);
+            //If the AppUserId is not provided, then affect the currenct logged In User Id
+            if (string.IsNullOrWhiteSpace(personalFileWriteDto.AppUserId)) personalFileWriteDto.AppUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
+            _mapper.Map(personalFileWriteDto, personalFile);
 
-            await _repository.PersonalFile.UpdatePersonalFileAsync(personalFileEntity);
+            await _repository.PersonalFile.UpdatePersonalFileAsync(personalFile);
             await _repository.SaveAsync();
 
-            var personalFileReadDto = _mapper.Map<PersonalFileReadDto>(personalFileEntity);
+            var personalFileReadDto = _mapper.Map<PersonalFileReadDto>(personalFile);
 
             if (!string.IsNullOrWhiteSpace(personalFileReadDto.Link)) personalFileReadDto.Link = $"{_baseURL}{personalFileReadDto.Link}";
 
@@ -152,12 +158,12 @@ namespace GesProdAPI.Controllers
 
 
         [HttpPatch("{id}")]
-        public async Task<ActionResult> PartialBranchUpdate(Guid Id, JsonPatchDocument<BranchWriteDto> patchDoc)
+        public async Task<ActionResult> PartialPersonalFileUpdate(Guid Id, JsonPatchDocument<PersonalFileWriteDto> patchDoc)
         {
-            var branchModelFromRepository = await _repository.Branch.GetBranchByIdAsync(Id);
-            if (branchModelFromRepository == null) return NotFound();
+            var personalFile = await _repository.PersonalFile.GetPersonalFileByIdAsync(Id);
+            if (personalFile == null) return NotFound();
 
-            var branchToPatch = _mapper.Map<BranchWriteDto>(branchModelFromRepository);
+            var branchToPatch = _mapper.Map<PersonalFileWriteDto>(personalFile);
             patchDoc.ApplyTo(branchToPatch, ModelState);
 
             if (!TryValidateModel(branchToPatch))
@@ -165,9 +171,12 @@ namespace GesProdAPI.Controllers
                 return ValidationProblem(ModelState);
             }
 
-            _mapper.Map(branchToPatch, branchModelFromRepository);
+            //If the AppUserId is not provided, then affect the currenct logged In User Id
+            if (string.IsNullOrWhiteSpace(personalFile.AppUserId)) personalFile.AppUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            await _repository.Branch.UpdateBranchAsync(branchModelFromRepository);
+            _mapper.Map(branchToPatch, personalFile);
+
+            await _repository.PersonalFile.UpdatePersonalFileAsync(personalFile);
 
             await _repository.SaveAsync();
 

@@ -19,7 +19,7 @@ namespace Entities.DataTransfertObjects
         public DateTime? Birthday { get; set; }
 
         [Required]
-        [EmailField]
+        [EmailAddress]
         public string Email { get; set; }
 
         [Required]

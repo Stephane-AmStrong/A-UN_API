@@ -27,12 +27,12 @@ namespace Repository
 
 
 
-        public FileRepository(IWebHostEnvironment webHostEnvironment, string folderName)
+        public FileRepository(IWebHostEnvironment webHostEnvironment, string filePath)
         {
             _webHostEnvironment = webHostEnvironment;
-            this.absoluteFilePath = $"{_webHostEnvironment.WebRootPath}/{folderName}";
+            this.absoluteFilePath = $"{_webHostEnvironment.WebRootPath}/{filePath}";
 
-            relativeFilePath = $"/{folderName}";
+            relativeFilePath = $"{filePath}";
         }
 
 

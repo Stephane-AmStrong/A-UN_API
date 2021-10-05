@@ -1,7 +1,8 @@
 ﻿using Contracts;
 using Entities;
+using Entities.Helpers;
 using Entities.Models;
-using Entities.Models.QueryParameters;
+using Entities.RequestFeatures;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -38,6 +39,7 @@ namespace Repository
         private IUniversityRepository _university;
         private IWorkstationRepository _workstation;
 
+        private ISortHelper<University> _universitySortHelper;
 
         private IWebHostEnvironment _webHostEnvironment;
 
@@ -266,7 +268,7 @@ namespace Repository
             {
                 if (_university == null)
                 {
-                    _university = new UniversityRepository(_repoContext);
+                    _university = new UniversityRepository(_repoContext, _universitySortHelper);
                 }
                 return _university;
             }
@@ -287,12 +289,21 @@ namespace Repository
 
 
 
-        public RepositoryWrapper(UserManager<AppUser> userManager, RoleManager<Workstation> roleManager, RepositoryContext repositoryContext, IOptions<EmailSettings> options, IWebHostEnvironment webHostEnvironment, IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
+        public RepositoryWrapper(
+            UserManager<AppUser> userManager, 
+            RoleManager<Workstation> roleManager, 
+            RepositoryContext repositoryContext, 
+            ISortHelper<University> universitySortHelper, 
+            IOptions<EmailSettings> options, 
+            IWebHostEnvironment webHostEnvironment, 
+            IConfiguration configuration, 
+            IHttpContextAccessor httpContextAccessor)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _configuration = configuration;
             _repoContext = repositoryContext;
+            _universitySortHelper = universitySortHelper;
             _emailSettings = options;
             _webHostEnvironment = webHostEnvironment;
             _httpContextAccessor = httpContextAccessor;

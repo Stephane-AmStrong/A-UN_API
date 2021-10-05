@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace Entities.Models.QueryParameters
+namespace Entities.RequestFeatures
 {
     public class VenteParameters : QueryStringParameters
     {

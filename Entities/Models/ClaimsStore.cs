@@ -6,7 +6,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities.Models.QueryParameters
+namespace Entities.RequestFeatures
 {
     public static class ClaimsStore
     {

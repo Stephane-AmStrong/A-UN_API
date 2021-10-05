@@ -1,7 +1,8 @@
 ﻿using Contracts;
 using Entities;
+using Entities.Helpers;
 using Entities.Models;
-using Entities.Models.QueryParameters;
+using Entities.RequestFeatures;
 using LoggerServices;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -65,6 +66,8 @@ namespace A_UN_API.Extensions
 
         public static void ConfigureRepositoryWrapper(this IServiceCollection services)
         {
+            services.AddScoped<ISortHelper<University>, SortHelper<University>>();
+
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
         }
 

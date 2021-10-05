@@ -1,6 +1,6 @@
 ﻿
 using Entities.Models;
-using Entities.Models.QueryParameters;
+using Entities.RequestFeatures;
 using System;
 using System.Threading.Tasks;
 
@@ -8,7 +8,7 @@ namespace Contracts
 {
     public interface IUniversityRepository
     {
-        Task<PagedList<University>> GetAllUniversitiesAsync(QueryStringParameters paginationParameters);
+        Task<PagedList<University>> GetAllUniversitiesAsync(UniversityParameters universityParameters);
 
         Task<University> GetUniversityByIdAsync(Guid id);
         Task<bool> UniversityExistAsync(University university);

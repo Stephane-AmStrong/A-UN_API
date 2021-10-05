@@ -1,5 +1,5 @@
 ﻿using Contracts;
-using Entities.Models.QueryParameters;
+using Entities.RequestFeatures;
 using MailKit.Net.Smtp;
 using Microsoft.Extensions.Options;
 using MailKit;

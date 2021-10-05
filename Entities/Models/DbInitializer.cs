@@ -1,4 +1,4 @@
-﻿using Entities.Models.QueryParameters;
+﻿using Entities.RequestFeatures;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
