@@ -17,7 +17,10 @@ namespace Repository
     {
         private ISortHelper<University> _sortHelper;
 
-        public UniversityRepository(RepositoryContext repositoryContext, ISortHelper<University> sortHelper) : base(repositoryContext)
+        public UniversityRepository(
+            RepositoryContext repositoryContext, 
+            ISortHelper<University> sortHelper
+            ) : base(repositoryContext)
         {
             _sortHelper = sortHelper;
         }
