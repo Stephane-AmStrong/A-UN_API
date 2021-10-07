@@ -20,7 +20,7 @@ namespace Repository
         public async Task<PagedList<Branch>> GetAllBranchesAsync(QueryStringParameters paginationParameters)
         {
             return await Task.Run(() =>
-                PagedList<Branch>.ToPagedList(FindAll().OrderBy(x => x.Name),
+                PagedList<Branch>.ToPagedList(FindAll(),
                     paginationParameters.PageNumber,
                     paginationParameters.PageSize)
                 );
@@ -29,8 +29,6 @@ namespace Repository
         public async Task<Branch> GetBranchByIdAsync(Guid id)
         {
             return await FindByCondition(branch => branch.Id.Equals(id))
-                
-                .OrderBy(x => x.Name)
                 .FirstOrDefaultAsync();
         }
 

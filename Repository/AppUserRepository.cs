@@ -26,7 +26,7 @@ namespace Repository
         public async Task<PagedList<AppUser>> GetAllAppUsersAsync(QueryStringParameters paginationParameters)
         {
             return await Task.Run(() =>
-                PagedList<AppUser>.ToPagedList(_userManager.Users.OrderBy(x => x.Name),
+                PagedList<AppUser>.ToPagedList(_userManager.Users,
                     paginationParameters.PageNumber,
                     paginationParameters.PageSize)
                 );
@@ -35,7 +35,6 @@ namespace Repository
         public async Task<AppUser> GetAppUserByIdAsync(string id)
         {
             return await _userManager.Users.Where(appUser => appUser.Id.Equals(id))
-                .OrderBy(x => x.Name)
                 .FirstOrDefaultAsync();
         }
 

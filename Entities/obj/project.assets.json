@@ -5702,7 +5702,6 @@
   "projectFileDependencyGroups": {
     "net5.0": [
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 5.0.10",
-      "Microsoft.AspNetCore.JsonPatch >= 5.0.10",
       "Microsoft.AspNetCore.Mvc.NewtonsoftJson >= 5.0.10",
       "Microsoft.EntityFrameworkCore.Design >= 5.0.10",
       "Microsoft.EntityFrameworkCore.SqlServer >= 5.0.10",
@@ -5750,10 +5749,6 @@
         "targetAlias": "net5.0",
         "dependencies": {
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
-            "target": "Package",
-            "version": "[5.0.10, )"
-          },
-          "Microsoft.AspNetCore.JsonPatch": {
             "target": "Package",
             "version": "[5.0.10, )"
           },

@@ -20,7 +20,7 @@ namespace Repository
         public async Task<PagedList<RegistrationFormLine>> GetAllRegistrationFormLinesAsync(QueryStringParameters paginationParameters)
         {
             return await Task.Run(() =>
-                PagedList<RegistrationFormLine>.ToPagedList(FindAll().OrderBy(x => x.Name),
+                PagedList<RegistrationFormLine>.ToPagedList(FindAll(),
                     paginationParameters.PageNumber,
                     paginationParameters.PageSize)
                 );
@@ -29,8 +29,6 @@ namespace Repository
         public async Task<RegistrationFormLine> GetRegistrationFormLineByIdAsync(Guid id)
         {
             return await FindByCondition(registrationFormLine => registrationFormLine.Id.Equals(id))
-                
-                .OrderBy(x => x.Name)
                 .FirstOrDefaultAsync();
         }
 

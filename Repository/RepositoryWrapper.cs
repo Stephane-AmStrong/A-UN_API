@@ -38,19 +38,20 @@ namespace Repository
         private ITechnicalThemeRepository _technicalTheme;
         private IUniversityRepository _university;
         private IWorkstationRepository _workstation;
-
-        private ISortHelper<University> _universitySortHelper;
-
         private IWebHostEnvironment _webHostEnvironment;
-
 
         private readonly IConfiguration _configuration;
         private IHttpContextAccessor _httpContextAccessor;
+        private IOptions<EmailSettings> _emailSettings;
+
+        private ISortHelper<University> _universitySortHelper;
+        private IDataShaper<University> _universityDataShaper;
+
+
 
         private RepositoryContext _repoContext;
         private UserManager<AppUser> _userManager;
         private RoleManager<Workstation> _roleManager;
-        private IOptions<EmailSettings> _emailSettings;
 
         private string filePath;
         public string Path
@@ -268,7 +269,7 @@ namespace Repository
             {
                 if (_university == null)
                 {
-                    _university = new UniversityRepository(_repoContext, _universitySortHelper);
+                    _university = new UniversityRepository(_repoContext, _universitySortHelper, _universityDataShaper);
                 }
                 return _university;
             }
@@ -293,10 +294,11 @@ namespace Repository
             UserManager<AppUser> userManager, 
             RoleManager<Workstation> roleManager, 
             RepositoryContext repositoryContext, 
-            ISortHelper<University> universitySortHelper, 
             IOptions<EmailSettings> options, 
             IWebHostEnvironment webHostEnvironment, 
             IConfiguration configuration, 
+            ISortHelper<University> universitySortHelper,
+            IDataShaper<University> universityDataShaper, 
             IHttpContextAccessor httpContextAccessor)
         {
             _userManager = userManager;
@@ -304,6 +306,7 @@ namespace Repository
             _configuration = configuration;
             _repoContext = repositoryContext;
             _universitySortHelper = universitySortHelper;
+            _universityDataShaper = universityDataShaper;
             _emailSettings = options;
             _webHostEnvironment = webHostEnvironment;
             _httpContextAccessor = httpContextAccessor;

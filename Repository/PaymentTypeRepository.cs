@@ -20,7 +20,7 @@ namespace Repository
         public async Task<PagedList<PaymentType>> GetAllPaymentTypesAsync(QueryStringParameters paginationParameters)
         {
             return await Task.Run(() =>
-                PagedList<PaymentType>.ToPagedList(FindAll().OrderBy(x => x.Name),
+                PagedList<PaymentType>.ToPagedList(FindAll(),
                     paginationParameters.PageNumber,
                     paginationParameters.PageSize)
                 );
@@ -29,8 +29,6 @@ namespace Repository
         public async Task<PaymentType> GetPaymentTypeByIdAsync(Guid id)
         {
             return await FindByCondition(paymentType => paymentType.Id.Equals(id))
-                
-                .OrderBy(x => x.Name)
                 .FirstOrDefaultAsync();
         }
 

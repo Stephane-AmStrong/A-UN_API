@@ -44,9 +44,6 @@ namespace GesProdAPI.Controllers
 
             //if (!universityParameters.ValidCreateAtRange) return BadRequest("Max create day cannot be less than min create day");
 
-
-
-
             var universities = await _repository.University.GetAllUniversitiesAsync(universityParameters);
 
             Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(universities.MetaData));

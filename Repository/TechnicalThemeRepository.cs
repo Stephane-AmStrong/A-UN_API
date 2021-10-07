@@ -20,7 +20,7 @@ namespace Repository
         public async Task<PagedList<TechnicalTheme>> GetAllTechnicalThemesAsync(QueryStringParameters paginationParameters)
         {
             return await Task.Run(() =>
-                PagedList<TechnicalTheme>.ToPagedList(FindAll().OrderBy(x => x.Name),
+                PagedList<TechnicalTheme>.ToPagedList(FindAll(),
                     paginationParameters.PageNumber,
                     paginationParameters.PageSize)
                 );
@@ -29,8 +29,6 @@ namespace Repository
         public async Task<TechnicalTheme> GetTechnicalThemeByIdAsync(Guid id)
         {
             return await FindByCondition(technicalTheme => technicalTheme.Id.Equals(id))
-                
-                .OrderBy(x => x.Name)
                 .FirstOrDefaultAsync();
         }
 

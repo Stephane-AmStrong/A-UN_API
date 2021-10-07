@@ -95,3 +95,4 @@ D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Release\net5.0\A_UN
 D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Release\net5.0\Razor\Pages\ResetPassword.cshtml.g.cs
 D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Release\net5.0\A_UN_API.RazorTargetAssemblyInfo.cs
 D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\obj\Release\net5.0\A_UN_API.Views.pdb
+D:\Visual Studio 2019\source\Personnel\A_UN_API\A_UN_API\bin\Release\net5.0\System.Linq.Dynamic.Core.dll

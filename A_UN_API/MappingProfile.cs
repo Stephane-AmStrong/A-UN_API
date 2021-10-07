@@ -66,11 +66,17 @@ namespace GesProdAPI
             CreateMap<TechnicalTheme, TechnicalThemeReadDto>();
             CreateMap<TechnicalThemeWriteDto, TechnicalTheme>();
 
-            CreateMap<University, UniversityReadDto>();
-            CreateMap<UniversityWriteDto, University>();
+            CreateMap<University, UniversityReadDto>()
+                .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
+
+            //CreateMap<UniversityWriteDto, University>();
 
             CreateMap<Workstation, WorkstationReadDto>();
             CreateMap<WorkstationWriteDto, Workstation>();
+
+
+            //CreateMap<University, UniversityReadDto>()
+            //    .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
 
 
 

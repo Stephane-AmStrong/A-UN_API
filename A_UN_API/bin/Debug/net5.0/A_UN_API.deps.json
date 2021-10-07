@@ -29,6 +29,7 @@
           "LoggerServices": "1.0.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "5.0.9",
           "Microsoft.AspNetCore.Authentication.OpenIdConnect": "5.0.9",
+          "Microsoft.AspNetCore.Mvc.NewtonsoftJson": "5.0.10",
           "Microsoft.EntityFrameworkCore.Design": "5.0.9",
           "Repository": "1.0.0",
           "Swashbuckle.AspNetCore": "6.2.1",
@@ -1561,7 +1562,6 @@
       "Entities/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "5.0.10",
-          "Microsoft.AspNetCore.JsonPatch": "5.0.10",
           "Microsoft.AspNetCore.Mvc.NewtonsoftJson": "5.0.10",
           "Microsoft.EntityFrameworkCore.SqlServer": "5.0.10",
           "System.Linq.Dynamic.Core": "1.2.12"

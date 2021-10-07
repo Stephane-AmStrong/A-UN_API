@@ -20,7 +20,7 @@ namespace Repository
         public async Task<PagedList<Partner>> GetAllPartnersAsync(QueryStringParameters paginationParameters)
         {
             return await Task.Run(() =>
-                PagedList<Partner>.ToPagedList(FindAll().OrderBy(x => x.Name),
+                PagedList<Partner>.ToPagedList(FindAll(),
                     paginationParameters.PageNumber,
                     paginationParameters.PageSize)
                 );
@@ -29,8 +29,6 @@ namespace Repository
         public async Task<Partner> GetPartnerByIdAsync(Guid id)
         {
             return await FindByCondition(partner => partner.Id.Equals(id))
-                
-                .OrderBy(x => x.Name)
                 .FirstOrDefaultAsync();
         }
 

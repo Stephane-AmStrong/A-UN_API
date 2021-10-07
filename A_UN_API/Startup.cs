@@ -1,4 +1,6 @@
 using A_UN_API.Extensions;
+using AutoMapper;
+using GesProdAPI;
 using GesProdAPI.Helpers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -43,10 +45,28 @@ namespace A_UN_API
             services.ConfigureNewtonsoftJson();
             services.ConfigureMailService(Configuration);
 
-            services.AddAutoMapper(typeof(Startup));
+            // Auto Mapper Configurations  
+            //var mappingConfig = new MapperConfiguration(mc => {
+            //    mc.AddProfile(new MappingProfile());
+            //});
 
+            //IMapper mapper = mappingConfig.CreateMapper();
+            //services.AddSingleton(mapper);
+
+
+            services.AddAutoMapper(typeof(MappingProfile));
+
+            /*
+            services.AddControllers(config =>
+            {
+                config.RespectBrowserAcceptHeader = true;
+                config.ReturnHttpNotAcceptable = true;
+            }).AddXmlDataContractSerializerFormatters()
+            .AddNewtonsoftJson();
+            */
             services.AddControllers();
-            services.AddRazorPages();
+
+           services.AddRazorPages();
 
             services.AddSwaggerGen(c =>
             {
@@ -74,17 +94,16 @@ namespace A_UN_API
 
             app.UseHttpsRedirection();
 
-            app.UseStaticFiles();
+            app.UseCors("CorsPolicy");
 
             app.UseForwardedHeaders(new ForwardedHeadersOptions
             {
                 ForwardedHeaders = ForwardedHeaders.All
             });
 
+            app.UseStaticFiles();
 
             app.UseRouting();
-
-            app.UseCors("CorsPolicy");
 
             app.UseAuthentication();
 

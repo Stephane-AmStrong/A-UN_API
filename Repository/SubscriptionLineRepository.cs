@@ -20,7 +20,7 @@ namespace Repository
         public async Task<PagedList<SubscriptionLine>> GetAllSubscriptionLinesAsync(QueryStringParameters paginationParameters)
         {
             return await Task.Run(() =>
-                PagedList<SubscriptionLine>.ToPagedList(FindAll().OrderBy(x => x.Name),
+                PagedList<SubscriptionLine>.ToPagedList(FindAll(),
                     paginationParameters.PageNumber,
                     paginationParameters.PageSize)
                 );
@@ -29,8 +29,6 @@ namespace Repository
         public async Task<SubscriptionLine> GetSubscriptionLineByIdAsync(Guid id)
         {
             return await FindByCondition(subscriptionLine => subscriptionLine.Id.Equals(id))
-                
-                .OrderBy(x => x.Name)
                 .FirstOrDefaultAsync();
         }
 

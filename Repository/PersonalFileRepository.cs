@@ -20,7 +20,7 @@ namespace Repository
         public async Task<PagedList<PersonalFile>> GetAllPersonalFilesAsync(QueryStringParameters paginationParameters)
         {
             return await Task.Run(() =>
-                PagedList<PersonalFile>.ToPagedList(FindAll().OrderBy(x => x.Name),
+                PagedList<PersonalFile>.ToPagedList(FindAll(),
                     paginationParameters.PageNumber,
                     paginationParameters.PageSize)
                 );
@@ -29,8 +29,6 @@ namespace Repository
         public async Task<PersonalFile> GetPersonalFileByIdAsync(Guid id)
         {
             return await FindByCondition(personalFile => personalFile.Id.Equals(id))
-                
-                .OrderBy(x => x.Name)
                 .FirstOrDefaultAsync();
         }
 

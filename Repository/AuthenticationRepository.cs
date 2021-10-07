@@ -38,7 +38,7 @@ namespace Repository
         public async Task<PagedList<AppUser>> GetAllUsersAsync(QueryStringParameters paginationParameters)
         {
             return await Task.Run(() =>
-                        PagedList<AppUser>.ToPagedList(FindAll().OrderBy(x => x.Name),
+                        PagedList<AppUser>.ToPagedList(FindAll(),
                             paginationParameters.PageNumber,
                             paginationParameters.PageSize)
                         );

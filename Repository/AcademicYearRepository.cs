@@ -20,7 +20,7 @@ namespace Repository
         public async Task<PagedList<AcademicYear>> GetAllAcademicYearsAsync(QueryStringParameters paginationParameters)
         {
             return await Task.Run(() =>
-                PagedList<AcademicYear>.ToPagedList(FindAll().OrderBy(x => x.Name),
+                PagedList<AcademicYear>.ToPagedList(FindAll(),
                     paginationParameters.PageNumber,
                     paginationParameters.PageSize)
                 );
@@ -29,8 +29,6 @@ namespace Repository
         public async Task<AcademicYear> GetAcademicYearByIdAsync(Guid id)
         {
             return await FindByCondition(academicYear => academicYear.Id.Equals(id))
-                
-                .OrderBy(x => x.Name)
                 .FirstOrDefaultAsync();
         }
 

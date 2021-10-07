@@ -20,7 +20,7 @@ namespace Repository
         public async Task<PagedList<Objective>> GetAllObjectivesAsync(QueryStringParameters paginationParameters)
         {
             return await Task.Run(() =>
-                PagedList<Objective>.ToPagedList(FindAll().OrderBy(x => x.Name),
+                PagedList<Objective>.ToPagedList(FindAll(),
                     paginationParameters.PageNumber,
                     paginationParameters.PageSize)
                 );
@@ -29,8 +29,6 @@ namespace Repository
         public async Task<Objective> GetObjectiveByIdAsync(Guid id)
         {
             return await FindByCondition(objective => objective.Id.Equals(id))
-                
-                .OrderBy(x => x.Name)
                 .FirstOrDefaultAsync();
         }
 

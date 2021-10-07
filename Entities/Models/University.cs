@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Entities.Models
 {
-    public class University
+    public class University : IEntity
     {
         public University()
         {

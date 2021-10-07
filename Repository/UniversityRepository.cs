@@ -1,5 +1,6 @@
 ﻿using Contracts;
 using Entities;
+using Entities.Extensions;
 using Entities.Helpers;
 using Entities.Models;
 using Entities.RequestFeatures;
@@ -16,16 +17,19 @@ namespace Repository
     public class UniversityRepository : RepositoryBase<University>, IUniversityRepository
     {
         private ISortHelper<University> _sortHelper;
+        private IDataShaper<University> _dataShaper;
 
         public UniversityRepository(
             RepositoryContext repositoryContext, 
-            ISortHelper<University> sortHelper
+            ISortHelper<University> sortHelper,
+            IDataShaper<University> dataShaper
             ) : base(repositoryContext)
         {
             _sortHelper = sortHelper;
+            _dataShaper = dataShaper;
         }
 
-        public async Task<PagedList<University>> GetAllUniversitiesAsync(UniversityParameters universityParameters)
+        public async Task<PagedList<Entity>> GetAllUniversitiesAsync(UniversityParameters universityParameters)
         {
             var universities = Enumerable.Empty<University>().AsQueryable();
 
@@ -34,68 +38,31 @@ namespace Repository
             PerformSearch(ref universities, universityParameters.Name);
 
             var sortedUniversities = _sortHelper.ApplySort(universities, universityParameters.OrderBy);
+            var shapedUniversities = _dataShaper.ShapeData(sortedUniversities, universityParameters.Fields);
 
             return await Task.Run(() =>
-                PagedList<University>.ToPagedList
+                PagedList<Entity>.ToPagedList
                 (
-                    sortedUniversities,
+                    shapedUniversities,
                     universityParameters.PageNumber,
                     universityParameters.PageSize)
                 );
         }
 
-        private void ApplyFilters(ref IQueryable<University> universities, UniversityParameters universityParameters)
+        public async Task<Entity> GetUniversityByIdAsync(Guid id, string fields)
         {
-            /*
-                public string AppUserId { get; set; }
-                public DateTime? MinBirthday { get; set; }
-                public DateTime? MaxBirthday { get; set; }
-                public bool ValidBirthdayRange => MaxBirthday > MinBirthday;
+            var university = FindByCondition(university => university.Id.Equals(id))
+                .DefaultIfEmpty(new University())
+                .FirstOrDefault();
 
-                public DateTime? MinCreateAt { get; set; }
-                public DateTime? MaxCreateAt { get; set; }
-                public bool ValidCreateAtRange => MaxCreateAt > MinCreateAt;
-             */
-
-            universities = FindAll();
-            if (!string.IsNullOrWhiteSpace(universityParameters.AppUserId))
-            {
-                universities = universities.Where(x => x.AppUserId == universityParameters.AppUserId);
-            }
-            
-            if (universityParameters.MinBirthday!=null)
-            {
-                universities = universities.Where(x => x.Birthday >= universityParameters.MinBirthday);
-            }
-
-            if (universityParameters.MaxBirthday!=null)
-            {
-                universities = universities.Where(x => x.Birthday < universityParameters.MaxBirthday);
-            }
-
-            if (universityParameters.MinCreateAt!=null)
-            {
-                universities = universities.Where(x => x.CreateAt >= universityParameters.MinCreateAt);
-            }
-
-            if (universityParameters.MaxCreateAt!=null)
-            {
-                universities = universities.Where(x => x.CreateAt < universityParameters.MaxCreateAt);
-            }
-        }
-        
-        private void PerformSearch(ref IQueryable<University> universities, string universityName)
-        {
-            if (!universities.Any() || string.IsNullOrWhiteSpace(universityName)) return;
-
-            universities = universities.Where(x => x.Name.ToLower().Contains(universityName.Trim().ToLower()));
+            return await Task.Run(() =>
+                _dataShaper.ShapeData(university, fields)
+            );
         }
 
         public async Task<University> GetUniversityByIdAsync(Guid id)
         {
             return await FindByCondition(university => university.Id.Equals(id))
-                
-                .OrderBy(x => x.Name)
                 .FirstOrDefaultAsync();
         }
 
@@ -120,5 +87,45 @@ namespace Repository
         {
             await DeleteAsync(university);
         }
+
+        #region ApplyFilters and PerformSearch Region
+        private void ApplyFilters(ref IQueryable<University> universities, UniversityParameters universityParameters)
+        {
+            universities = FindAll();
+            if (!string.IsNullOrWhiteSpace(universityParameters.AppUserId))
+            {
+                universities = universities.Where(x => x.AppUserId == universityParameters.AppUserId);
+            }
+
+            if (universityParameters.MinBirthday != null)
+            {
+                universities = universities.Where(x => x.Birthday >= universityParameters.MinBirthday);
+            }
+
+            if (universityParameters.MaxBirthday != null)
+            {
+                universities = universities.Where(x => x.Birthday < universityParameters.MaxBirthday);
+            }
+
+            if (universityParameters.MinCreateAt != null)
+            {
+                universities = universities.Where(x => x.CreateAt >= universityParameters.MinCreateAt);
+            }
+
+            if (universityParameters.MaxCreateAt != null)
+            {
+                universities = universities.Where(x => x.CreateAt < universityParameters.MaxCreateAt);
+            }
+        }
+
+        private void PerformSearch(ref IQueryable<University> universities, string universityName)
+        {
+            if (!universities.Any() || string.IsNullOrWhiteSpace(universityName)) return;
+
+            universities = universities.Where(x => x.Name.ToLower().Contains(universityName.Trim().ToLower()));
+        }
+
+        #endregion
+
     }
 }

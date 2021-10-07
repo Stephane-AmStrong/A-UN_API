@@ -67,6 +67,7 @@ namespace A_UN_API.Extensions
         public static void ConfigureRepositoryWrapper(this IServiceCollection services)
         {
             services.AddScoped<ISortHelper<University>, SortHelper<University>>();
+            services.AddScoped<IDataShaper<University>, DataShaper<University>>();
 
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
         }

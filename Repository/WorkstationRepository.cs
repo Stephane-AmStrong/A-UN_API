@@ -24,7 +24,7 @@ namespace Repository
         public async Task<PagedList<Workstation>> GetAllWorkstationsAsync(QueryStringParameters paginationParameters)
         {
             return await Task.Run(() =>
-                PagedList<Workstation>.ToPagedList(_roleManager.Roles.OrderBy(x => x.Name),
+                PagedList<Workstation>.ToPagedList(_roleManager.Roles,
                     paginationParameters.PageNumber,
                     paginationParameters.PageSize)
                 );
@@ -33,7 +33,6 @@ namespace Repository
         public async Task<Workstation> GetWorkstationByIdAsync(Guid id)
         {
             return await _roleManager.Roles.Where(workstation => workstation.Id.Equals(id))
-                .OrderBy(x => x.Name)
                 .FirstOrDefaultAsync();
         }
         
@@ -41,7 +40,6 @@ namespace Repository
         public async Task<Workstation> GetWorkstationByNameAsync(string workstationName)
         {
             return await _roleManager.Roles.Where(workstation => workstation.Name.Equals(workstationName))
-                .OrderBy(x => x.Name)
                 .FirstOrDefaultAsync();
         }
 
