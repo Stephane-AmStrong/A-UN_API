@@ -64,6 +64,7 @@ namespace A_UN_API
             }).AddXmlDataContractSerializerFormatters()
             .AddNewtonsoftJson();
             */
+
             services.AddControllers();
 
            services.AddRazorPages();

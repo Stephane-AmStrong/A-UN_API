@@ -24,6 +24,6 @@ namespace Entities.RequestFeatures
 
         public DateTime? debutPeriode { get; set; }
         public DateTime? finPeriode { get; set; }
-        public string Name { get; set; }
+
     }
 }

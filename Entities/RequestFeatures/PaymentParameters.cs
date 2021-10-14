@@ -19,7 +19,7 @@ namespace Entities.RequestFeatures
         public Guid PaymentTypeId { get; set; }
 
         public Guid SubscriptionId { get; set; }
-        public string Name { get; set; }
+
         public float MoneyAmount { get; set; }
         public float RemainingAmount { get; set; }
         public DateTime? PaidAt { get; set; }

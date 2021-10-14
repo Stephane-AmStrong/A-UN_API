@@ -15,7 +15,7 @@ namespace Entities.RequestFeatures
             OrderBy = "name";
         }
 
-        public string Name { get; set; }
+
         public string AppUserId { get; set; }
         public DateTime? MinBirthday { get; set; }
         public DateTime? MaxBirthday { get; set; }

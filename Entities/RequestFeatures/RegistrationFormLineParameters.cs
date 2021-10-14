@@ -18,7 +18,7 @@ namespace Entities.RequestFeatures
         public Guid RegistrationFormId { get; set; }
         public int NumOrder { get; set; }
 
-        public string Name { get; set; }
+
         public bool IsProgram { get; set; }
     }
 }

@@ -15,7 +15,7 @@ namespace Entities.RequestFeatures
             OrderBy = "name";
         }
 
-        public string Name { get; set; }
+
         public float Price { get; set; }
         public Guid FieldLevelId { get; set; }
     }

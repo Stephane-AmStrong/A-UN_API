@@ -69,7 +69,7 @@ namespace GesProdAPI
             CreateMap<University, UniversityReadDto>()
                 .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
 
-            //CreateMap<UniversityWriteDto, University>();
+            CreateMap<UniversityWriteDto, University>();
 
             CreateMap<Workstation, WorkstationReadDto>();
             CreateMap<WorkstationWriteDto, Workstation>();

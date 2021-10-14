@@ -15,7 +15,7 @@ namespace Entities.RequestFeatures
             OrderBy = "name";
         }
 
-        public string Name { get; set; }
+
         public Guid PersonalFileId { get; set; }
         public Guid RegistrationFormLineId { get; set; }
         public Guid SubscriptionId { get; set; }

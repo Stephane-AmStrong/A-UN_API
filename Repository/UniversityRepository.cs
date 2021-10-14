@@ -35,7 +35,7 @@ namespace Repository
 
             ApplyFilters(ref universities, universityParameters);
 
-            PerformSearch(ref universities, universityParameters.Name);
+            PerformSearch(ref universities, universityParameters.SearchTerm);
 
             var sortedUniversities = _sortHelper.ApplySort(universities, universityParameters.OrderBy);
             var shapedUniversities = _dataShaper.ShapeData(sortedUniversities, universityParameters.Fields);
@@ -118,11 +118,11 @@ namespace Repository
             }
         }
 
-        private void PerformSearch(ref IQueryable<University> universities, string universityName)
+        private void PerformSearch(ref IQueryable<University> universities, string searchTerm)
         {
-            if (!universities.Any() || string.IsNullOrWhiteSpace(universityName)) return;
+            if (!universities.Any() || string.IsNullOrWhiteSpace(searchTerm)) return;
 
-            universities = universities.Where(x => x.Name.ToLower().Contains(universityName.Trim().ToLower()));
+            universities = universities.Where(x => x.Name.ToLower().Contains(searchTerm.Trim().ToLower()));
         }
 
         #endregion
