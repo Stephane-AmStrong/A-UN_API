@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Entities.Models
 {
-    public class Subscription
+    public class Subscription : IEntity
     {
         public Subscription()
         {

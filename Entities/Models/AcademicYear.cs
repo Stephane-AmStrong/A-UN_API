@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Entities.Models
 {
-    public class AcademicYear
+    public class AcademicYear : IEntity
     {
         public Guid Id { get; set; }
         [Required]

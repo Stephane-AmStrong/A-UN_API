@@ -14,7 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace GesProdAPI.Controllers
+namespace A_UN_API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -37,9 +37,9 @@ namespace GesProdAPI.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<BranchLevelReadDto>>> GetAllBranchLevels([FromQuery] QueryStringParameters paginationParameters)
+        public async Task<ActionResult<IEnumerable<BranchLevelReadDto>>> GetAllBranchLevels([FromQuery] BranchLevelParameters queryParameters)
         {
-            var branchLevels = await _repository.BranchLevel.GetAllBranchLevelsAsync(paginationParameters);
+            var branchLevels = await _repository.BranchLevel.GetAllBranchLevelsAsync(queryParameters);
 
             Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(branchLevels.MetaData));
 

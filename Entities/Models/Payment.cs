@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Entities.Models
 {
-    public class Payment
+    public class Payment : IEntity
     {
         public Guid Id { get; set; }
         public Guid PaymentTypeId { get; set; }

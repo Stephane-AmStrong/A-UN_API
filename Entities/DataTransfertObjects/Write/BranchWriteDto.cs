@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -10,9 +11,18 @@ namespace Entities.DataTransfertObjects
 {
     public class BranchWriteDto
     {
-        public Guid TechnicalThemeId { get; set; }
+        public Guid? Id { get; set; }
+        public string ImgLink { get; set; }
+        public string Code { get; set; }
         [Required]
         public string Name { get; set; }
-        public Guid BranchLevelId { get; set; }
+        [Required]
+        public Guid UniversityId { get; set; }
+
+        public IFormFile file { get; set; }
+
+        public virtual UniversityWriteDto University { get; set; }
+
+        public virtual BranchLevelWriteDto[] BranchLevels { get; set; }
     }
 }

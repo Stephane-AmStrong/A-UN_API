@@ -11,6 +11,7 @@ namespace Entities.DataTransfertObjects
     public class SubscriptionLineWriteDto
     {
 
+        public Guid? Id { get; set; }
         [Required]
         public string Name { get; set; }
         public Guid PersonalFileId { get; set; }

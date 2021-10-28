@@ -26,7 +26,6 @@ namespace Entities
         public DbSet<RegistrationFormLine> RegistrationFormLines { get; set; }
         public DbSet<Subscription> Subscriptions { get; set; }
         public DbSet<SubscriptionLine> SubscriptionLines { get; set; }
-        public DbSet<TechnicalTheme> TechnicalThemes { get; set; }
         public DbSet<University> Universities { get; set; }
         public DbSet<Workstation> Workstations { get; set; }
 

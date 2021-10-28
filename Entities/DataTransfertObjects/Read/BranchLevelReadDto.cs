@@ -10,18 +10,13 @@ namespace Entities.DataTransfertObjects
 {
     public class BranchLevelReadDto
     {
-        public Guid Id { get; set; }
-        public Guid BranchId { get; set; }
-        public Guid TechnicalThemeId { get; set; }
-
-        public string Name { get; set; }
+        public Guid? Id { get; set; }
         public string ImgLink { get; set; }
-
+        public string Code { get; set; }
+        public string Name { get; set; }
+        public Guid BranchId { get; set; }
 
         public virtual BranchReadDto Branch { get; set; }
-
-
-        public virtual TechnicalThemeReadDto TechnicalTheme { get; set; }
 
         public virtual RegistrationFormReadDto[] RegistrationForms { get; set; }
     }

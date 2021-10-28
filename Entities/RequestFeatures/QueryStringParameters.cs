@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Entities.RequestFeatures
 {
-    public class QueryStringParameters
+    public abstract class QueryStringParameters
     {
-        const int maxPageSize = 250;
+        const int maxPageSize = 250000;
         public int PageNumber { get; set; } = 1;
-        private int _pageSize = 10;
+        private int _pageSize = 1000;
         public int PageSize
         {
             get

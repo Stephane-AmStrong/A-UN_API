@@ -14,7 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace GesProdAPI.Controllers
+namespace A_UN_API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -34,9 +34,9 @@ namespace GesProdAPI.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<AcademicYearReadDto>>> GetAllAcademicYears([FromQuery] QueryStringParameters paginationParameters)
+        public async Task<ActionResult<IEnumerable<AcademicYearReadDto>>> GetAllAcademicYears([FromQuery] AcademicYearParameters academicYearParameters)
         {
-            var academicYears = await _repository.AcademicYear.GetAllAcademicYearsAsync(paginationParameters);
+            var academicYears = await _repository.AcademicYear.GetAllAcademicYearsAsync(academicYearParameters);
 
             Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(academicYears.MetaData));
 

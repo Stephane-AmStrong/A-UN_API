@@ -8,7 +8,7 @@ namespace Contracts
 {
     public interface IRegistrationFormRepository
     {
-        Task<PagedList<RegistrationForm>> GetAllRegistrationFormsAsync(QueryStringParameters paginationParameters);
+        Task<PagedList<Entity>> GetAllRegistrationFormsAsync(RegistrationFormParameters registrationFormParameters);
 
         Task<RegistrationForm> GetRegistrationFormByIdAsync(Guid id);
         Task<bool> RegistrationFormExistAsync(RegistrationForm registrationForm);

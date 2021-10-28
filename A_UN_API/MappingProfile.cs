@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace GesProdAPI
+namespace A_UN_API
 {
     public class MappingProfile : Profile
     {
@@ -62,9 +62,6 @@ namespace GesProdAPI
 
             CreateMap<SubscriptionLine, SubscriptionLineReadDto>();
             CreateMap<SubscriptionLineWriteDto, SubscriptionLine>();
-
-            CreateMap<TechnicalTheme, TechnicalThemeReadDto>();
-            CreateMap<TechnicalThemeWriteDto, TechnicalTheme>();
 
             CreateMap<University, UniversityReadDto>()
                 .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));

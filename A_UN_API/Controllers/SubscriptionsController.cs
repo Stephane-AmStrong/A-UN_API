@@ -15,7 +15,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace GesProdAPI.Controllers
+namespace A_UN_API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -35,9 +35,9 @@ namespace GesProdAPI.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<SubscriptionReadDto>>> GetAllSubscriptions([FromQuery] QueryStringParameters paginationParameters)
+        public async Task<ActionResult<IEnumerable<SubscriptionReadDto>>> GetAllSubscriptions([FromQuery] SubscriptionParameters queryParameters)
         {
-            var subscriptions = await _repository.Subscription.GetAllSubscriptionsAsync(paginationParameters);
+            var subscriptions = await _repository.Subscription.GetAllSubscriptionsAsync(queryParameters);
 
             Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(subscriptions.MetaData));
 

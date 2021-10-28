@@ -8,7 +8,7 @@ namespace Contracts
 {
     public interface IAcademicYearRepository
     {
-        Task<PagedList<AcademicYear>> GetAllAcademicYearsAsync(QueryStringParameters paginationParameters);
+        Task<PagedList<Entity>> GetAllAcademicYearsAsync(AcademicYearParameters academicYearParameters);
 
         Task<AcademicYear> GetAcademicYearByIdAsync(Guid id);
         Task<bool> AcademicYearExistAsync(AcademicYear academicYear);

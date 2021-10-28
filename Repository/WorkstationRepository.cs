@@ -21,12 +21,12 @@ namespace Repository
             _roleManager = roleManager;
         }
 
-        public async Task<PagedList<Workstation>> GetAllWorkstationsAsync(QueryStringParameters paginationParameters)
+        public async Task<PagedList<Workstation>> GetAllWorkstationsAsync(WorkstationParameters workstationParameters)
         {
             return await Task.Run(() =>
                 PagedList<Workstation>.ToPagedList(_roleManager.Roles,
-                    paginationParameters.PageNumber,
-                    paginationParameters.PageSize)
+                    workstationParameters.PageNumber,
+                    workstationParameters.PageSize)
                 );
         }
 

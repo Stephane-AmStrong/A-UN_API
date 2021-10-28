@@ -14,7 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace GesProdAPI.Controllers
+namespace A_UN_API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -37,9 +37,9 @@ namespace GesProdAPI.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<PartnerReadDto>>> GetAllPartners([FromQuery] QueryStringParameters paginationParameters)
+        public async Task<ActionResult<IEnumerable<PartnerReadDto>>> GetAllPartners([FromQuery] PartnerParameters partnerParameters)
         {
-            var partners = await _repository.Partner.GetAllPartnersAsync(paginationParameters);
+            var partners = await _repository.Partner.GetAllPartnersAsync(partnerParameters);
 
             Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(partners.MetaData));
 
@@ -57,7 +57,7 @@ namespace GesProdAPI.Controllers
 
 
 
-        [HttpGet("{id}", Name = "PartnerById")]
+        [HttpGet("{id}", Name = "GetPartnerById")]
         public async Task<ActionResult<PartnerReadDto>> GetPartnerById(Guid id)
         {
             var partner = await _repository.Partner.GetPartnerByIdAsync(id);

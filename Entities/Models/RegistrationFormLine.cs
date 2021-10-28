@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Entities.Models
 {
-    public class RegistrationFormLine
+    public class RegistrationFormLine : IEntity
     {
         public RegistrationFormLine()
         {

@@ -10,6 +10,7 @@ namespace Entities.DataTransfertObjects
     public class PaymentTypeWriteDto
     {
 
+        public Guid? Id { get; set; }
         [Required]
         public string Name { get; set; }
     }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Entities.Models
 {
-    public class RegistrationForm
+    public class RegistrationForm : IEntity
     {
         public Guid Id { get; set; }
         [Required]

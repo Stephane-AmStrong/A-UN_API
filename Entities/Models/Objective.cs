@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Entities.Models
 {
-    public class Objective
+    public class Objective : IEntity
     {
         public Guid Id { get; set; }
         [Required]

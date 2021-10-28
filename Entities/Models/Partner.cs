@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Entities.Models
 {
-    public class Partner
+    public class Partner : IEntity
     {
         public Guid Id { get; set; }
         [Required]

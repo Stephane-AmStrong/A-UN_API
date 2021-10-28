@@ -15,7 +15,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace GesProdAPI.Controllers
+namespace A_UN_API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -38,9 +38,9 @@ namespace GesProdAPI.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<PersonalFileReadDto>>> GetAllPersonalFiles([FromQuery] QueryStringParameters paginationParameters)
+        public async Task<ActionResult<IEnumerable<PersonalFileReadDto>>> GetAllPersonalFiles([FromQuery] PersonalFileParameters queryParameters)
         {
-            var personalFiles = await _repository.PersonalFile.GetAllPersonalFilesAsync(paginationParameters);
+            var personalFiles = await _repository.PersonalFile.GetAllPersonalFilesAsync(queryParameters);
 
             Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(personalFiles.MetaData));
 

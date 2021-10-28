@@ -23,7 +23,7 @@ namespace Repository
         }
 
 
-        public async Task<PagedList<AppUser>> GetAllAppUsersAsync(QueryStringParameters paginationParameters)
+        public async Task<PagedList<AppUser>> GetAllAppUsersAsync(AppUserParameters paginationParameters)
         {
             return await Task.Run(() =>
                 PagedList<AppUser>.ToPagedList(_userManager.Users,

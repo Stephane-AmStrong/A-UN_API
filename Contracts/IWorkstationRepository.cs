@@ -9,7 +9,7 @@ namespace Contracts
 {
     public interface IWorkstationRepository
     {
-        Task<PagedList<Workstation>> GetAllWorkstationsAsync(QueryStringParameters paginationParameters);
+        Task<PagedList<Workstation>> GetAllWorkstationsAsync(WorkstationParameters workstationParameters);
 
         Task<Workstation> GetWorkstationByIdAsync(Guid id);
         Task<Workstation> GetWorkstationByNameAsync(string workstationName);

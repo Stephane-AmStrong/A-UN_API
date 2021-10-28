@@ -11,6 +11,7 @@ namespace Entities.DataTransfertObjects
 {
     public class AppUserWriteDto
     {
+        public string? Id { get; set; }
         [Required]
         public string Firstname { get; set; }
         [Required]

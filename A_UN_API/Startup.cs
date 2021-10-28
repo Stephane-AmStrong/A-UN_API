@@ -1,7 +1,7 @@
 using A_UN_API.Extensions;
 using AutoMapper;
-using GesProdAPI;
-using GesProdAPI.Helpers;
+using A_UN_API;
+using A_UN_API.Helpers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -107,8 +107,10 @@ namespace A_UN_API
             app.UseRouting();
 
             app.UseAuthentication();
-
             app.UseAuthorization();
+
+            //Global execption handling
+            app.ConfigureCustomExceptionMiddleware();
 
             app.UseEndpoints(endpoints =>
             {

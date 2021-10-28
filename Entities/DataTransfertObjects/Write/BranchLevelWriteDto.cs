@@ -10,12 +10,13 @@ namespace Entities.DataTransfertObjects
 {
     public class BranchLevelWriteDto
     {
-        public Guid BranchId { get; set; }
-        public Guid TechnicalThemeId { get; set; }
+        public Guid? Id { get; set; }
+        public string ImgLink { get; set; }
+        [Required]
+        public string Code { get; set; }
         [Required]
         public string Name { get; set; }
-        public virtual TechnicalThemeWriteDto TechnicalTheme { get; set; }
-
-        public virtual RegistrationFormWriteDto[] RegistrationForms { get; set; }
+        [Required]
+        public Guid BranchId { get; set; }
     }
 }

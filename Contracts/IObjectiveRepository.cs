@@ -8,7 +8,7 @@ namespace Contracts
 {
     public interface IObjectiveRepository
     {
-        Task<PagedList<Objective>> GetAllObjectivesAsync(QueryStringParameters paginationParameters);
+        Task<PagedList<Entity>> GetAllObjectivesAsync(ObjectiveParameters objectiveParameters);
 
         Task<Objective> GetObjectiveByIdAsync(Guid id);
         Task<bool> ObjectiveExistAsync(Objective objective);

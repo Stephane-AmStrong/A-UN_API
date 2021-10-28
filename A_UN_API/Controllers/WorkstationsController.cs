@@ -17,7 +17,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 
 
-namespace GesProdAPI.Controllers
+namespace A_UN_API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -37,9 +37,9 @@ namespace GesProdAPI.Controllers
 
         [HttpGet]
         [MultiplePoliciesAuthorize("readWorkstationPolicy; writeWorkstationPolicy")]
-        public async Task<ActionResult<IEnumerable<WorkstationReadDto>>> GetAllWorkstations([FromQuery] QueryStringParameters paginationParameters)
+        public async Task<ActionResult<IEnumerable<WorkstationReadDto>>> GetAllWorkstations([FromQuery] WorkstationParameters queryParameters)
         {
-            var workstations = await _repository.Workstation.GetAllWorkstationsAsync(paginationParameters);
+            var workstations = await _repository.Workstation.GetAllWorkstationsAsync(queryParameters);
 
             //var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Entities.Models
 {
-    public class BranchLevel
+    public class BranchLevel : IEntity
     {
         public BranchLevel()
         {
@@ -16,19 +16,18 @@ namespace Entities.Models
         }
 
         public Guid Id { get; set; }
-        public Guid BranchId { get; set; }
-        public Guid TechnicalThemeId { get; set; }
+        public string ImgLink { get; set; }
+        [Required]
+        public string Code { get; set; }
         [Required]
         public string Name { get; set; }
-        public string ImgLink { get; set; }
+        [Required]
+        public Guid BranchId { get; set; }
 
 
         [ForeignKey("BranchId")]
         public virtual Branch Branch { get; set; }
 
-
-        [ForeignKey("TechnicalThemeId")]
-        public virtual TechnicalTheme TechnicalTheme { get; set; }
 
         public virtual ICollection<RegistrationForm> RegistrationForms { get; set; }
     }

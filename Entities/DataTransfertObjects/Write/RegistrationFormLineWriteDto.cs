@@ -10,6 +10,7 @@ namespace Entities.DataTransfertObjects
 {
     public class RegistrationFormLineWriteDto
     {
+        public Guid? Id { get; set; }
         public Guid RegistrationFormId { get; set; }
         public int NumOrder { get; set; }
         [Required]

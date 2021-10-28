@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -10,10 +11,11 @@ namespace Entities.DataTransfertObjects
 {
     public class UniversityWriteDto
     {
+        public Guid? Id { get; set; }
         public string Name { get; set; }
-        public long Price { get; set; }
         [JsonIgnore]
         public string AppUserId { get; set; }
         public DateTime Birthday { get; set; }
+        public IFormFile file { get; set; }
     }
 }

@@ -26,18 +26,12 @@ namespace A_UN_API.Extensions
         {
             services.AddCors(options =>
             {
-                options.AddPolicy("CorsPolicy",builder => builder
-                    .WithOrigins("http://localhost:5768", "")
+                options.AddPolicy("CorsPolicy", builder => 
+                builder.WithOrigins("http://localhost:5768", "http://localhost:5768")
                     .AllowAnyHeader()
                     .AllowAnyMethod()
                     .WithExposedHeaders("X-Pagination"));
-                
-                /*
-                options.AddPolicy("CorsPolicy",
-                    builder => builder.AllowAnyOrigin()
-                    .AllowAnyMethod()
-                    .AllowAnyHeader());
-                */
+
             });
         }
 
@@ -66,7 +60,32 @@ namespace A_UN_API.Extensions
 
         public static void ConfigureRepositoryWrapper(this IServiceCollection services)
         {
+            services.AddScoped<ISortHelper<AcademicYear>, SortHelper<AcademicYear>>();
+            services.AddScoped<ISortHelper<Branch>, SortHelper<Branch>>();
+            services.AddScoped<ISortHelper<BranchLevel>, SortHelper<BranchLevel>>();
+            services.AddScoped<ISortHelper<Objective>, SortHelper<Objective>>();
+            services.AddScoped<ISortHelper<Partner>, SortHelper<Partner>>();
+            services.AddScoped<ISortHelper<Payment>, SortHelper<Payment>>();
+            services.AddScoped<ISortHelper<PaymentType>, SortHelper<PaymentType>>();
+            services.AddScoped<ISortHelper<PersonalFile>, SortHelper<PersonalFile>>();
+            services.AddScoped<ISortHelper<RegistrationForm>, SortHelper<RegistrationForm>>();
+            services.AddScoped<ISortHelper<RegistrationFormLine>, SortHelper<RegistrationFormLine>>();
+            services.AddScoped<ISortHelper<Subscription>, SortHelper<Subscription>>();
+            services.AddScoped<ISortHelper<SubscriptionLine>, SortHelper<SubscriptionLine>>();
             services.AddScoped<ISortHelper<University>, SortHelper<University>>();
+
+            services.AddScoped<IDataShaper<AcademicYear>, DataShaper<AcademicYear>>();
+            services.AddScoped<IDataShaper<Branch>, DataShaper<Branch>>();
+            services.AddScoped<IDataShaper<BranchLevel>, DataShaper<BranchLevel>>();
+            services.AddScoped<IDataShaper<Objective>, DataShaper<Objective>>();
+            services.AddScoped<IDataShaper<Partner>, DataShaper<Partner>>();
+            services.AddScoped<IDataShaper<Payment>, DataShaper<Payment>>();
+            services.AddScoped<IDataShaper<PaymentType>, DataShaper<PaymentType>>();
+            services.AddScoped<IDataShaper<PersonalFile>, DataShaper<PersonalFile>>();
+            services.AddScoped<IDataShaper<RegistrationForm>, DataShaper<RegistrationForm>>();
+            services.AddScoped<IDataShaper<RegistrationFormLine>, DataShaper<RegistrationFormLine>>();
+            services.AddScoped<IDataShaper<Subscription>, DataShaper<Subscription>>();
+            services.AddScoped<IDataShaper<SubscriptionLine>, DataShaper<SubscriptionLine>>();
             services.AddScoped<IDataShaper<University>, DataShaper<University>>();
 
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();

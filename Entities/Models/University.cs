@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -18,6 +19,7 @@ namespace Entities.Models
         public string Name { get; set; }
         public string ImgLink { get; set; }
         public long Price { get; set; }
+        [Required]
         public string AppUserId { get; set; }
         public DateTime Birthday { get; set; }
         public DateTime CreateAt { get; set; }

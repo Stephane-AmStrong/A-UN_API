@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Visual Studio 2019\\source\\Personnel\\A_UN_API\\A_UN_API\\A_UN_API.csproj": {}
+    "D:\\Visual Studio 2019\\source\\A_UN_API\\A_UN_API\\A_UN_API.csproj": {}
   },
   "projects": {
-    "D:\\Visual Studio 2019\\source\\Personnel\\A_UN_API\\A_UN_API\\A_UN_API.csproj": {
+    "D:\\Visual Studio 2019\\source\\A_UN_API\\A_UN_API\\A_UN_API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Visual Studio 2019\\source\\Personnel\\A_UN_API\\A_UN_API\\A_UN_API.csproj",
+        "projectUniqueName": "D:\\Visual Studio 2019\\source\\A_UN_API\\A_UN_API\\A_UN_API.csproj",
         "projectName": "A_UN_API",
-        "projectPath": "D:\\Visual Studio 2019\\source\\Personnel\\A_UN_API\\A_UN_API\\A_UN_API.csproj",
+        "projectPath": "D:\\Visual Studio 2019\\source\\A_UN_API\\A_UN_API\\A_UN_API.csproj",
         "packagesPath": "C:\\Users\\AmStrong\\.nuget\\packages\\",
-        "outputPath": "D:\\Visual Studio 2019\\source\\Personnel\\A_UN_API\\A_UN_API\\obj\\",
+        "outputPath": "D:\\Visual Studio 2019\\source\\A_UN_API\\A_UN_API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\AmStrong\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,11 +28,11 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "D:\\Visual Studio 2019\\source\\Personnel\\A_UN_API\\LoggerServices\\LoggerServices.csproj": {
-                "projectPath": "D:\\Visual Studio 2019\\source\\Personnel\\A_UN_API\\LoggerServices\\LoggerServices.csproj"
+              "D:\\Visual Studio 2019\\source\\A_UN_API\\LoggerServices\\LoggerServices.csproj": {
+                "projectPath": "D:\\Visual Studio 2019\\source\\A_UN_API\\LoggerServices\\LoggerServices.csproj"
               },
-              "D:\\Visual Studio 2019\\source\\Personnel\\A_UN_API\\Repository\\Repository.csproj": {
-                "projectPath": "D:\\Visual Studio 2019\\source\\Personnel\\A_UN_API\\Repository\\Repository.csproj"
+              "D:\\Visual Studio 2019\\source\\A_UN_API\\Repository\\Repository.csproj": {
+                "projectPath": "D:\\Visual Studio 2019\\source\\A_UN_API\\Repository\\Repository.csproj"
               }
             }
           }
@@ -102,14 +102,14 @@
         }
       }
     },
-    "D:\\Visual Studio 2019\\source\\Personnel\\A_UN_API\\Contracts\\Contracts.csproj": {
+    "D:\\Visual Studio 2019\\source\\A_UN_API\\Contracts\\Contracts.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Visual Studio 2019\\source\\Personnel\\A_UN_API\\Contracts\\Contracts.csproj",
+        "projectUniqueName": "D:\\Visual Studio 2019\\source\\A_UN_API\\Contracts\\Contracts.csproj",
         "projectName": "Contracts",
-        "projectPath": "D:\\Visual Studio 2019\\source\\Personnel\\A_UN_API\\Contracts\\Contracts.csproj",
+        "projectPath": "D:\\Visual Studio 2019\\source\\A_UN_API\\Contracts\\Contracts.csproj",
         "packagesPath": "C:\\Users\\AmStrong\\.nuget\\packages\\",
-        "outputPath": "D:\\Visual Studio 2019\\source\\Personnel\\A_UN_API\\Contracts\\obj\\",
+        "outputPath": "D:\\Visual Studio 2019\\source\\A_UN_API\\Contracts\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\AmStrong\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -126,8 +126,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "D:\\Visual Studio 2019\\source\\Personnel\\A_UN_API\\Entities\\Entities.csproj": {
-                "projectPath": "D:\\Visual Studio 2019\\source\\Personnel\\A_UN_API\\Entities\\Entities.csproj"
+              "D:\\Visual Studio 2019\\source\\A_UN_API\\Entities\\Entities.csproj": {
+                "projectPath": "D:\\Visual Studio 2019\\source\\A_UN_API\\Entities\\Entities.csproj"
               }
             }
           }
@@ -163,14 +163,14 @@
         }
       }
     },
-    "D:\\Visual Studio 2019\\source\\Personnel\\A_UN_API\\Entities\\Entities.csproj": {
+    "D:\\Visual Studio 2019\\source\\A_UN_API\\Entities\\Entities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Visual Studio 2019\\source\\Personnel\\A_UN_API\\Entities\\Entities.csproj",
+        "projectUniqueName": "D:\\Visual Studio 2019\\source\\A_UN_API\\Entities\\Entities.csproj",
         "projectName": "Entities",
-        "projectPath": "D:\\Visual Studio 2019\\source\\Personnel\\A_UN_API\\Entities\\Entities.csproj",
+        "projectPath": "D:\\Visual Studio 2019\\source\\A_UN_API\\Entities\\Entities.csproj",
         "packagesPath": "C:\\Users\\AmStrong\\.nuget\\packages\\",
-        "outputPath": "D:\\Visual Studio 2019\\source\\Personnel\\A_UN_API\\Entities\\obj\\",
+        "outputPath": "D:\\Visual Studio 2019\\source\\A_UN_API\\Entities\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\AmStrong\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -250,14 +250,14 @@
         }
       }
     },
-    "D:\\Visual Studio 2019\\source\\Personnel\\A_UN_API\\LoggerServices\\LoggerServices.csproj": {
+    "D:\\Visual Studio 2019\\source\\A_UN_API\\LoggerServices\\LoggerServices.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Visual Studio 2019\\source\\Personnel\\A_UN_API\\LoggerServices\\LoggerServices.csproj",
+        "projectUniqueName": "D:\\Visual Studio 2019\\source\\A_UN_API\\LoggerServices\\LoggerServices.csproj",
         "projectName": "LoggerServices",
-        "projectPath": "D:\\Visual Studio 2019\\source\\Personnel\\A_UN_API\\LoggerServices\\LoggerServices.csproj",
+        "projectPath": "D:\\Visual Studio 2019\\source\\A_UN_API\\LoggerServices\\LoggerServices.csproj",
         "packagesPath": "C:\\Users\\AmStrong\\.nuget\\packages\\",
-        "outputPath": "D:\\Visual Studio 2019\\source\\Personnel\\A_UN_API\\LoggerServices\\obj\\",
+        "outputPath": "D:\\Visual Studio 2019\\source\\A_UN_API\\LoggerServices\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\AmStrong\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -274,8 +274,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "D:\\Visual Studio 2019\\source\\Personnel\\A_UN_API\\Contracts\\Contracts.csproj": {
-                "projectPath": "D:\\Visual Studio 2019\\source\\Personnel\\A_UN_API\\Contracts\\Contracts.csproj"
+              "D:\\Visual Studio 2019\\source\\A_UN_API\\Contracts\\Contracts.csproj": {
+                "projectPath": "D:\\Visual Studio 2019\\source\\A_UN_API\\Contracts\\Contracts.csproj"
               }
             }
           }
@@ -317,14 +317,14 @@
         }
       }
     },
-    "D:\\Visual Studio 2019\\source\\Personnel\\A_UN_API\\Repository\\Repository.csproj": {
+    "D:\\Visual Studio 2019\\source\\A_UN_API\\Repository\\Repository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Visual Studio 2019\\source\\Personnel\\A_UN_API\\Repository\\Repository.csproj",
+        "projectUniqueName": "D:\\Visual Studio 2019\\source\\A_UN_API\\Repository\\Repository.csproj",
         "projectName": "Repository",
-        "projectPath": "D:\\Visual Studio 2019\\source\\Personnel\\A_UN_API\\Repository\\Repository.csproj",
+        "projectPath": "D:\\Visual Studio 2019\\source\\A_UN_API\\Repository\\Repository.csproj",
         "packagesPath": "C:\\Users\\AmStrong\\.nuget\\packages\\",
-        "outputPath": "D:\\Visual Studio 2019\\source\\Personnel\\A_UN_API\\Repository\\obj\\",
+        "outputPath": "D:\\Visual Studio 2019\\source\\A_UN_API\\Repository\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\AmStrong\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -341,11 +341,11 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "D:\\Visual Studio 2019\\source\\Personnel\\A_UN_API\\Contracts\\Contracts.csproj": {
-                "projectPath": "D:\\Visual Studio 2019\\source\\Personnel\\A_UN_API\\Contracts\\Contracts.csproj"
+              "D:\\Visual Studio 2019\\source\\A_UN_API\\Contracts\\Contracts.csproj": {
+                "projectPath": "D:\\Visual Studio 2019\\source\\A_UN_API\\Contracts\\Contracts.csproj"
               },
-              "D:\\Visual Studio 2019\\source\\Personnel\\A_UN_API\\Entities\\Entities.csproj": {
-                "projectPath": "D:\\Visual Studio 2019\\source\\Personnel\\A_UN_API\\Entities\\Entities.csproj"
+              "D:\\Visual Studio 2019\\source\\A_UN_API\\Entities\\Entities.csproj": {
+                "projectPath": "D:\\Visual Studio 2019\\source\\A_UN_API\\Entities\\Entities.csproj"
               }
             }
           }

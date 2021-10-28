@@ -14,7 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace GesProdAPI.Controllers
+namespace A_UN_API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -34,9 +34,9 @@ namespace GesProdAPI.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ObjectiveReadDto>>> GetAllObjectives([FromQuery] QueryStringParameters paginationParameters)
+        public async Task<ActionResult<IEnumerable<ObjectiveReadDto>>> GetAllObjectives([FromQuery] ObjectiveParameters queryParameters)
         {
-            var objectives = await _repository.Objective.GetAllObjectivesAsync(paginationParameters);
+            var objectives = await _repository.Objective.GetAllObjectivesAsync(queryParameters);
 
             Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(objectives.MetaData));
 

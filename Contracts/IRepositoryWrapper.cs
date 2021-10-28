@@ -23,7 +23,6 @@ namespace Contracts
         IRegistrationFormLineRepository RegistrationFormLine { get; }
         ISubscriptionRepository Subscription { get; }
         ISubscriptionLineRepository SubscriptionLine { get; }
-        ITechnicalThemeRepository TechnicalTheme { get; }
         IUniversityRepository University { get; }
         IWorkstationRepository Workstation { get; }
         IMailRepository Mail { get; }

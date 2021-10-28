@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Entities.RequestFeatures
 {
-    public class TechnicalThemeParameters : QueryStringParameters
+    public class TechnicalThemeParameters : BranchParameters
     {
         public TechnicalThemeParameters()
         {

@@ -11,6 +11,7 @@ namespace Entities.DataTransfertObjects
     public class PaymentWriteDto
     {
 
+        public Guid? Id { get; set; }
         public Guid PaymentTypeId { get; set; }
         [Required]
         public Guid SubscriptionId { get; set; }

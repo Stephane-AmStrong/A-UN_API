@@ -11,7 +11,7 @@ namespace Contracts
 {
     public interface IAuthenticationRepository
     {
-        Task<PagedList<AppUser>> GetAllUsersAsync(QueryStringParameters paginationParameters);
+        Task<PagedList<AppUser>> GetAllUsersAsync(BranchParameters paginationParameters);
         Task<int> CountUsersAsync();
         Task<AuthenticationResponse> RegisterUserAsync(AppUser appUser, string password);
         Task<AuthenticationResponse> ConfirmEmailAsync(string userId, string token);

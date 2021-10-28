@@ -1,11 +1,14 @@
 ﻿using Contracts;
 using Entities;
+using Entities.Extensions;
+using Entities.Helpers;
 using Entities.Models;
 using Entities.RequestFeatures;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,17 +16,48 @@ namespace Repository
 {
     public class PersonalFileRepository : RepositoryBase<PersonalFile>, IPersonalFileRepository
     {
-        public PersonalFileRepository(RepositoryContext repositoryContext) : base(repositoryContext)
+        private ISortHelper<PersonalFile> _sortHelper;
+        private IDataShaper<PersonalFile> _dataShaper;
+
+        public PersonalFileRepository(
+            RepositoryContext repositoryContext, 
+            ISortHelper<PersonalFile> sortHelper,
+            IDataShaper<PersonalFile> dataShaper
+            ) : base(repositoryContext)
         {
+            _sortHelper = sortHelper;
+            _dataShaper = dataShaper;
         }
 
-        public async Task<PagedList<PersonalFile>> GetAllPersonalFilesAsync(QueryStringParameters paginationParameters)
+        public async Task<PagedList<Entity>> GetAllPersonalFilesAsync(PersonalFileParameters personalFileParameters)
         {
+            var personalFiles = Enumerable.Empty<PersonalFile>().AsQueryable();
+
+            ApplyFilters(ref personalFiles, personalFileParameters);
+
+            PerformSearch(ref personalFiles, personalFileParameters.SearchTerm);
+
+            var sortedPersonalFiles = _sortHelper.ApplySort(personalFiles, personalFileParameters.OrderBy);
+            var shapedPersonalFiles = _dataShaper.ShapeData(sortedPersonalFiles, personalFileParameters.Fields);
+
             return await Task.Run(() =>
-                PagedList<PersonalFile>.ToPagedList(FindAll(),
-                    paginationParameters.PageNumber,
-                    paginationParameters.PageSize)
+                PagedList<Entity>.ToPagedList
+                (
+                    shapedPersonalFiles,
+                    personalFileParameters.PageNumber,
+                    personalFileParameters.PageSize)
                 );
+        }
+
+        public async Task<Entity> GetPersonalFileByIdAsync(Guid id, string fields)
+        {
+            var personalFile = FindByCondition(personalFile => personalFile.Id.Equals(id))
+                .DefaultIfEmpty(new PersonalFile())
+                .FirstOrDefault();
+
+            return await Task.Run(() =>
+                _dataShaper.ShapeData(personalFile, fields)
+            );
         }
 
         public async Task<PersonalFile> GetPersonalFileByIdAsync(Guid id)
@@ -52,5 +86,47 @@ namespace Repository
         {
             await DeleteAsync(personalFile);
         }
+
+        #region ApplyFilters and PerformSearch Region
+        private void ApplyFilters(ref IQueryable<PersonalFile> personalFiles, PersonalFileParameters personalFileParameters)
+        {
+            personalFiles = FindAll();
+            /*
+            if (!string.IsNullOrWhiteSpace(personalFileParameters.AppUserId))
+            {
+                personalFiles = personalFiles.Where(x => x.AppUserId == personalFileParameters.AppUserId);
+            }
+
+            if (personalFileParameters.MinBirthday != null)
+            {
+                personalFiles = personalFiles.Where(x => x.Birthday >= personalFileParameters.MinBirthday);
+            }
+
+            if (personalFileParameters.MaxBirthday != null)
+            {
+                personalFiles = personalFiles.Where(x => x.Birthday < personalFileParameters.MaxBirthday);
+            }
+
+            if (personalFileParameters.MinCreateAt != null)
+            {
+                personalFiles = personalFiles.Where(x => x.CreateAt >= personalFileParameters.MinCreateAt);
+            }
+
+            if (personalFileParameters.MaxCreateAt != null)
+            {
+                personalFiles = personalFiles.Where(x => x.CreateAt < personalFileParameters.MaxCreateAt);
+            }
+            */
+        }
+
+        private void PerformSearch(ref IQueryable<PersonalFile> personalFiles, string searchTerm)
+        {
+            if (!personalFiles.Any() || string.IsNullOrWhiteSpace(searchTerm)) return;
+
+            personalFiles = personalFiles.Where(x => x.Name.ToLower().Contains(searchTerm.Trim().ToLower()));
+        }
+
+        #endregion
+
     }
 }

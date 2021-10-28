@@ -8,7 +8,7 @@ namespace Contracts
 {
     public interface IBranchLevelRepository
     {
-        Task<PagedList<BranchLevel>> GetAllBranchLevelsAsync(QueryStringParameters paginationParameters);
+        Task<PagedList<Entity>> GetAllBranchLevelsAsync(BranchLevelParameters branchlevelParameters);
 
         Task<BranchLevel> GetBranchLevelByIdAsync(Guid id);
         Task<bool> BranchLevelExistAsync(BranchLevel branchLevel);

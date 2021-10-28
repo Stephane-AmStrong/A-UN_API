@@ -17,6 +17,6 @@ namespace Entities.RequestFeatures
 
 
         public Guid TechnicalThemeId { get; set; }
-        public Guid BranchLevelId { get; set; }
+        public Guid UniversityId { get; set; }
     }
 }

@@ -5715,11 +5715,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Visual Studio 2019\\source\\Personnel\\A_UN_API\\Entities\\Entities.csproj",
+      "projectUniqueName": "D:\\Visual Studio 2019\\source\\A_UN_API\\Entities\\Entities.csproj",
       "projectName": "Entities",
-      "projectPath": "D:\\Visual Studio 2019\\source\\Personnel\\A_UN_API\\Entities\\Entities.csproj",
+      "projectPath": "D:\\Visual Studio 2019\\source\\A_UN_API\\Entities\\Entities.csproj",
       "packagesPath": "C:\\Users\\AmStrong\\.nuget\\packages\\",
-      "outputPath": "D:\\Visual Studio 2019\\source\\Personnel\\A_UN_API\\Entities\\obj\\",
+      "outputPath": "D:\\Visual Studio 2019\\source\\A_UN_API\\Entities\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\AmStrong\\AppData\\Roaming\\NuGet\\NuGet.Config",

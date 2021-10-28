@@ -8,22 +8,24 @@ using System.Threading.Tasks;
 
 namespace Entities.Models
 {
-    public class Branch
+    public class Branch : IEntity
     {
         public Branch()
         {
             BranchLevels = new HashSet<BranchLevel>();
         }
         public Guid Id { get; set; }
-        public Guid TechnicalThemeId { get; set; }
+        public string ImgLink { get; set; }
+        [Required]
+        public string Code { get; set; }
         [Required]
         public string Name { get; set; }
-        public string ImgLink { get; set; }
-        public Guid BranchLevelId { get; set; }
+        [Required]
+        public Guid UniversityId { get; set; }
 
-
-        [ForeignKey ("TechnicalThemeId")]
-        public virtual TechnicalTheme TechnicalTheme { get; set; }
+        
+        [ForeignKey ("UniversityId")]
+        public virtual University University { get; set; }
 
         public virtual ICollection<BranchLevel> BranchLevels { get; set; }
     }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Entities.Models
 {
-    public class SubscriptionLine
+    public class SubscriptionLine : IEntity
     {
         public Guid Id { get; set; }
         [Required]
