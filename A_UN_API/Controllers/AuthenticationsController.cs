@@ -56,37 +56,46 @@ namespace A_UN_API.Controllers
 
             if (await GetUsersCount() < 1)
             {
-                ModelState.AddModelError("", "create an admin account first");
+                ModelState.AddModelError("", "create an adminUser account first");
                 return ValidationProblem(ModelState);
             }
 
-
             _logger.LogInfo($"Registration attempt by : {userRegistrationDto.Firstname } {userRegistrationDto.Name }");
 
-            var userRegistration = _mapper.Map<AppUser>(userRegistrationDto);
-            var result = await _repository.Authentication.RegisterUserAsync(userRegistration, userRegistrationDto.Password);
+            var workstation = await _repository.Workstation.GetWorkstationByNameAsync(userRegistrationDto.WorkstationName);
+            if (workstation == null) return NotFound("Workstation not found");
+
+            var userWithoutWorkstation = _mapper.Map<AppUser>(userRegistrationDto);
+            var result = await _repository.Authentication.RegisterUserAsync(userWithoutWorkstation, userRegistrationDto.Password);
+
+            var userReadDto = _mapper.Map<AppUserReadDto>(userWithoutWorkstation);
+
 
             if (result.IsSuccess)
             {
-                var userReadDto = _mapper.Map<AppUserReadDto>(userRegistration);
+                var workstationAssignationResult = await _repository.Authentication.AddToWorkstationAsync(userWithoutWorkstation, workstation);
 
-                _logger.LogInfo($"Registration was successful");
-
-                /*
-                string url = $"{_baseURL}/api/authentication/confirmemail?userId={userReadDto.Id}&token={result.Token}";
-
-                var email = new EmailData
+                if (workstationAssignationResult.IsSuccess)
                 {
-                    ToEmail = userReadDto.Email,
-                    ToName = userReadDto.Firstname,
-                    Subject = "Confirm your email",
-                    Body = $"<h1>Welcome to A-UN</h1><p>Please confirm your email by <a href='{url}'>Clicking here<a/></p>",
-                };
+                    var userWorkstations = await _repository.Authentication.GetUsersWorkstationsAsync(userWithoutWorkstation);
+                    //if (userWorkstations.Any()) userReadDto.Workstation = _mapper.Map<Workstation, WorkstationReadDto>(await _repository.Workstation.GetWorkstationByNameAsync(userWorkstations.First()));
 
-                await _repository.Mail.SendEmailAsync(email);
-                */
-                await SendVerificationEmail(userReadDto.Id);
-                return Ok(userReadDto);
+                    //await SendVerificationEmail(userReadDto.Id);
+
+                    _logger.LogInfo($"Registration was successful");
+
+                    //email verification should be enable later
+                    //await SendVerificationEmail(userReadDto.Id);
+                    return Ok(userReadDto);
+                }
+                else
+                {
+                    foreach (var error in workstationAssignationResult.ErrorDetails)
+                    {
+                        ModelState.AddModelError(error, error);
+                    }
+                    return ValidationProblem(ModelState);
+                }
             }
             else
             {
@@ -102,7 +111,7 @@ namespace A_UN_API.Controllers
 
 
 
-        [HttpPost("admin/registration")]
+        [HttpPost("adminUser/registration")]
         //[ApiExplorerSettings(IgnoreApi = true)]
         [AllowAnonymous]
         public async Task<ActionResult<AppUserReadDto>> RegisterAdmin([FromBody] AppUserWriteDto adminRegistrationDto)
@@ -114,18 +123,18 @@ namespace A_UN_API.Controllers
             var workstation = await _repository.Workstation.GetWorkstationByNameAsync("SuperAdmin");
             if (workstation == null) return NotFound("Workstation not found");
 
-            var admin = _mapper.Map<AppUser>(adminRegistrationDto);
-            var result = await _repository.Authentication.RegisterUserAsync(admin, adminRegistrationDto.Password);
-            var userReadDto = _mapper.Map<AppUserReadDto>(admin);
+            var adminUser = _mapper.Map<AppUser>(adminRegistrationDto);
+            var result = await _repository.Authentication.RegisterUserAsync(adminUser, adminRegistrationDto.Password);
+            var userReadDto = _mapper.Map<AppUserReadDto>(adminUser);
 
 
             if (result.IsSuccess)
             {
-                var workstationAssignationResult = await _repository.Authentication.AddToWorkstationAsync(admin, workstation);
+                var workstationAssignationResult = await _repository.Authentication.AddToWorkstationAsync(adminUser, workstation);
 
                 if (workstationAssignationResult.IsSuccess)
                 {
-                    var userWorkstations = await _repository.Authentication.GetUsersWorkstationsAsync(admin);
+                    var userWorkstations = await _repository.Authentication.GetUsersWorkstationsAsync(adminUser);
                     //if (userWorkstations.Any()) userReadDto.Workstation = _mapper.Map<Workstation, WorkstationReadDto>(await _repository.Workstation.GetWorkstationByNameAsync(userWorkstations.First()));
 
                     //await SendVerificationEmail(userReadDto.Id);

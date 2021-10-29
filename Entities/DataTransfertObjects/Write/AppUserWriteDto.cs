@@ -11,12 +11,12 @@ namespace Entities.DataTransfertObjects
 {
     public class AppUserWriteDto
     {
-        public string? Id { get; set; }
         [Required]
         public string Firstname { get; set; }
         [Required]
         public string Name { get; set; }
         public string Gender { get; set; }
+        public string WorkstationName { get; set; }
         public DateTime? Birthday { get; set; }
 
         [Required]

@@ -11,7 +11,7 @@ namespace Entities.DataTransfertObjects
 {
     public class SubscriptionWriteDto
     {
-        public Guid? Id { get; set; }
+        
         [Required]
         public string Name { get; set; }
         [JsonIgnore]

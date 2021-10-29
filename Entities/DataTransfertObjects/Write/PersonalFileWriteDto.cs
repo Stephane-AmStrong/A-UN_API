@@ -12,7 +12,7 @@ namespace Entities.DataTransfertObjects
     public class PersonalFileWriteDto
     {
 
-        public Guid? Id { get; set; }
+        
         [Required]
         public string Name { get; set; }
         public string Link { get; set; }

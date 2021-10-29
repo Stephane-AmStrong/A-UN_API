@@ -11,7 +11,7 @@ namespace Entities.DataTransfertObjects
     public class PartnerWriteDto
     {
 
-        public Guid? Id { get; set; }
+        
         [Required]
         public string Name { get; set; }
         public IFormFile file { get; set; }

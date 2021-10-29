@@ -10,7 +10,7 @@ namespace Entities.DataTransfertObjects
     public class ObjectiveWriteDto
     {
 
-        public Guid? Id { get; set; }
+        
         [Required]
         public string Name { get; set; }
     }

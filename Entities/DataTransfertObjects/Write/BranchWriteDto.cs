@@ -11,7 +11,7 @@ namespace Entities.DataTransfertObjects
 {
     public class BranchWriteDto
     {
-        public Guid? Id { get; set; }
+        
         public string ImgLink { get; set; }
         public string Code { get; set; }
         [Required]

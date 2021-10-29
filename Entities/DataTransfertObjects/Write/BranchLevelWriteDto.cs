@@ -10,7 +10,7 @@ namespace Entities.DataTransfertObjects
 {
     public class BranchLevelWriteDto
     {
-        public Guid? Id { get; set; }
+        
         public string ImgLink { get; set; }
         [Required]
         public string Code { get; set; }

@@ -11,7 +11,6 @@ namespace Entities.DataTransfertObjects
 {
     public class UniversityWriteDto
     {
-        public Guid? Id { get; set; }
         public string Name { get; set; }
         [JsonIgnore]
         public string AppUserId { get; set; }
