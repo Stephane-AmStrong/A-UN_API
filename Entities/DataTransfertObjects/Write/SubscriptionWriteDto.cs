@@ -11,11 +11,20 @@ namespace Entities.DataTransfertObjects
 {
     public class SubscriptionWriteDto
     {
-        
         [Required]
-        public string Name { get; set; }
-        [JsonIgnore]
+        [Display(Name = "Souscrit le")]
+        public DateTime SubscribedAt { get; set; }
+        [Display(Name = "Créé le")]
+        public DateTime CreatedAt { get; set; }
+        [Display(Name = "Mise à jour le")]
+        public DateTime? UpdatedAt { get; set; }
+        [Display(Name = "Validé le")]
+        public DateTime? ValiddatedAt { get; set; }
+        [Required]
+        public Guid AcademicYearId { get; set; }
+        [Required]
         public string AppUserId { get; set; }
-        //public virtual SubscriptionLineWriteDto[] SubscriptionLines { get; set; }
+        [Required]
+        public Guid FormationLevelId { get; set; }
     }
 }

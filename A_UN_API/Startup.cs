@@ -40,8 +40,8 @@ namespace A_UN_API
             services.ConfigureRepositoryContext(Configuration);
             services.AddHttpContextAccessor();
             services.ConfigureRepositoryWrapper();
-            services.ConfigureAuthenticationService(Configuration);
-            services.ConfigureAuthorizationService();
+            services.ConfigureJWTAuthenticationService(Configuration);
+            services.ConfigureClaimPolicy();
             services.ConfigureNewtonsoftJson();
             services.ConfigureMailService(Configuration);
 

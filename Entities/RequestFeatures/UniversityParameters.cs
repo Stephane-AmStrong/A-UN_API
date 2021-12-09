@@ -16,7 +16,8 @@ namespace Entities.RequestFeatures
         }
 
 
-        public string AppUserId { get; set; }
+        public string ManagedByAppUserId { get; set; }
+        public bool showValidatedOnesOnly { get; set; }
         public DateTime? MinBirthday { get; set; }
         public DateTime? MaxBirthday { get; set; }
         //[JsonIgnore]

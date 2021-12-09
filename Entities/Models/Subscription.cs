@@ -18,12 +18,27 @@ namespace Entities.Models
 
         public Guid Id { get; set; }
         [Required]
-        public string Name { get; set; }
+        public DateTime SubscribedAt  { get; set; }
         [Required]
-        public string AppUserId { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }       
+        public DateTime? ValiddatedAt { get; set; }
+        [Required]
+        public Guid AcademicYearId { get; set; }          
+        [Required]
+        public string AppUserId { get; set; }        
+        [Required]
+        public Guid FormationLevelId { get; set; }
+
+
+        [ForeignKey("AcademicYearId")]
+        public virtual AcademicYear AcademicYear { get; set; }
 
         [ForeignKey("AppUserId")]
         public virtual AppUser AppUser { get; set; }
+
+        [ForeignKey("FormationLevelId")]
+        public virtual FormationLevel FormationLevel { get; set; }
 
         public virtual ICollection<SubscriptionLine> SubscriptionLines { get; set; }
     }

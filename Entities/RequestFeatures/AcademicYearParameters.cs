@@ -9,8 +9,10 @@ namespace Entities.RequestFeatures
     {
         public AcademicYearParameters()
         {
-            OrderBy = "name";
+            OrderBy = "startson";
         }
 
+        public new DateTime? SearchTerm { get; set; }
+        public bool DisplaysTheOpenOneOnly { get; set; }
     }
 }

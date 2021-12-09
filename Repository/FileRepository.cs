@@ -39,18 +39,25 @@ namespace Repository
 
         public async Task DeleteFile(string filePath)
         {
-            try
-            {
-                await Task.Run(()=> File.Delete(filePath));
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            /*
+                try
+                {
+                    await Task.Run(() => File.Delete(filePath));
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+             */
+
+            await Task.Run(() => File.Delete(filePath));
+
         }
 
         public async Task<string> UploadFile(IFormFile file)
         {
+            /*
+             
             try
             {
                 if (!System.IO.Directory.Exists(absoluteFilePath)) Directory.CreateDirectory(absoluteFilePath);
@@ -73,6 +80,26 @@ namespace Repository
             catch (Exception)
             {
                 throw;
+            } 
+
+             */
+
+
+            if (!System.IO.Directory.Exists(absoluteFilePath)) Directory.CreateDirectory(absoluteFilePath);
+
+
+            if (file.Length > 0)
+            {
+                string extention = file.FileName.Split('.').Last();
+
+                var fullPath = $"{this.absoluteFilePath}/{fileName}.{extention}";
+                var relativePath = $"{this.relativeFilePath}/{fileName}.{extention}";
+                using (var stream = File.Create(fullPath))
+                {
+                    await file.CopyToAsync(stream);
+                    await stream.FlushAsync();
+                    return relativePath;
+                }
             }
             return null;
         }

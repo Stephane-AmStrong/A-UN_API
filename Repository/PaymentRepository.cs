@@ -29,7 +29,7 @@ namespace Repository
             _dataShaper = dataShaper;
         }
 
-        public async Task<PagedList<Entity>> GetAllPaymentsAsync(PaymentParameters paymentParameters)
+        public async Task<PagedList<Entity>> GetPaymentsAsync(PaymentParameters paymentParameters)
         {
             var payments = Enumerable.Empty<Payment>().AsQueryable();
 
@@ -63,12 +63,13 @@ namespace Repository
         public async Task<Payment> GetPaymentByIdAsync(Guid id)
         {
             return await FindByCondition(payment => payment.Id.Equals(id))
+                .Include(x => x.AppUser).Include(x => x.AcademicYear)
                 .FirstOrDefaultAsync();
         }
 
         public async Task<bool> PaymentExistAsync(Payment payment)
         {
-            return await FindByCondition(x => x.Name == payment.Name)
+            return await FindByCondition(x => x.AcademicYearId == payment.AcademicYearId)
                 .AnyAsync();
         }
 
@@ -90,7 +91,8 @@ namespace Repository
         #region ApplyFilters and PerformSearch Region
         private void ApplyFilters(ref IQueryable<Payment> payments, PaymentParameters paymentParameters)
         {
-            payments = FindAll();
+            payments = FindAll()
+                .Include(x=>x.AppUser).Include(x=>x.AcademicYear);
             /*
             if (!string.IsNullOrWhiteSpace(paymentParameters.AppUserId))
             {
@@ -123,7 +125,7 @@ namespace Repository
         {
             if (!payments.Any() || string.IsNullOrWhiteSpace(searchTerm)) return;
 
-            payments = payments.Where(x => x.Name.ToLower().Contains(searchTerm.Trim().ToLower()));
+            payments = payments.Where(x => x.AppUser.Name.ToLower().Contains(searchTerm.Trim().ToLower()) || x.AppUser.Firstname.ToLower().Contains(searchTerm.Trim().ToLower()));
         }
 
         #endregion

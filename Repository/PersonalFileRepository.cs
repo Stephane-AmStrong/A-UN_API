@@ -29,7 +29,7 @@ namespace Repository
             _dataShaper = dataShaper;
         }
 
-        public async Task<PagedList<Entity>> GetAllPersonalFilesAsync(PersonalFileParameters personalFileParameters)
+        public async Task<PagedList<Entity>> GetPersonalFilesAsync(PersonalFileParameters personalFileParameters)
         {
             var personalFiles = Enumerable.Empty<PersonalFile>().AsQueryable();
 
@@ -63,12 +63,13 @@ namespace Repository
         public async Task<PersonalFile> GetPersonalFileByIdAsync(Guid id)
         {
             return await FindByCondition(personalFile => personalFile.Id.Equals(id))
+                .Include(x=>x.AppUser)
                 .FirstOrDefaultAsync();
         }
 
         public async Task<bool> PersonalFileExistAsync(PersonalFile personalFile)
         {
-            return await FindByCondition(x => x.Name == personalFile.Name)
+            return await FindByCondition(x => x.Name == personalFile.Name && x.AppUserId == personalFile.AppUserId)
                 .AnyAsync();
         }
 
@@ -90,13 +91,15 @@ namespace Repository
         #region ApplyFilters and PerformSearch Region
         private void ApplyFilters(ref IQueryable<PersonalFile> personalFiles, PersonalFileParameters personalFileParameters)
         {
-            personalFiles = FindAll();
-            /*
-            if (!string.IsNullOrWhiteSpace(personalFileParameters.AppUserId))
+            personalFiles = FindAll()
+                .Include(x=>x.AppUser);
+
+            if (!string.IsNullOrWhiteSpace(personalFileParameters.OfAppUserId))
             {
-                personalFiles = personalFiles.Where(x => x.AppUserId == personalFileParameters.AppUserId);
+                personalFiles = personalFiles.Where(x => x.AppUserId == personalFileParameters.OfAppUserId);
             }
 
+            /*
             if (personalFileParameters.MinBirthday != null)
             {
                 personalFiles = personalFiles.Where(x => x.Birthday >= personalFileParameters.MinBirthday);

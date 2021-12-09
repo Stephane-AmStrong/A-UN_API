@@ -37,9 +37,9 @@ namespace A_UN_API.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<AppUserReadDto>>> GetAllAppUsers([FromQuery] AppUserParameters queryParameters)
+        public async Task<ActionResult<IEnumerable<AppUserReadDto>>> GetAppUsers([FromQuery] AppUserParameters queryParameters)
         {
-            var appUsers = await _repository.AppUser.GetAllAppUsersAsync(queryParameters);
+            var appUsers = await _repository.AppUser.GetAppUsersAsync(queryParameters);
 
             Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(appUsers.MetaData));
 

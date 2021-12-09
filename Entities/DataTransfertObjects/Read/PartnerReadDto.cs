@@ -10,6 +10,7 @@ namespace Entities.DataTransfertObjects
     public class PartnerReadDto
     {
         public Guid Id { get; set; }
+        [Display(Name = "Nom")]
         public string Name { get; set; }
         public string ImgLink { get; set; }
     }

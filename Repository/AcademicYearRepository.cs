@@ -17,19 +17,16 @@ namespace Repository
     public class AcademicYearRepository : RepositoryBase<AcademicYear>, IAcademicYearRepository
     {
         private ISortHelper<AcademicYear> _sortHelper;
-        private IDataShaper<AcademicYear> _dataShaper;
 
         public AcademicYearRepository(
             RepositoryContext repositoryContext, 
-            ISortHelper<AcademicYear> sortHelper,
-            IDataShaper<AcademicYear> dataShaper
+            ISortHelper<AcademicYear> sortHelper
             ) : base(repositoryContext)
         {
             _sortHelper = sortHelper;
-            _dataShaper = dataShaper;
         }
 
-        public async Task<PagedList<Entity>> GetAllAcademicYearsAsync(AcademicYearParameters academicYearParameters)
+        public async Task<PagedList<AcademicYear>> GetAcademicYearsAsync(AcademicYearParameters academicYearParameters)
         {
             var academicYears = Enumerable.Empty<AcademicYear>().AsQueryable();
 
@@ -38,26 +35,20 @@ namespace Repository
             PerformSearch(ref academicYears, academicYearParameters.SearchTerm);
 
             var sortedAcademicYears = _sortHelper.ApplySort(academicYears, academicYearParameters.OrderBy);
-            var shapedAcademicYears = _dataShaper.ShapeData(sortedAcademicYears, academicYearParameters.Fields);
 
             return await Task.Run(() =>
-                PagedList<Entity>.ToPagedList
+                PagedList<AcademicYear>.ToPagedList
                 (
-                    shapedAcademicYears,
+                    sortedAcademicYears,
                     academicYearParameters.PageNumber,
                     academicYearParameters.PageSize)
                 );
         }
 
-        public async Task<Entity> GetAcademicYearByIdAsync(Guid id, string fields)
+        public async Task<AcademicYear> GetOpenAcademicYearAsync()
         {
-            var academicYear = FindByCondition(academicYear => academicYear.Id.Equals(id))
-                .DefaultIfEmpty(new AcademicYear())
-                .FirstOrDefault();
-
-            return await Task.Run(() =>
-                _dataShaper.ShapeData(academicYear, fields)
-            );
+            return await FindByCondition(academicYear => academicYear.IsOpen)
+                .FirstOrDefaultAsync();
         }
 
         public async Task<AcademicYear> GetAcademicYearByIdAsync(Guid id)
@@ -68,7 +59,7 @@ namespace Repository
 
         public async Task<bool> AcademicYearExistAsync(AcademicYear academicYear)
         {
-            return await FindByCondition(x => x.Name == academicYear.Name)
+            return await FindByCondition(x => x.StartsOn == academicYear.StartsOn || x.EndsOn == academicYear.EndsOn)
                 .AnyAsync();
         }
 
@@ -82,6 +73,11 @@ namespace Repository
             await UpdateAsync(academicYear);
         }
 
+        public async Task UpdateAcademicYearAsync(IEnumerable<AcademicYear> academicYears)
+        {
+            await UpdateAsync(academicYears);
+        }
+
         public async Task DeleteAcademicYearAsync(AcademicYear academicYear)
         {
             await DeleteAsync(academicYear);
@@ -91,12 +87,12 @@ namespace Repository
         private void ApplyFilters(ref IQueryable<AcademicYear> academicYears, AcademicYearParameters academicYearParameters)
         {
             academicYears = FindAll();
-            /*
-            if (!string.IsNullOrWhiteSpace(academicYearParameters.AppUserId))
+            if (academicYearParameters.DisplaysTheOpenOneOnly)
             {
-                academicYears = academicYears.Where(x => x.AppUserId == academicYearParameters.AppUserId);
+                academicYears = academicYears.Where(x => x.IsOpen);
             }
 
+            /*
             if (academicYearParameters.MinBirthday != null)
             {
                 academicYears = academicYears.Where(x => x.Birthday >= academicYearParameters.MinBirthday);
@@ -119,11 +115,11 @@ namespace Repository
             */
         }
 
-        private void PerformSearch(ref IQueryable<AcademicYear> academicYears, string searchTerm)
+        private void PerformSearch(ref IQueryable<AcademicYear> academicYears, DateTime? searchTerm)
         {
-            if (!academicYears.Any() || string.IsNullOrWhiteSpace(searchTerm)) return;
+            if (!academicYears.Any() || searchTerm == null) return;
 
-            academicYears = academicYears.Where(x => x.Name.ToLower().Contains(searchTerm.Trim().ToLower()));
+            academicYears = academicYears.Where(x => x.StartsOn == searchTerm || x.EndsOn == searchTerm);
         }
 
         #endregion

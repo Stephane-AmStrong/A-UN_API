@@ -12,6 +12,7 @@ namespace Entities.DataTransfertObjects
     {
         public Guid Id { get; set; }
 
+        [Display(Name = "Nom")]
         public string Name { get; set; }
         public string Link { get; set; }
 

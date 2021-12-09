@@ -38,13 +38,13 @@ namespace A_UN_API.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UniversityReadDto>>> GetAllUniversities([FromQuery] UniversityParameters universityParameters)
+        public async Task<ActionResult<IEnumerable<UniversityReadDto>>> GetUniversities([FromQuery] UniversityParameters universityParameters)
         {
             //if (!universityParameters.ValidBirthdayRange) return BadRequest("Max birthday cannot be less than min birthday");
 
             //if (!universityParameters.ValidCreateAtRange) return BadRequest("Max create day cannot be less than min create day");
 
-            var universities = await _repository.University.GetAllUniversitiesAsync(universityParameters);
+            var universities = await _repository.University.GetUniversitiesAsync(universityParameters);
 
             Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(universities.MetaData));
 

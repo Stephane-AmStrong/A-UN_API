@@ -13,12 +13,58 @@ D:\Visual Studio 2019\source\Personnel\A_UN_API\Entities\obj\Debug\net5.0\Entiti
 D:\Visual Studio 2019\source\Personnel\A_UN_API\Entities\obj\Debug\net5.0\ref\Entities.dll
 D:\Visual Studio 2019\source\Personnel\A_UN_API\Entities\obj\Debug\net5.0\Entities.pdb
 D:\Visual Studio 2019\source\Personnel\A_UN_API\Entities\obj\Debug\net5.0\Entities.genruntimeconfig.cache
+D:\Visual Studio 2019\source\Personnel\ASP CORE CRUD\Entities\bin\Debug\net5.0\Entities.deps.json
+D:\Visual Studio 2019\source\Personnel\ASP CORE CRUD\Entities\bin\Debug\net5.0\Entities.runtimeconfig.json
+D:\Visual Studio 2019\source\Personnel\ASP CORE CRUD\Entities\bin\Debug\net5.0\Entities.runtimeconfig.dev.json
+D:\Visual Studio 2019\source\Personnel\ASP CORE CRUD\Entities\bin\Debug\net5.0\Entities.dll
+D:\Visual Studio 2019\source\Personnel\ASP CORE CRUD\Entities\bin\Debug\net5.0\ref\Entities.dll
+D:\Visual Studio 2019\source\Personnel\ASP CORE CRUD\Entities\bin\Debug\net5.0\Entities.pdb
+D:\Visual Studio 2019\source\Personnel\ASP CORE CRUD\Entities\obj\Debug\net5.0\Entities.csprojAssemblyReference.cache
+D:\Visual Studio 2019\source\Personnel\ASP CORE CRUD\Entities\obj\Debug\net5.0\Entities.GeneratedMSBuildEditorConfig.editorconfig
+D:\Visual Studio 2019\source\Personnel\ASP CORE CRUD\Entities\obj\Debug\net5.0\Entities.AssemblyInfoInputs.cache
+D:\Visual Studio 2019\source\Personnel\ASP CORE CRUD\Entities\obj\Debug\net5.0\Entities.AssemblyInfo.cs
+D:\Visual Studio 2019\source\Personnel\ASP CORE CRUD\Entities\obj\Debug\net5.0\Entities.csproj.CoreCompileInputs.cache
+D:\Visual Studio 2019\source\Personnel\ASP CORE CRUD\Entities\obj\Debug\net5.0\Entities.dll
+D:\Visual Studio 2019\source\Personnel\ASP CORE CRUD\Entities\obj\Debug\net5.0\ref\Entities.dll
+D:\Visual Studio 2019\source\Personnel\ASP CORE CRUD\Entities\obj\Debug\net5.0\Entities.pdb
+D:\Visual Studio 2019\source\Personnel\ASP CORE CRUD\Entities\obj\Debug\net5.0\Entities.genruntimeconfig.cache
+D:\Visual Studio 2019\source\ASP CORE CRUD\Entities\bin\Debug\net5.0\Entities.deps.json
+D:\Visual Studio 2019\source\ASP CORE CRUD\Entities\bin\Debug\net5.0\Entities.runtimeconfig.json
+D:\Visual Studio 2019\source\ASP CORE CRUD\Entities\bin\Debug\net5.0\Entities.runtimeconfig.dev.json
+D:\Visual Studio 2019\source\ASP CORE CRUD\Entities\bin\Debug\net5.0\Entities.dll
+D:\Visual Studio 2019\source\ASP CORE CRUD\Entities\bin\Debug\net5.0\ref\Entities.dll
+D:\Visual Studio 2019\source\ASP CORE CRUD\Entities\bin\Debug\net5.0\Entities.pdb
+D:\Visual Studio 2019\source\ASP CORE CRUD\Entities\obj\Debug\net5.0\Entities.GeneratedMSBuildEditorConfig.editorconfig
+D:\Visual Studio 2019\source\ASP CORE CRUD\Entities\obj\Debug\net5.0\Entities.AssemblyInfoInputs.cache
+D:\Visual Studio 2019\source\ASP CORE CRUD\Entities\obj\Debug\net5.0\Entities.AssemblyInfo.cs
+D:\Visual Studio 2019\source\ASP CORE CRUD\Entities\obj\Debug\net5.0\Entities.csproj.CoreCompileInputs.cache
+D:\Visual Studio 2019\source\ASP CORE CRUD\Entities\obj\Debug\net5.0\Entities.dll
+D:\Visual Studio 2019\source\ASP CORE CRUD\Entities\obj\Debug\net5.0\ref\Entities.dll
+D:\Visual Studio 2019\source\ASP CORE CRUD\Entities\obj\Debug\net5.0\Entities.pdb
+D:\Visual Studio 2019\source\ASP CORE CRUD\Entities\obj\Debug\net5.0\Entities.genruntimeconfig.cache
+D:\Visual Studio 2019\source\ASP CORE CRUD\Entities\obj\Debug\net5.0\Entities.csprojAssemblyReference.cache
+D:\Visual Studio 2019\source\A-UN ASP CORE\Entities\bin\Debug\net5.0\Entities.deps.json
+D:\Visual Studio 2019\source\A-UN ASP CORE\Entities\bin\Debug\net5.0\Entities.runtimeconfig.json
+D:\Visual Studio 2019\source\A-UN ASP CORE\Entities\bin\Debug\net5.0\Entities.runtimeconfig.dev.json
+D:\Visual Studio 2019\source\A-UN ASP CORE\Entities\bin\Debug\net5.0\Entities.dll
+D:\Visual Studio 2019\source\A-UN ASP CORE\Entities\bin\Debug\net5.0\ref\Entities.dll
+D:\Visual Studio 2019\source\A-UN ASP CORE\Entities\bin\Debug\net5.0\Entities.pdb
+D:\Visual Studio 2019\source\A-UN ASP CORE\Entities\obj\Debug\net5.0\Entities.GeneratedMSBuildEditorConfig.editorconfig
+D:\Visual Studio 2019\source\A-UN ASP CORE\Entities\obj\Debug\net5.0\Entities.AssemblyInfoInputs.cache
+D:\Visual Studio 2019\source\A-UN ASP CORE\Entities\obj\Debug\net5.0\Entities.AssemblyInfo.cs
+D:\Visual Studio 2019\source\A-UN ASP CORE\Entities\obj\Debug\net5.0\Entities.csproj.CoreCompileInputs.cache
+D:\Visual Studio 2019\source\A-UN ASP CORE\Entities\obj\Debug\net5.0\Entities.dll
+D:\Visual Studio 2019\source\A-UN ASP CORE\Entities\obj\Debug\net5.0\ref\Entities.dll
+D:\Visual Studio 2019\source\A-UN ASP CORE\Entities\obj\Debug\net5.0\Entities.pdb
+D:\Visual Studio 2019\source\A-UN ASP CORE\Entities\obj\Debug\net5.0\Entities.genruntimeconfig.cache
+D:\Visual Studio 2019\source\A-UN ASP CORE\Entities\obj\Debug\net5.0\Entities.csprojAssemblyReference.cache
 D:\Visual Studio 2019\source\A_UN_API\Entities\bin\Debug\net5.0\Entities.deps.json
 D:\Visual Studio 2019\source\A_UN_API\Entities\bin\Debug\net5.0\Entities.runtimeconfig.json
 D:\Visual Studio 2019\source\A_UN_API\Entities\bin\Debug\net5.0\Entities.runtimeconfig.dev.json
 D:\Visual Studio 2019\source\A_UN_API\Entities\bin\Debug\net5.0\Entities.dll
 D:\Visual Studio 2019\source\A_UN_API\Entities\bin\Debug\net5.0\ref\Entities.dll
 D:\Visual Studio 2019\source\A_UN_API\Entities\bin\Debug\net5.0\Entities.pdb
+D:\Visual Studio 2019\source\A_UN_API\Entities\obj\Debug\net5.0\Entities.csprojAssemblyReference.cache
 D:\Visual Studio 2019\source\A_UN_API\Entities\obj\Debug\net5.0\Entities.GeneratedMSBuildEditorConfig.editorconfig
 D:\Visual Studio 2019\source\A_UN_API\Entities\obj\Debug\net5.0\Entities.AssemblyInfoInputs.cache
 D:\Visual Studio 2019\source\A_UN_API\Entities\obj\Debug\net5.0\Entities.AssemblyInfo.cs
@@ -27,4 +73,3 @@ D:\Visual Studio 2019\source\A_UN_API\Entities\obj\Debug\net5.0\Entities.dll
 D:\Visual Studio 2019\source\A_UN_API\Entities\obj\Debug\net5.0\ref\Entities.dll
 D:\Visual Studio 2019\source\A_UN_API\Entities\obj\Debug\net5.0\Entities.pdb
 D:\Visual Studio 2019\source\A_UN_API\Entities\obj\Debug\net5.0\Entities.genruntimeconfig.cache
-D:\Visual Studio 2019\source\A_UN_API\Entities\obj\Debug\net5.0\Entities.csprojAssemblyReference.cache

@@ -38,9 +38,9 @@ namespace A_UN_API.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<PersonalFileReadDto>>> GetAllPersonalFiles([FromQuery] PersonalFileParameters queryParameters)
+        public async Task<ActionResult<IEnumerable<PersonalFileReadDto>>> GetPersonalFiles([FromQuery] PersonalFileParameters queryParameters)
         {
-            var personalFiles = await _repository.PersonalFile.GetAllPersonalFilesAsync(queryParameters);
+            var personalFiles = await _repository.PersonalFile.GetPersonalFilesAsync(queryParameters);
 
             Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(personalFiles.MetaData));
 

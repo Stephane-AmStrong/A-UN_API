@@ -29,7 +29,7 @@ namespace Repository
             _dataShaper = dataShaper;
         }
 
-        public async Task<PagedList<Entity>> GetAllPartnersAsync(PartnerParameters partnerParameters)
+        public async Task<PagedList<Entity>> GetPartnersAsync(PartnerParameters partnerParameters)
         {
             var partners = Enumerable.Empty<Partner>().AsQueryable();
 

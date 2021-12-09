@@ -34,9 +34,9 @@ namespace A_UN_API.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<PaymentReadDto>>> GetAllPayments([FromQuery] PaymentParameters paymentParameters)
+        public async Task<ActionResult<IEnumerable<PaymentReadDto>>> GetPayments([FromQuery] PaymentParameters paymentParameters)
         {
-            var payments = await _repository.Payment.GetAllPaymentsAsync(paymentParameters);
+            var payments = await _repository.Payment.GetPaymentsAsync(paymentParameters);
 
             Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(payments.MetaData));
 

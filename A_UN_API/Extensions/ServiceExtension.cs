@@ -61,38 +61,36 @@ namespace A_UN_API.Extensions
         public static void ConfigureRepositoryWrapper(this IServiceCollection services)
         {
             services.AddScoped<ISortHelper<AcademicYear>, SortHelper<AcademicYear>>();
-            services.AddScoped<ISortHelper<Branch>, SortHelper<Branch>>();
-            services.AddScoped<ISortHelper<BranchLevel>, SortHelper<BranchLevel>>();
-            services.AddScoped<ISortHelper<Objective>, SortHelper<Objective>>();
+            services.AddScoped<ISortHelper<AppUser>, SortHelper<AppUser>>();
+            services.AddScoped<ISortHelper<Formation>, SortHelper<Formation>>();
+            services.AddScoped<ISortHelper<FormationLevel>, SortHelper<FormationLevel>>();
             services.AddScoped<ISortHelper<Partner>, SortHelper<Partner>>();
             services.AddScoped<ISortHelper<Payment>, SortHelper<Payment>>();
-            services.AddScoped<ISortHelper<PaymentType>, SortHelper<PaymentType>>();
             services.AddScoped<ISortHelper<PersonalFile>, SortHelper<PersonalFile>>();
-            services.AddScoped<ISortHelper<RegistrationForm>, SortHelper<RegistrationForm>>();
-            services.AddScoped<ISortHelper<RegistrationFormLine>, SortHelper<RegistrationFormLine>>();
+            services.AddScoped<ISortHelper<Prerequisite>, SortHelper<Prerequisite>>();
             services.AddScoped<ISortHelper<Subscription>, SortHelper<Subscription>>();
             services.AddScoped<ISortHelper<SubscriptionLine>, SortHelper<SubscriptionLine>>();
             services.AddScoped<ISortHelper<University>, SortHelper<University>>();
+            services.AddScoped<ISortHelper<Workstation>, SortHelper<Workstation>>();
 
             services.AddScoped<IDataShaper<AcademicYear>, DataShaper<AcademicYear>>();
-            services.AddScoped<IDataShaper<Branch>, DataShaper<Branch>>();
-            services.AddScoped<IDataShaper<BranchLevel>, DataShaper<BranchLevel>>();
-            services.AddScoped<IDataShaper<Objective>, DataShaper<Objective>>();
+            services.AddScoped<IDataShaper<AppUser>, DataShaper<AppUser>>();
+            services.AddScoped<IDataShaper<Formation>, DataShaper<Formation>>();
+            services.AddScoped<IDataShaper<FormationLevel>, DataShaper<FormationLevel>>();
             services.AddScoped<IDataShaper<Partner>, DataShaper<Partner>>();
             services.AddScoped<IDataShaper<Payment>, DataShaper<Payment>>();
-            services.AddScoped<IDataShaper<PaymentType>, DataShaper<PaymentType>>();
             services.AddScoped<IDataShaper<PersonalFile>, DataShaper<PersonalFile>>();
-            services.AddScoped<IDataShaper<RegistrationForm>, DataShaper<RegistrationForm>>();
-            services.AddScoped<IDataShaper<RegistrationFormLine>, DataShaper<RegistrationFormLine>>();
+            services.AddScoped<IDataShaper<Prerequisite>, DataShaper<Prerequisite>>();
             services.AddScoped<IDataShaper<Subscription>, DataShaper<Subscription>>();
             services.AddScoped<IDataShaper<SubscriptionLine>, DataShaper<SubscriptionLine>>();
             services.AddScoped<IDataShaper<University>, DataShaper<University>>();
+            services.AddScoped<IDataShaper<Workstation>, DataShaper<Workstation>>();
 
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
         }
 
 
-        public static void ConfigureAuthenticationService(this IServiceCollection services, IConfiguration config)
+        public static void ConfigureJWTAuthenticationService(this IServiceCollection services, IConfiguration config)
         {
             services.AddIdentity<AppUser, Workstation>(option =>
             {
@@ -126,22 +124,22 @@ namespace A_UN_API.Extensions
                 };
             });
 
-            services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
+            //services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
         }
 
 
-        public static void ConfigureAuthorizationService(this IServiceCollection services)
+        public static void ConfigureClaimPolicy(this IServiceCollection services)
         {
             services.AddAuthorization(option =>
             {
                 option.AddPolicy("readAppUserPolicy", policy => policy.RequireClaim("readAppUser"));
                 option.AddPolicy("writeAppUserPolicy", policy => policy.RequireClaim("writeAppUser"));
 
-                option.AddPolicy("readBranchPolicy", policy => policy.RequireClaim("readBranch"));
-                option.AddPolicy("writeBranchPolicy", policy => policy.RequireClaim("writeBranch"));
+                option.AddPolicy("readFormationPolicy", policy => policy.RequireClaim("readFormation"));
+                option.AddPolicy("writeFormationPolicy", policy => policy.RequireClaim("writeFormation"));
 
-                option.AddPolicy("readBranchLevelPolicy", policy => policy.RequireClaim("readBranchLevel"));
-                option.AddPolicy("writeBranchLevelPolicy", policy => policy.RequireClaim("writeBranchLevel"));
+                option.AddPolicy("readFormationLevelPolicy", policy => policy.RequireClaim("readFormationLevel"));
+                option.AddPolicy("writeFormationLevelPolicy", policy => policy.RequireClaim("writeFormationLevel"));
 
                 option.AddPolicy("readFilePolicy", policy => policy.RequireClaim("readFile"));
                 option.AddPolicy("writeFilePolicy", policy => policy.RequireClaim("writeFile"));
@@ -158,11 +156,11 @@ namespace A_UN_API.Extensions
                 option.AddPolicy("readPaymentTypePolicy", policy => policy.RequireClaim("readPaymentType"));
                 option.AddPolicy("writePaymentTypePolicy", policy => policy.RequireClaim("writePaymentType"));
 
-                option.AddPolicy("readRegistrationFormPolicy", policy => policy.RequireClaim("readRegistrationForm"));
-                option.AddPolicy("writeRegistrationFormPolicy", policy => policy.RequireClaim("writeRegistrationForm"));
+                option.AddPolicy("readPrerequisitePolicy", policy => policy.RequireClaim("readPrerequisite"));
+                option.AddPolicy("writePrerequisitePolicy", policy => policy.RequireClaim("writePrerequisite"));
 
-                option.AddPolicy("readRegistrationFormLinePolicy", policy => policy.RequireClaim("readRegistrationFormLine"));
-                option.AddPolicy("writeRegistrationFormLinePolicy", policy => policy.RequireClaim("writeRegistrationFormLine"));
+                option.AddPolicy("readPrerequisiteLinePolicy", policy => policy.RequireClaim("readPrerequisiteLine"));
+                option.AddPolicy("writePrerequisiteLinePolicy", policy => policy.RequireClaim("writePrerequisiteLine"));
 
                 option.AddPolicy("readSubscriptionPolicy", policy => policy.RequireClaim("readSubscription"));
                 option.AddPolicy("writeSubscriptionPolicy", policy => policy.RequireClaim("writeSubscription"));

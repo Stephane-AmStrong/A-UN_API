@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Entities.Models;
 
 namespace Repository
 {
@@ -22,7 +23,7 @@ namespace Repository
         }
 
      
-        public async Task SendEmailAsync(EmailData emailData)
+        public async Task SendEmailAsync(EmailModel emailData)
         {
             var emailMessage = new MimeMessage();
 

@@ -10,10 +10,9 @@ namespace Entities.DataTransfertObjects
 {
     public class PartnerWriteDto
     {
-
-        
         [Required]
+        [Display(Name = "Nom")]
         public string Name { get; set; }
-        public IFormFile file { get; set; }
+        public IFormFile File { get; set; }
     }
 }

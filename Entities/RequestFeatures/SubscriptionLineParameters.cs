@@ -17,7 +17,7 @@ namespace Entities.RequestFeatures
 
 
         public Guid PersonalFileId { get; set; }
-        public Guid RegistrationFormLineId { get; set; }
+        public Guid FormationLevelFileId { get; set; }
         public Guid SubscriptionId { get; set; }
     }
 }

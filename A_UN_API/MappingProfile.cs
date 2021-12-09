@@ -30,14 +30,11 @@ namespace A_UN_API
             CreateMap<AcademicYear, AcademicYearReadDto>();
             CreateMap<AcademicYearWriteDto, AcademicYear>();
 
-            CreateMap<Branch, BranchReadDto>();
-            CreateMap<BranchWriteDto, Branch>();
+            CreateMap<Formation, FormationReadDto>();
+            CreateMap<FormationWriteDto, Formation>();
 
-            CreateMap<BranchLevel, BranchLevelReadDto>();
-            CreateMap<BranchLevelWriteDto, BranchLevel>();
-
-            CreateMap<Objective, ObjectiveReadDto>();
-            CreateMap<ObjectiveWriteDto, Objective>();
+            CreateMap<FormationLevel, FormationLevelReadDto>();
+            CreateMap<FormationLevelWriteDto, FormationLevel>();
 
             CreateMap<Partner, PartnerReadDto>();
             CreateMap<PartnerWriteDto, Partner>();
@@ -45,17 +42,11 @@ namespace A_UN_API
             CreateMap<Payment, PaymentReadDto>();
             CreateMap<PaymentWriteDto, Payment>();
 
-            CreateMap<PaymentType, PaymentTypeReadDto>();
-            CreateMap<PaymentTypeWriteDto, PaymentType>();
-
             CreateMap<PersonalFile, PersonalFileReadDto>();
             CreateMap<PersonalFileWriteDto, PersonalFile>();
 
-            CreateMap<RegistrationForm, RegistrationFormReadDto>();
-            CreateMap<RegistrationFormWriteDto, RegistrationForm>();
-
-            CreateMap<RegistrationFormLine, RegistrationFormLineReadDto>();
-            CreateMap<RegistrationFormLineWriteDto, RegistrationFormLine>();
+            CreateMap<Prerequisite, PrerequisiteReadDto>();
+            CreateMap<PrerequisiteWriteDto, Prerequisite>();
 
             CreateMap<Subscription, SubscriptionReadDto>();
             CreateMap<SubscriptionWriteDto, Subscription>();

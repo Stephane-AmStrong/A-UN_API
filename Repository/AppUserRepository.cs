@@ -1,5 +1,6 @@
 ﻿using Contracts;
 using Entities;
+using Entities.Helpers;
 using Entities.Models;
 using Entities.RequestFeatures;
 using Microsoft.AspNetCore.Identity;
@@ -15,20 +16,41 @@ namespace Repository
 {
     public class AppUserRepository : RepositoryBase<AppUser>, IAppUserRepository
     {
+        private ISortHelper<AppUser> _sortHelper;
         private readonly UserManager<AppUser> _userManager;
 
-        public AppUserRepository(RepositoryContext repositoryContext, UserManager<AppUser> userManager) : base(repositoryContext)
+        public AppUserRepository(RepositoryContext repositoryContext, ISortHelper<AppUser> sortHelper, UserManager<AppUser> userManager) : base(repositoryContext)
         {
             _userManager = userManager;
+            _sortHelper = sortHelper;
         }
 
-
-        public async Task<PagedList<AppUser>> GetAllAppUsersAsync(AppUserParameters paginationParameters)
+        public async Task<PagedList<AppUser>> GetAppUsersAsync_old(AppUserParameters appUserParameters)
         {
             return await Task.Run(() =>
                 PagedList<AppUser>.ToPagedList(_userManager.Users,
-                    paginationParameters.PageNumber,
-                    paginationParameters.PageSize)
+                    appUserParameters.PageNumber,
+                    appUserParameters.PageSize)
+                );
+        }
+
+
+        public async Task<PagedList<AppUser>> GetAppUsersAsync(AppUserParameters appUserParameters)
+        {
+            var appUsers = Enumerable.Empty<AppUser>().AsQueryable();
+
+            ApplyFilters(ref appUsers, appUserParameters);
+
+            PerformSearch(ref appUsers, appUserParameters.SearchTerm);
+
+            var sortedAppUsers = _sortHelper.ApplySort(appUsers, appUserParameters.OrderBy);
+
+            return await Task.Run(() =>
+                PagedList<AppUser>.ToPagedList
+                (
+                    sortedAppUsers,
+                    appUserParameters.PageNumber,
+                    appUserParameters.PageSize)
                 );
         }
 
@@ -36,6 +58,11 @@ namespace Repository
         {
             return await _userManager.Users.Where(appUser => appUser.Id.Equals(id))
                 .FirstOrDefaultAsync();
+        }
+
+        public async Task<bool> IsInRoleAsync(AppUser appUser, string roneName)
+        {
+            return await _userManager.IsInRoleAsync(appUser, roneName);
         }
 
         public async Task<bool> AppUserExistAsync(AppUser appUser)
@@ -53,5 +80,57 @@ namespace Repository
         {
             await _userManager.DeleteAsync(appUser);
         }
+
+        #region ApplyFilters and PerformSearch Region
+        private void ApplyFilters(ref IQueryable<AppUser> appUsers, AppUserParameters appUserParameters)
+        {
+            appUsers = FindAll()
+                .Include(x => x.Subscriptions).ThenInclude(x => x.FormationLevel).ThenInclude(x => x.Formation).ThenInclude(x => x.University);
+
+            //var userWorkstations = await Task.Run(() => _userManager.Users.Join(_repositoryContext.AppUserWorkstations, user => user.Id, role => role.UserId, (user, role) => role).Where(x => x.RoleId == id).OrderBy(x => x.User.Name).ThenBy(x => x.User.FirstName));
+
+            //var userWorkstations = await _userManager.Users.Join(_repositoryContext.AppUserWorkstations, user => user.Id, role => role.UserId, (user, role) => role).Where(x => x.RoleId == id).Include(x=>x.User).OrderBy(x => x.User.Name).ThenBy(x => x.User.FirstName).ToListAsync();
+
+
+            if (!string.IsNullOrEmpty(appUserParameters.WithRoleName))
+            {
+                var taskAppUsers = Task.Run(async () => await _userManager.GetUsersInRoleAsync(appUserParameters.WithRoleName));
+                appUsers = taskAppUsers.Result.AsQueryable();
+            }
+
+            if (appUserParameters.OfFormationLevelId != new Guid())
+            {
+                appUsers = appUsers.Where(x => x.Subscriptions.Any(x=>x.FormationLevelId == appUserParameters.OfFormationLevelId));
+            }
+            
+            if (appUserParameters.OfFormationId != new Guid())
+            {
+                appUsers = appUsers.Where(x => x.Subscriptions.Any(x=>x.FormationLevel.FormationId == appUserParameters.OfFormationId));
+            }
+            
+            if (appUserParameters.FromUniversityId != new Guid())
+            {
+                appUsers = appUsers.Where(x => x.Subscriptions.Any(x=>x.FormationLevel.Formation.UniversityId == appUserParameters.FromUniversityId));
+            }
+            
+            if (!string.IsNullOrEmpty(appUserParameters.ManagedByAppUserId))
+            {
+                appUsers = appUsers.Where(x => x.Subscriptions.Any(x=>x.FormationLevel.Formation.University.AppUserId == appUserParameters.ManagedByAppUserId));
+            }
+            
+            if (appUserParameters.DisplayStudentOnly)
+            {
+                appUsers = appUsers.Where(x => x.Subscriptions.Any(x=>x.AppUserId != null));
+            }
+        }
+
+        private void PerformSearch(ref IQueryable<AppUser> appUsers, string searchTerm)
+        {
+            if (!appUsers.Any() || string.IsNullOrWhiteSpace(searchTerm)) return;
+
+            appUsers = appUsers.Where(x => x.Name.ToLower().Contains(searchTerm.Trim().ToLower()));
+        }
+
+        #endregion
     }
 }

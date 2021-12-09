@@ -15,7 +15,13 @@ namespace Entities.RequestFeatures
         }
 
 
+        public string ManagedByAppUserId { get; set; }
+        public string WithRoleName { get; set; }
+        public Guid FromUniversityId { get; set; }
+        public Guid OfFormationId { get; set; }
+        public Guid OfFormationLevelId { get; set; }
         public string Gender { get; set; }
+        public bool DisplayStudentOnly { get; set; }
         public DateTime? Birthday { get; set; }
         public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }

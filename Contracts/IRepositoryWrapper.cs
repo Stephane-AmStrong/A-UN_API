@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Authorization;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,18 +10,16 @@ namespace Contracts
     {
         IFileRepository File { get; }
 
-        IAuthenticationRepository Authentication { get; }
+        IAccountRepository Account { get; }
+        IAuthorizationService Authorization { get; }
         IAcademicYearRepository AcademicYear { get; }
         IAppUserRepository AppUser { get; }
-        IBranchRepository Branch { get; }
-        IBranchLevelRepository BranchLevel { get; }
+        IFormationRepository Formation { get; }
+        IFormationLevelRepository FormationLevel { get; }
         IPersonalFileRepository PersonalFile { get; }
-        IObjectiveRepository Objective { get; }
         IPartnerRepository Partner { get; }
         IPaymentRepository Payment { get; }
-        IPaymentTypeRepository PaymentType { get; }
-        IRegistrationFormRepository RegistrationForm { get; }
-        IRegistrationFormLineRepository RegistrationFormLine { get; }
+        IPrerequisiteRepository Prerequisite { get; }
         ISubscriptionRepository Subscription { get; }
         ISubscriptionLineRepository SubscriptionLine { get; }
         IUniversityRepository University { get; }

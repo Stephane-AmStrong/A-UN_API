@@ -29,7 +29,7 @@ namespace Repository
             _dataShaper = dataShaper;
         }
 
-        public async Task<PagedList<Entity>> GetAllSubscriptionLinesAsync(SubscriptionLineParameters subscriptionLineParameters)
+        public async Task<PagedList<Entity>> GetSubscriptionLinesAsync(SubscriptionLineParameters subscriptionLineParameters)
         {
             var subscriptionLines = Enumerable.Empty<SubscriptionLine>().AsQueryable();
 

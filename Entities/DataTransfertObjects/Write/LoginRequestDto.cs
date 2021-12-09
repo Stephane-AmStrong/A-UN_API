@@ -16,6 +16,7 @@ namespace Entities.DataTransfertObjects
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
+        [Display(Name = "Se rappelé de moi")]
         public bool RememberMe { get; set; } = false;
     }
 }

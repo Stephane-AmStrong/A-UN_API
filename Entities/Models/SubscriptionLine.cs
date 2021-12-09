@@ -14,15 +14,15 @@ namespace Entities.Models
         [Required]
         public string Name { get; set; }
         public Guid PersonalFileId { get; set; }
-        public Guid RegistrationFormLineId { get; set; }
+        public Guid PrerequisiteId { get; set; }
         public Guid SubscriptionId { get; set; }
 
 
         [ForeignKey ("PersonalFileId")]
         public virtual PersonalFile PersonalFile { get; set; }
         
-        [ForeignKey ("RegistrationFormLineId")]
-        public virtual RegistrationFormLine RegistrationFormLine { get; set; }
+        [ForeignKey ("PrerequisiteId")]
+        public virtual Prerequisite Prerequisite { get; set; }
 
         [ForeignKey ("SubscriptionId")]
         public virtual Subscription Subscription { get; set; }

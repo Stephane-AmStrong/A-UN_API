@@ -17,6 +17,6 @@ namespace Entities.RequestFeatures
 
 
 
-        public string AppUserId { get; set; }
+        public string OfAppUserId { get; set; }
     }
 }

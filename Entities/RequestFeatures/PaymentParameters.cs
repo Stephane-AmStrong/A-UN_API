@@ -13,12 +13,12 @@ namespace Entities.RequestFeatures
 
         public PaymentParameters()
         {
-            OrderBy = "name";
+            OrderBy = "PaidAt desc";
         }
         
-        public Guid PaymentTypeId { get; set; }
+        public Guid? PaymentTypeId { get; set; }
 
-        public Guid SubscriptionId { get; set; }
+        public Guid? SubscriptionId { get; set; }
 
         public float MoneyAmount { get; set; }
         public float RemainingAmount { get; set; }

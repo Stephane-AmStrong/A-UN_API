@@ -16,7 +16,7 @@ namespace Entities.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.10")
+                .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Entities.Models.AcademicYear", b =>
@@ -25,9 +25,17 @@ namespace Entities.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("EndsOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsOpen")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("StartsOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<float>("SubscriptionFee")
+                        .HasColumnType("real");
 
                     b.HasKey("Id");
 
@@ -126,67 +134,85 @@ namespace Entities.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("Entities.Models.Branch", b =>
+            modelBuilder.Entity("Entities.Models.Banner", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ImgLink")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("TechnicalThemeId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("UniversityId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TechnicalThemeId");
-
-                    b.HasIndex("UniversityId");
-
-                    b.ToTable("Branches");
-                });
-
-            modelBuilder.Entity("Entities.Models.BranchLevel", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("BranchId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("ImgLink")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("TechnicalThemeId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BranchId");
-
-                    b.HasIndex("TechnicalThemeId");
-
-                    b.ToTable("BranchLevels");
-                });
-
-            modelBuilder.Entity("Entities.Models.Objective", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Objectives");
+                    b.ToTable("Banners");
+                });
+
+            modelBuilder.Entity("Entities.Models.Formation", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImgLink")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImgLink2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UniversityId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ValiddatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UniversityId");
+
+                    b.ToTable("Formations");
+                });
+
+            modelBuilder.Entity("Entities.Models.FormationLevel", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("FormationId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ImgLink")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("Price")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("ValiddatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FormationId");
+
+                    b.ToTable("FormationLevels");
                 });
 
             modelBuilder.Entity("Entities.Models.Partner", b =>
@@ -213,82 +239,56 @@ namespace Entities.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Compteur")
+                    b.Property<Guid>("AcademicYearId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AppUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Feda_Amount")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FA_CompteurTotal")
+                    b.Property<string>("Feda_CallbackUrl")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FA_CompteurType")
+                    b.Property<string>("Feda_Currency_id")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FA_DateMECef")
+                    b.Property<string>("Feda_Customer_id")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FA_NIM")
+                    b.Property<string>("Feda_Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FA_SIG")
+                    b.Property<string>("Feda_Id")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FV_CompteurTotal")
+                    b.Property<string>("Feda_Klass")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FV_CompteurType")
+                    b.Property<string>("Feda_Mode")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FV_DateMECef")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FV_NIM")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FV_SIG")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("IFU")
+                    b.Property<string>("Feda_Status")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<float>("MoneyAmount")
                         .HasColumnType("real");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("PaidAt")
                         .HasColumnType("datetime2");
-
-                    b.Property<Guid>("PaymentTypeId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<float>("RemainingAmount")
                         .HasColumnType("real");
 
-                    b.Property<Guid>("SubscriptionId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("PaymentTypeId");
+                    b.HasIndex("AcademicYearId");
 
-                    b.HasIndex("SubscriptionId");
+                    b.HasIndex("AppUserId");
 
                     b.ToTable("Payments");
-                });
-
-            modelBuilder.Entity("Entities.Models.PaymentType", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PaymentTypes");
                 });
 
             modelBuilder.Entity("Entities.Models.PersonalFile", b =>
@@ -315,40 +315,14 @@ namespace Entities.Migrations
                     b.ToTable("PersonalFiles");
                 });
 
-            modelBuilder.Entity("Entities.Models.RegistrationForm", b =>
+            modelBuilder.Entity("Entities.Models.Prerequisite", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("FieldLevelId")
+                    b.Property<Guid>("FormationLevelId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("ImgLink")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("Price")
-                        .HasColumnType("real");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FieldLevelId");
-
-                    b.ToTable("RegistrationForms");
-                });
-
-            modelBuilder.Entity("Entities.Models.RegistrationFormLine", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool>("IsProgram")
-                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -357,14 +331,11 @@ namespace Entities.Migrations
                     b.Property<int>("NumOrder")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("RegistrationFormId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("RegistrationFormId");
+                    b.HasIndex("FormationLevelId");
 
-                    b.ToTable("RegistrationFormLines");
+                    b.ToTable("Prerequisites");
                 });
 
             modelBuilder.Entity("Entities.Models.Subscription", b =>
@@ -373,17 +344,35 @@ namespace Entities.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("AcademicYearId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("AppUserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("FormationLevelId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("SubscribedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("ValiddatedAt")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AcademicYearId");
+
                     b.HasIndex("AppUserId");
+
+                    b.HasIndex("FormationLevelId");
 
                     b.ToTable("Subscriptions");
                 });
@@ -401,7 +390,7 @@ namespace Entities.Migrations
                     b.Property<Guid>("PersonalFileId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("RegistrationFormLineId")
+                    b.Property<Guid>("PrerequisiteId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("SubscriptionId")
@@ -411,32 +400,11 @@ namespace Entities.Migrations
 
                     b.HasIndex("PersonalFileId");
 
-                    b.HasIndex("RegistrationFormLineId");
+                    b.HasIndex("PrerequisiteId");
 
                     b.HasIndex("SubscriptionId");
 
                     b.ToTable("SubscriptionLines");
-                });
-
-            modelBuilder.Entity("Entities.Models.TechnicalTheme", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Code")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("IsBranch")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TechnicalThemes");
                 });
 
             modelBuilder.Entity("Entities.Models.University", b =>
@@ -446,6 +414,7 @@ namespace Entities.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("AppUserId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("Birthday")
@@ -454,14 +423,19 @@ namespace Entities.Migrations
                     b.Property<DateTime>("CreateAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ImgLink")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("Price")
-                        .HasColumnType("bigint");
+                    b.Property<DateTime?>("ValiddatedAt")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -614,61 +588,45 @@ namespace Entities.Migrations
                     b.HasDiscriminator().HasValue("Workstation");
                 });
 
-            modelBuilder.Entity("Entities.Models.Branch", b =>
+            modelBuilder.Entity("Entities.Models.Formation", b =>
                 {
-                    b.HasOne("Entities.Models.TechnicalTheme", "TechnicalTheme")
-                        .WithMany("Branches")
-                        .HasForeignKey("TechnicalThemeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Entities.Models.University", "University")
-                        .WithMany("Branches")
+                        .WithMany("Formations")
                         .HasForeignKey("UniversityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("TechnicalTheme");
-
                     b.Navigation("University");
                 });
 
-            modelBuilder.Entity("Entities.Models.BranchLevel", b =>
+            modelBuilder.Entity("Entities.Models.FormationLevel", b =>
                 {
-                    b.HasOne("Entities.Models.Branch", "Branch")
-                        .WithMany("BranchLevels")
-                        .HasForeignKey("BranchId")
+                    b.HasOne("Entities.Models.Formation", "Formation")
+                        .WithMany("FormationLevels")
+                        .HasForeignKey("FormationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Entities.Models.TechnicalTheme", "TechnicalTheme")
-                        .WithMany("FieldLevels")
-                        .HasForeignKey("TechnicalThemeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Branch");
-
-                    b.Navigation("TechnicalTheme");
+                    b.Navigation("Formation");
                 });
 
             modelBuilder.Entity("Entities.Models.Payment", b =>
                 {
-                    b.HasOne("Entities.Models.PaymentType", "PaymentType")
+                    b.HasOne("Entities.Models.AcademicYear", "AcademicYear")
                         .WithMany()
-                        .HasForeignKey("PaymentTypeId")
+                        .HasForeignKey("AcademicYearId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Entities.Models.Subscription", "Subscription")
-                        .WithMany()
-                        .HasForeignKey("SubscriptionId")
+                    b.HasOne("Entities.Models.AppUser", "AppUser")
+                        .WithMany("Payments")
+                        .HasForeignKey("AppUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("PaymentType");
+                    b.Navigation("AcademicYear");
 
-                    b.Navigation("Subscription");
+                    b.Navigation("AppUser");
                 });
 
             modelBuilder.Entity("Entities.Models.PersonalFile", b =>
@@ -682,37 +640,42 @@ namespace Entities.Migrations
                     b.Navigation("AppUser");
                 });
 
-            modelBuilder.Entity("Entities.Models.RegistrationForm", b =>
+            modelBuilder.Entity("Entities.Models.Prerequisite", b =>
                 {
-                    b.HasOne("Entities.Models.BranchLevel", "FieldLevel")
-                        .WithMany("RegistrationForms")
-                        .HasForeignKey("FieldLevelId")
+                    b.HasOne("Entities.Models.FormationLevel", "FormationLevel")
+                        .WithMany("Prerequisites")
+                        .HasForeignKey("FormationLevelId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("FieldLevel");
-                });
-
-            modelBuilder.Entity("Entities.Models.RegistrationFormLine", b =>
-                {
-                    b.HasOne("Entities.Models.RegistrationForm", "RegistrationForm")
-                        .WithMany("RegistrationFormRequirements")
-                        .HasForeignKey("RegistrationFormId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("RegistrationForm");
+                    b.Navigation("FormationLevel");
                 });
 
             modelBuilder.Entity("Entities.Models.Subscription", b =>
                 {
+                    b.HasOne("Entities.Models.AcademicYear", "AcademicYear")
+                        .WithMany()
+                        .HasForeignKey("AcademicYearId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Entities.Models.AppUser", "AppUser")
                         .WithMany("Subscriptions")
                         .HasForeignKey("AppUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Entities.Models.FormationLevel", "FormationLevel")
+                        .WithMany("Subscriptions")
+                        .HasForeignKey("FormationLevelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AcademicYear");
+
                     b.Navigation("AppUser");
+
+                    b.Navigation("FormationLevel");
                 });
 
             modelBuilder.Entity("Entities.Models.SubscriptionLine", b =>
@@ -723,9 +686,9 @@ namespace Entities.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Entities.Models.RegistrationFormLine", "RegistrationFormLine")
+                    b.HasOne("Entities.Models.Prerequisite", "Prerequisite")
                         .WithMany("SubscriptionLines")
-                        .HasForeignKey("RegistrationFormLineId")
+                        .HasForeignKey("PrerequisiteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -737,7 +700,7 @@ namespace Entities.Migrations
 
                     b.Navigation("PersonalFile");
 
-                    b.Navigation("RegistrationFormLine");
+                    b.Navigation("Prerequisite");
 
                     b.Navigation("Subscription");
                 });
@@ -746,7 +709,9 @@ namespace Entities.Migrations
                 {
                     b.HasOne("Entities.Models.AppUser", "AppUser")
                         .WithMany()
-                        .HasForeignKey("AppUserId");
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("AppUser");
                 });
@@ -804,27 +769,26 @@ namespace Entities.Migrations
 
             modelBuilder.Entity("Entities.Models.AppUser", b =>
                 {
+                    b.Navigation("Payments");
+
                     b.Navigation("PersonalFiles");
 
                     b.Navigation("Subscriptions");
                 });
 
-            modelBuilder.Entity("Entities.Models.Branch", b =>
+            modelBuilder.Entity("Entities.Models.Formation", b =>
                 {
-                    b.Navigation("BranchLevels");
+                    b.Navigation("FormationLevels");
                 });
 
-            modelBuilder.Entity("Entities.Models.BranchLevel", b =>
+            modelBuilder.Entity("Entities.Models.FormationLevel", b =>
                 {
-                    b.Navigation("RegistrationForms");
+                    b.Navigation("Prerequisites");
+
+                    b.Navigation("Subscriptions");
                 });
 
-            modelBuilder.Entity("Entities.Models.RegistrationForm", b =>
-                {
-                    b.Navigation("RegistrationFormRequirements");
-                });
-
-            modelBuilder.Entity("Entities.Models.RegistrationFormLine", b =>
+            modelBuilder.Entity("Entities.Models.Prerequisite", b =>
                 {
                     b.Navigation("SubscriptionLines");
                 });
@@ -834,16 +798,9 @@ namespace Entities.Migrations
                     b.Navigation("SubscriptionLines");
                 });
 
-            modelBuilder.Entity("Entities.Models.TechnicalTheme", b =>
-                {
-                    b.Navigation("Branches");
-
-                    b.Navigation("FieldLevels");
-                });
-
             modelBuilder.Entity("Entities.Models.University", b =>
                 {
-                    b.Navigation("Branches");
+                    b.Navigation("Formations");
                 });
 #pragma warning restore 612, 618
         }

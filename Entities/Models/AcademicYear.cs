@@ -11,6 +11,10 @@ namespace Entities.Models
     {
         public Guid Id { get; set; }
         [Required]
-        public string Name { get; set; }
+        public DateTime StartsOn { get; set; }
+        [Required]
+        public DateTime EndsOn { get; set; }
+        public float SubscriptionFee { get; set; }
+        public bool IsOpen { get; set; }
     }
 }

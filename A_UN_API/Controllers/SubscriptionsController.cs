@@ -35,9 +35,9 @@ namespace A_UN_API.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<SubscriptionReadDto>>> GetAllSubscriptions([FromQuery] SubscriptionParameters queryParameters)
+        public async Task<ActionResult<IEnumerable<SubscriptionReadDto>>> GetSubscriptions([FromQuery] SubscriptionParameters queryParameters)
         {
-            var subscriptions = await _repository.Subscription.GetAllSubscriptionsAsync(queryParameters);
+            var subscriptions = await _repository.Subscription.GetSubscriptionsAsync(queryParameters);
 
             Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(subscriptions.MetaData));
 

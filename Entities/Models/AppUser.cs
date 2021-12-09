@@ -11,6 +11,7 @@ namespace Entities.Models
     {
         public AppUser()
         {
+            Payments = new HashSet<Payment>();
             PersonalFiles = new HashSet<PersonalFile>();
             Subscriptions = new HashSet<Subscription>();
         }
@@ -27,6 +28,7 @@ namespace Entities.Models
         public DateTime? UpdatedAt { get; set; }
         public DateTime? DisabledAt { get; set; }
 
+        public virtual ICollection<Payment> Payments { get; set; }
         public virtual ICollection<PersonalFile> PersonalFiles { get; set; }
         public virtual ICollection<Subscription> Subscriptions { get; set; }
     }

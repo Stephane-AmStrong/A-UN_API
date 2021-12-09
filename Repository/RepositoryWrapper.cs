@@ -3,6 +3,7 @@ using Entities;
 using Entities.Helpers;
 using Entities.Models;
 using Entities.RequestFeatures;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -19,20 +20,18 @@ namespace Repository
     public class RepositoryWrapper : IRepositoryWrapper
     {
         private IFileRepository _fileRepository;
-        private IAuthenticationRepository _authenticationRepository;
+        private IAccountRepository _accountRepository;
+        private IAuthorizationService _authorization;
         private IAcademicYearRepository _academicYearRepository;
 
         private IAppUserRepository _appUser;
-        private IBranchRepository _branche;
-        private IBranchLevelRepository _branchLevel;
+        private IFormationRepository _formatione;
+        private IFormationLevelRepository _formationLevel;
         private IPersonalFileRepository _personalFile;
-        private IObjectiveRepository _objective;
         private IMailRepository _mail;
         private IPartnerRepository _partner;
         private IPaymentRepository _payment;
-        private IPaymentTypeRepository _paymentType;
-        private IRegistrationFormRepository _registrationForm;
-        private IRegistrationFormLineRepository _registrationFormLine;
+        private IPrerequisiteRepository _prerequisite;
         private ISubscriptionRepository _subscription;
         private ISubscriptionLineRepository _subscriptionLine;
         private IUniversityRepository _university;
@@ -44,29 +43,26 @@ namespace Repository
         private IOptions<EmailSettings> _emailSettings;
 
         private readonly ISortHelper<AcademicYear> _academicYearSortHelper;
-        private readonly ISortHelper<Branch> _branchSortHelper;
-        private readonly ISortHelper<BranchLevel> _branchLevelSortHelper;
-        private readonly ISortHelper<Objective> _objectiveSortHelper;
+        private readonly ISortHelper<AppUser> _appUserSortHelper;
+        private readonly ISortHelper<Formation> _formationSortHelper;
+        private readonly ISortHelper<FormationLevel> _formationLevelSortHelper;
         private readonly ISortHelper<Partner> _partnerSortHelper;
         private readonly ISortHelper<Payment> _paymentSortHelper;
-        private readonly ISortHelper<PaymentType> _paymentTypeSortHelper;
         private readonly ISortHelper<PersonalFile> _personalFileSortHelper;
-        private readonly ISortHelper<RegistrationForm> _registrationFormSortHelper;
-        private readonly ISortHelper<RegistrationFormLine> _registrationFormLineSortHelper;
+        private readonly ISortHelper<Prerequisite> _prerequisiteSortHelper;
         private readonly ISortHelper<Subscription> _subscriptionSortHelper;
         private readonly ISortHelper<SubscriptionLine> _subscriptionLineSortHelper;
         private readonly ISortHelper<University> _universitySortHelper;
+        private readonly ISortHelper<Workstation> _workstationSortHelper;
 
         private readonly IDataShaper<AcademicYear> _academicYearDataShaper;
-        private readonly IDataShaper<Branch> _branchDataShaper;
-        private readonly IDataShaper<BranchLevel> _branchLevelDataShaper;
-        private readonly IDataShaper<Objective> _objectiveDataShaper;
+        private readonly IDataShaper<Formation> _formationDataShaper;
+        private readonly IDataShaper<FormationLevel> _formationLevelDataShaper;
         private readonly IDataShaper<Partner> _partnerDataShaper;
         private readonly IDataShaper<Payment> _paymentDataShaper;
-        private readonly IDataShaper<PaymentType> _paymentTypeDataShaper;
         private readonly IDataShaper<PersonalFile> _personalFileDataShaper;
-        private readonly IDataShaper<RegistrationForm> _registrationFormDataShaper;
-        private readonly IDataShaper<RegistrationFormLine> _registrationFormLineDataShaper;
+        private readonly IDataShaper<Prerequisite> _registrationFormDataShaper;
+        private readonly IDataShaper<Prerequisite> _prerequisiteDataShaper;
         private readonly IDataShaper<Subscription> _subscriptionDataShaper;
         private readonly IDataShaper<SubscriptionLine> _subscriptionLineDataShaper;
         private readonly IDataShaper<University> _universityDataShaper;
@@ -94,15 +90,23 @@ namespace Repository
             }
         }
 
-        public IAuthenticationRepository Authentication
+        public IAccountRepository Account
         {
             get
             {
-                if (_authenticationRepository == null)
+                if (_accountRepository == null)
                 {
-                    _authenticationRepository = new AuthenticationRepository(_repoContext, _userManager, _roleManager, _configuration);
+                    _accountRepository = new AccountRepository(_repoContext, _userManager, _roleManager, _configuration, _httpContextAccessor);
                 }
-                return _authenticationRepository;
+                return _accountRepository;
+            }
+        }
+
+        public IAuthorizationService Authorization
+        {
+            get
+            {
+                return _authorization;
             }
         }
 
@@ -112,7 +116,7 @@ namespace Repository
             {
                 if (_academicYearRepository == null)
                 {
-                    _academicYearRepository = new AcademicYearRepository(_repoContext, _academicYearSortHelper, _academicYearDataShaper);
+                    _academicYearRepository = new AcademicYearRepository(_repoContext, _academicYearSortHelper);
                 }
                 return _academicYearRepository;
             }
@@ -124,33 +128,33 @@ namespace Repository
             {
                 if (_appUser == null)
                 {
-                    _appUser = new AppUserRepository(_repoContext, _userManager);
+                    _appUser = new AppUserRepository(_repoContext, _appUserSortHelper, _userManager);
                 }
                 return _appUser;
             }
         }
 
-        public IBranchRepository Branch
+        public IFormationRepository Formation
         {
             get
             {
-                if (_branche == null)
+                if (_formatione == null)
                 {
-                    _branche = new BranchRepository(_repoContext, _branchSortHelper, _branchDataShaper);
+                    _formatione = new FormationRepository(_repoContext, _formationSortHelper, _formationDataShaper);
                 }
-                return _branche;
+                return _formatione;
             }
         }
 
-        public IBranchLevelRepository BranchLevel
+        public IFormationLevelRepository FormationLevel
         {
             get
             {
-                if (_branchLevel == null)
+                if (_formationLevel == null)
                 {
-                    _branchLevel = new BranchLevelRepository(_repoContext, _branchLevelSortHelper, _branchLevelDataShaper);
+                    _formationLevel = new FormationLevelRepository(_repoContext, _formationLevelSortHelper, _formationLevelDataShaper);
                 }
-                return _branchLevel;
+                return _formationLevel;
             }
         }
 
@@ -178,18 +182,6 @@ namespace Repository
             }
         }
 
-        public IObjectiveRepository Objective
-        {
-            get
-            {
-                if (_objective == null)
-                {
-                    _objective = new ObjectiveRepository(_repoContext, _objectiveSortHelper, _objectiveDataShaper);
-                }
-                return _objective;
-            }
-        }
-
         public IPartnerRepository Partner
         {
             get
@@ -214,39 +206,15 @@ namespace Repository
             }
         }
 
-        public IPaymentTypeRepository PaymentType
+        public IPrerequisiteRepository Prerequisite
         {
             get
             {
-                if (_paymentType == null)
+                if (_prerequisite == null)
                 {
-                    _paymentType = new PaymentTypeRepository(_repoContext, _paymentTypeSortHelper, _paymentTypeDataShaper);
+                    _prerequisite = new PrerequisiteRepository(_repoContext, _prerequisiteSortHelper, _prerequisiteDataShaper);
                 }
-                return _paymentType;
-            }
-        }
-
-        public IRegistrationFormRepository RegistrationForm
-        {
-            get
-            {
-                if (_registrationForm == null)
-                {
-                    _registrationForm = new RegistrationFormRepository(_repoContext, _registrationFormSortHelper, _registrationFormDataShaper);
-                }
-                return _registrationForm;
-            }
-        }
-
-        public IRegistrationFormLineRepository RegistrationFormLine
-        {
-            get
-            {
-                if (_registrationFormLine == null)
-                {
-                    _registrationFormLine = new RegistrationFormLineRepository(_repoContext, _registrationFormLineSortHelper, _registrationFormLineDataShaper);
-                }
-                return _registrationFormLine;
+                return _prerequisite;
             }
         }
 
@@ -292,7 +260,7 @@ namespace Repository
             {
                 if (_workstation == null)
                 {
-                    _workstation = new WorkstationRepository(_repoContext, _roleManager);
+                    _workstation = new WorkstationRepository(_repoContext, _workstationSortHelper, _roleManager);
                 }
                 return _workstation;
             }
@@ -302,6 +270,7 @@ namespace Repository
 
 
         public RepositoryWrapper(
+            IAuthorizationService authorization,
             UserManager<AppUser> userManager,
             RoleManager<Workstation> roleManager,
             RepositoryContext repositoryContext,
@@ -309,63 +278,58 @@ namespace Repository
             IWebHostEnvironment webHostEnvironment,
             IConfiguration configuration,
             IDataShaper<AcademicYear> academicYearDataShaper,
-            IDataShaper<Branch> branchDataShaper,
-            IDataShaper<BranchLevel> branchLevelDataShaper,
-            IDataShaper<Objective> objectiveDataShaper,
+            IDataShaper<Formation> formationDataShaper,
+            IDataShaper<FormationLevel> formationLevelDataShaper,
             IDataShaper<Partner> partnerDataShaper,
             IDataShaper<Payment> paymentDataShaper,
-            IDataShaper<PaymentType> paymentTypeDataShaper,
             IDataShaper<PersonalFile> personalFileDataShaper,
-            IDataShaper<RegistrationForm> registrationFormDataShaper,
-            IDataShaper<RegistrationFormLine> registrationFormLineDataShaper,
+            IDataShaper<Prerequisite> registrationFormDataShaper,
+            IDataShaper<Prerequisite> prerequisiteDataShaper,
             IDataShaper<Subscription> subscriptionDataShaper,
             IDataShaper<SubscriptionLine> subscriptionLineDataShaper,
             IDataShaper<University> universityDataShaper,
 
             ISortHelper<AcademicYear> academicYearSortHelper,
-            ISortHelper<Branch> branchSortHelper,
-            ISortHelper<BranchLevel> branchLevelSortHelper,
-            ISortHelper<Objective> objectiveSortHelper,
+            ISortHelper<AppUser> appUserSortHelper,
+            ISortHelper<Formation> formationSortHelper,
+            ISortHelper<FormationLevel> formationLevelSortHelper,
             ISortHelper<Partner> partnerSortHelper,
             ISortHelper<Payment> paymentSortHelper,
-            ISortHelper<PaymentType> paymentTypeSortHelper,
             ISortHelper<PersonalFile> personalFileSortHelper,
-            ISortHelper<RegistrationForm> registrationFormSortHelper,
-            ISortHelper<RegistrationFormLine> registrationFormLineSortHelper,
+            ISortHelper<Prerequisite> prerequisiteSortHelper,
             ISortHelper<Subscription> subscriptionSortHelper,
             ISortHelper<SubscriptionLine> subscriptionLineSortHelper,
             ISortHelper<University> universitySortHelper,
+            ISortHelper<Workstation> workstationSortHelper,
             IHttpContextAccessor httpContextAccessor)
         {
+            _authorization = authorization;
             _userManager = userManager;
             _roleManager = roleManager;
             _configuration = configuration;
             _repoContext = repositoryContext;
 
             _academicYearDataShaper = academicYearDataShaper;
-            _branchDataShaper = branchDataShaper;
-            _branchLevelDataShaper = branchLevelDataShaper;
-            _objectiveDataShaper = objectiveDataShaper;
+            _formationDataShaper = formationDataShaper;
+            _formationLevelDataShaper = formationLevelDataShaper;
             _partnerDataShaper = partnerDataShaper;
             _paymentDataShaper = paymentDataShaper;
-            _paymentTypeDataShaper = paymentTypeDataShaper;
             _personalFileDataShaper = personalFileDataShaper;
             _registrationFormDataShaper = registrationFormDataShaper;
-            _registrationFormLineDataShaper = registrationFormLineDataShaper;
+            _prerequisiteDataShaper = prerequisiteDataShaper;
             _subscriptionDataShaper = subscriptionDataShaper;
             _subscriptionLineDataShaper = subscriptionLineDataShaper;
             _universityDataShaper = universityDataShaper;
+            _workstationSortHelper = workstationSortHelper;
 
             _academicYearSortHelper = academicYearSortHelper;
-            _branchSortHelper = branchSortHelper;
-            _branchLevelSortHelper = branchLevelSortHelper;
-            _objectiveSortHelper = objectiveSortHelper;
+            _appUserSortHelper = appUserSortHelper;
+            _formationSortHelper = formationSortHelper;
+            _formationLevelSortHelper = formationLevelSortHelper;
             _partnerSortHelper = partnerSortHelper;
             _paymentSortHelper = paymentSortHelper;
-            _paymentTypeSortHelper = paymentTypeSortHelper;
             _personalFileSortHelper = personalFileSortHelper;
-            _registrationFormSortHelper = registrationFormSortHelper;
-            _registrationFormLineSortHelper = registrationFormLineSortHelper;
+            _prerequisiteSortHelper = prerequisiteSortHelper;
             _subscriptionSortHelper = subscriptionSortHelper;
             _subscriptionLineSortHelper = subscriptionLineSortHelper;
             _universitySortHelper = universitySortHelper;

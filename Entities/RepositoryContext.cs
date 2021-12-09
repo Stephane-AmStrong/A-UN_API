@@ -15,15 +15,13 @@ namespace Entities
 
         public DbSet<AcademicYear> AcademicYears { get; set; }
         public DbSet<AppUser> AppUsers { get; set; }
-        public DbSet<Branch> Branches { get; set; }
-        public DbSet<BranchLevel> BranchLevels { get; set; }
+        public DbSet<Banner> Banners { get; set; }
+        public DbSet<Formation> Formations { get; set; }
+        public DbSet<FormationLevel> FormationLevels { get; set; }
         public DbSet<PersonalFile> PersonalFiles { get; set; }
-        public DbSet<Objective> Objectives { get; set; }
         public DbSet<Partner> Partners { get; set; }
         public DbSet<Payment> Payments { get; set; }
-        public DbSet<PaymentType> PaymentTypes { get; set; }
-        public DbSet<RegistrationForm> RegistrationForms { get; set; }
-        public DbSet<RegistrationFormLine> RegistrationFormLines { get; set; }
+        public DbSet<Prerequisite> Prerequisites { get; set; }
         public DbSet<Subscription> Subscriptions { get; set; }
         public DbSet<SubscriptionLine> SubscriptionLines { get; set; }
         public DbSet<University> Universities { get; set; }
@@ -38,7 +36,7 @@ namespace Entities
             //builder.Entity<Workstation>().HasData(
             //    new Workstation { Name = "SuperAdmin" },
             //    new Workstation { Name = "Administrator" },
-            //    new Workstation { Name = "Students" }
+            //    new Workstation { Name = "Etudiants" }
             //    );
 
         }

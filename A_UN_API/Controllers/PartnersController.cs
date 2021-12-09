@@ -37,9 +37,9 @@ namespace A_UN_API.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<PartnerReadDto>>> GetAllPartners([FromQuery] PartnerParameters partnerParameters)
+        public async Task<ActionResult<IEnumerable<PartnerReadDto>>> GetPartners([FromQuery] PartnerParameters partnerParameters)
         {
-            var partners = await _repository.Partner.GetAllPartnersAsync(partnerParameters);
+            var partners = await _repository.Partner.GetPartnersAsync(partnerParameters);
 
             Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(partners.MetaData));
 
@@ -152,22 +152,22 @@ namespace A_UN_API.Controllers
 
 
         [HttpPatch("{id}")]
-        public async Task<ActionResult> PartialBranchUpdate(Guid Id, JsonPatchDocument<BranchWriteDto> patchDoc)
+        public async Task<ActionResult> PartialPartnerUpdate(Guid Id, JsonPatchDocument<PartnerWriteDto> patchDoc)
         {
-            var branchModelFromRepository = await _repository.Branch.GetBranchByIdAsync(Id);
-            if (branchModelFromRepository == null) return NotFound();
+            var partnerModelFromRepository = await _repository.Partner.GetPartnerByIdAsync(Id);
+            if (partnerModelFromRepository == null) return NotFound();
 
-            var branchToPatch = _mapper.Map<BranchWriteDto>(branchModelFromRepository);
-            patchDoc.ApplyTo(branchToPatch, ModelState);
+            var partnerToPatch = _mapper.Map<PartnerWriteDto>(partnerModelFromRepository);
+            patchDoc.ApplyTo(partnerToPatch, ModelState);
 
-            if (!TryValidateModel(branchToPatch))
+            if (!TryValidateModel(partnerToPatch))
             {
                 return ValidationProblem(ModelState);
             }
 
-            _mapper.Map(branchToPatch, branchModelFromRepository);
+            _mapper.Map(partnerToPatch, partnerModelFromRepository);
 
-            await _repository.Branch.UpdateBranchAsync(branchModelFromRepository);
+            await _repository.Partner.UpdatePartnerAsync(partnerModelFromRepository);
 
             await _repository.SaveAsync();
 

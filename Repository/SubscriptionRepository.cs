@@ -29,7 +29,7 @@ namespace Repository
             _dataShaper = dataShaper;
         }
 
-        public async Task<PagedList<Entity>> GetAllSubscriptionsAsync(SubscriptionParameters subscriptionParameters)
+        public async Task<PagedList<Entity>> GetSubscriptionsAsync(SubscriptionParameters subscriptionParameters)
         {
             var subscriptions = Enumerable.Empty<Subscription>().AsQueryable();
 
@@ -63,22 +63,26 @@ namespace Repository
         public async Task<Subscription> GetSubscriptionByIdAsync(Guid id)
         {
             return await FindByCondition(subscription => subscription.Id.Equals(id))
+                .Include(x => x.AcademicYear).Include(x => x.AppUser).Include(x => x.FormationLevel).ThenInclude(x => x.Formation).ThenInclude(x => x.University)
                 .FirstOrDefaultAsync();
         }
 
         public async Task<bool> SubscriptionExistAsync(Subscription subscription)
         {
-            return await FindByCondition(x => x.Name == subscription.Name)
+            return await FindByCondition(x => x.AcademicYearId == subscription.AcademicYearId && x.AppUserId == subscription.AppUserId && x.FormationLevelId == subscription.FormationLevelId)
                 .AnyAsync();
         }
 
         public async Task CreateSubscriptionAsync(Subscription subscription)
         {
+            subscription.CreatedAt = DateTime.Now;
+            subscription.UpdatedAt = DateTime.Now;
             await CreateAsync(subscription);
         }
 
         public async Task UpdateSubscriptionAsync(Subscription subscription)
         {
+            subscription.UpdatedAt = DateTime.Now;
             await UpdateAsync(subscription);
         }
 
@@ -90,18 +94,19 @@ namespace Repository
         #region ApplyFilters and PerformSearch Region
         private void ApplyFilters(ref IQueryable<Subscription> subscriptions, SubscriptionParameters subscriptionParameters)
         {
-            subscriptions = FindAll();
-            /*
+            subscriptions = FindAll()
+                .Include(x=>x.AcademicYear).Include(x=>x.AppUser).Include(x=>x.FormationLevel).ThenInclude(x=>x.Formation).ThenInclude(x=>x.University);
             if (!string.IsNullOrWhiteSpace(subscriptionParameters.AppUserId))
             {
                 subscriptions = subscriptions.Where(x => x.AppUserId == subscriptionParameters.AppUserId);
             }
 
-            if (subscriptionParameters.MinBirthday != null)
+            if (subscriptionParameters.validateOnly)
             {
-                subscriptions = subscriptions.Where(x => x.Birthday >= subscriptionParameters.MinBirthday);
+                subscriptions = subscriptions.Where(x => x.ValiddatedAt != null);
             }
 
+            /*
             if (subscriptionParameters.MaxBirthday != null)
             {
                 subscriptions = subscriptions.Where(x => x.Birthday < subscriptionParameters.MaxBirthday);
@@ -123,7 +128,7 @@ namespace Repository
         {
             if (!subscriptions.Any() || string.IsNullOrWhiteSpace(searchTerm)) return;
 
-            subscriptions = subscriptions.Where(x => x.Name.ToLower().Contains(searchTerm.Trim().ToLower()));
+            subscriptions = subscriptions.Where(x => x.AppUser.Name.ToLower().Contains(searchTerm.Trim().ToLower()) || x.FormationLevel.Name.ToLower().Contains(searchTerm.Trim().ToLower()) || x.FormationLevel.Formation.Name.ToLower().Contains(searchTerm.Trim().ToLower()) || x.FormationLevel.Formation.University.Name.ToLower().Contains(searchTerm.Trim().ToLower()));
         }
 
         #endregion

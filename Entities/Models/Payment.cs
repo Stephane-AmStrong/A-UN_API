@@ -11,33 +11,45 @@ namespace Entities.Models
     public class Payment : IEntity
     {
         public Guid Id { get; set; }
-        public Guid PaymentTypeId { get; set; }
+        public Guid AcademicYearId { get; set; }
         [Required]
-        public Guid SubscriptionId { get; set; }
-        public string Name { get; set; }
+        public string AppUserId { get; set; }
         public float MoneyAmount { get; set; }
         public float RemainingAmount { get; set; }
         public DateTime? PaidAt { get; set; }
 
-        public string IFU { get; set; }
-        public string FV_NIM { get; set; }
-        public string FV_SIG { get; set; }
-        public string Compteur { get; set; }
-        public string FV_CompteurType { get; set; }
-        public string FV_CompteurTotal { get; set; }
-        public string FV_DateMECef { get; set; }
-        public string FA_NIM { get; set; }
-        public string FA_SIG { get; set; }
-        public string FA_CompteurType { get; set; }
-        public string FA_CompteurTotal { get; set; }
-        public string FA_DateMECef { get; set; }
+        public string Feda_Klass { get; set; }
+        public string Feda_Id { get; set; }
+        public string Feda_Amount { get; set; }
+        public string Feda_Description { get; set; }
+        public string Feda_CallbackUrl { get; set; }
+        public string Feda_Status { get; set; }
+        public string Feda_Customer_id { get; set; }
+        public string Feda_Currency_id { get; set; }
+        public string Feda_Mode { get; set; }
+
+        /*
+         
+            public string IFU { get; set; }
+            public string FV_NIM { get; set; }
+            public string FV_SIG { get; set; }
+            public string Compteur { get; set; }
+            public string FV_CompteurType { get; set; }
+            public string FV_CompteurTotal { get; set; }
+            public string FV_DateMECef { get; set; }
+            public string FA_NIM { get; set; }
+            public string FA_SIG { get; set; }
+            public string FA_CompteurType { get; set; }
+            public string FA_CompteurTotal { get; set; }
+            public string FA_DateMECef { get; set; }
+
+         */
+
+        [ForeignKey("AcademicYearId")]
+        public virtual AcademicYear AcademicYear { get; set; }
 
 
-        [ForeignKey("PaymentTypeId")]
-        public virtual PaymentType PaymentType { get; set; }
-
-
-        [ForeignKey("SubscriptionId")]
-        public virtual Subscription Subscription { get; set; }
+        [ForeignKey("AppUserId")]
+        public virtual AppUser AppUser { get; set; }
     }
 }

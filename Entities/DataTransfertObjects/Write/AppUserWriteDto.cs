@@ -12,13 +12,17 @@ namespace Entities.DataTransfertObjects
     public class AppUserWriteDto
     {
         [Required]
+        [Display(Name = "Prénoms")]
         public string Firstname { get; set; }
         [Required]
+        [Display(Name = "Nom")]
         public string Name { get; set; }
+        [Display(Name = "Sexe")]
         public string Gender { get; set; }
-        public string WorkstationName { get; set; }
         public DateTime? Birthday { get; set; }
-
+        [Display(Name = "Rôle")]
+        public string WorkstationName { get; set; }
+        
         [Required]
         [EmailAddress]
         public string Email { get; set; }

@@ -37,9 +37,9 @@ namespace A_UN_API.Controllers
 
         [HttpGet]
         [MultiplePoliciesAuthorize("readWorkstationPolicy; writeWorkstationPolicy")]
-        public async Task<ActionResult<IEnumerable<WorkstationReadDto>>> GetAllWorkstations([FromQuery] WorkstationParameters queryParameters)
+        public async Task<ActionResult<IEnumerable<WorkstationReadDto>>> GetWorkstations([FromQuery] WorkstationParameters queryParameters)
         {
-            var workstations = await _repository.Workstation.GetAllWorkstationsAsync(queryParameters);
+            var workstations = await _repository.Workstation.GetWorkstationsAsync(queryParameters);
 
             //var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
@@ -55,7 +55,7 @@ namespace A_UN_API.Controllers
 
 
         [HttpGet("{id}", Name = "WorkstationById")]
-        public async Task<ActionResult<WorkstationReadDto>> GetWorkstationById(Guid id)
+        public async Task<ActionResult<WorkstationReadDto>> GetWorkstationById(string id)
         {
             var workstation = await _repository.Workstation.GetWorkstationByIdAsync(id);
 
@@ -110,7 +110,7 @@ namespace A_UN_API.Controllers
 
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<WorkstationReadDto>> UpdateWorkstation(Guid id, [FromBody] WorkstationWriteDto workstationWriteDto)
+        public async Task<ActionResult<WorkstationReadDto>> UpdateWorkstation(string id, [FromBody] WorkstationWriteDto workstationWriteDto)
         {
             if (workstationWriteDto == null)
             {
@@ -145,9 +145,9 @@ namespace A_UN_API.Controllers
 
 
         [HttpPatch("{id}")]
-        public async Task<ActionResult> PartialWorkstationUpdate(Guid Id, JsonPatchDocument<WorkstationWriteDto> patchDoc)
+        public async Task<ActionResult> PartialWorkstationUpdate(string id, JsonPatchDocument<WorkstationWriteDto> patchDoc)
         {
-            var workstationModelFromRepository = await _repository.Workstation.GetWorkstationByIdAsync(Id);
+            var workstationModelFromRepository = await _repository.Workstation.GetWorkstationByIdAsync(id);
             if (workstationModelFromRepository == null) return NotFound();
 
             var workstationToPatch = _mapper.Map<WorkstationWriteDto>(workstationModelFromRepository);
@@ -171,7 +171,7 @@ namespace A_UN_API.Controllers
 
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteWorkstation(Guid id)
+        public async Task<ActionResult> DeleteWorkstation(string id)
         {
             var workstation = await _repository.Workstation.GetWorkstationByIdAsync(id);
 

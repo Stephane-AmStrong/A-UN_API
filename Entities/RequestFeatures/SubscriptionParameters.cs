@@ -12,11 +12,12 @@ namespace Entities.RequestFeatures
     {
         public SubscriptionParameters()
         {
-            OrderBy = "name";
+            OrderBy = "AppUser";
         }
 
 
 
         public string AppUserId { get; set; }
+        public bool validateOnly { get; set; }
     }
 }

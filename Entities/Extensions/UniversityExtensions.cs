@@ -14,7 +14,6 @@ namespace Entities.Models.Extensions
             dbUniversity.Id = university.Id;
             dbUniversity.Name = university.Name;
             dbUniversity.ImgLink = university.ImgLink;
-            dbUniversity.Price = university.Price;
             dbUniversity.AppUserId = university.AppUserId;
             dbUniversity.Birthday = university.Birthday;
             dbUniversity.CreateAt = university.CreateAt;

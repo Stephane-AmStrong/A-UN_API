@@ -17,7 +17,6 @@ namespace Entities.Models.ExtendedModels
             Id = university.Id;
             Name = university.Name;
             ImgLink = university.ImgLink;
-            Price = university.Price;
             AppUserId = university.AppUserId;
             Birthday = university.Birthday;
             CreateAt = university.CreateAt;
@@ -33,6 +32,6 @@ namespace Entities.Models.ExtendedModels
 
         
 
-        public IEnumerable<Branch> Branches { get; set; }
+        public IEnumerable<Formation> Formations { get; set; }
     }
 }

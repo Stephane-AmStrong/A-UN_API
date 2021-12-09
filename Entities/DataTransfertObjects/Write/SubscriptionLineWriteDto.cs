@@ -10,12 +10,11 @@ namespace Entities.DataTransfertObjects
 {
     public class SubscriptionLineWriteDto
     {
-
-        
         [Required]
+        [Display(Name = "Nom")]
         public string Name { get; set; }
         public Guid PersonalFileId { get; set; }
-        public Guid RegistrationFormLineId { get; set; }
+        public Guid PrerequisiteId { get; set; }
         public Guid SubscriptionId { get; set; }
     }
 }

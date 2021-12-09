@@ -12,21 +12,24 @@ namespace Entities.Models
     {
         public University()
         {
-            Branches = new HashSet<Branch>();
+            Formations = new HashSet<Formation>();
         }
 
         public Guid Id { get; set; }
+        [Required]
         public string Name { get; set; }
+        [Required]
+        public string Description { get; set; }
         public string ImgLink { get; set; }
-        public long Price { get; set; }
         [Required]
         public string AppUserId { get; set; }
         public DateTime Birthday { get; set; }
         public DateTime CreateAt { get; set; }
+        public DateTime? ValiddatedAt { get; set; }
 
         [ForeignKey("AppUserId")]
         public virtual AppUser AppUser { get; set; }
 
-        public virtual ICollection<Branch> Branches { get; set; }
+        public virtual ICollection<Formation> Formations { get; set; }
     }
 }

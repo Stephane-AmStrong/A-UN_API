@@ -29,7 +29,7 @@ namespace Repository
             _dataShaper = dataShaper;
         }
 
-        public async Task<PagedList<Entity>> GetAllUniversitiesAsync(UniversityParameters universityParameters)
+        public async Task<PagedList<University>> GetUniversitiesAsync(UniversityParameters universityParameters)
         {
             var universities = Enumerable.Empty<University>().AsQueryable();
 
@@ -38,12 +38,12 @@ namespace Repository
             PerformSearch(ref universities, universityParameters.SearchTerm);
 
             var sortedUniversities = _sortHelper.ApplySort(universities, universityParameters.OrderBy);
-            var shapedUniversities = _dataShaper.ShapeData(sortedUniversities, universityParameters.Fields);
+            //var shapedUniversities = _dataShaper.ShapeData(sortedUniversities, universityParameters.Fields);
 
             return await Task.Run(() =>
-                PagedList<Entity>.ToPagedList
+                PagedList<University>.ToPagedList
                 (
-                    shapedUniversities,
+                    sortedUniversities,
                     universityParameters.PageNumber,
                     universityParameters.PageSize)
                 );
@@ -63,6 +63,7 @@ namespace Repository
         public async Task<University> GetUniversityByIdAsync(Guid id)
         {
             return await FindByCondition(university => university.Id.Equals(id))
+                .Include(x=>x.Formations).ThenInclude(x=>x.FormationLevels).ThenInclude(x=>x.Subscriptions).ThenInclude(x=>x.AppUser)
                 .FirstOrDefaultAsync();
         }
 
@@ -91,17 +92,20 @@ namespace Repository
         #region ApplyFilters and PerformSearch Region
         private void ApplyFilters(ref IQueryable<University> universities, UniversityParameters universityParameters)
         {
-            universities = FindAll();
-            if (!string.IsNullOrWhiteSpace(universityParameters.AppUserId))
+            universities = FindAll()
+                .Include(x => x.Formations).ThenInclude(x => x.FormationLevels).ThenInclude(x => x.Subscriptions).ThenInclude(x => x.AppUser);
+
+            if (!string.IsNullOrWhiteSpace(universityParameters.ManagedByAppUserId))
             {
-                universities = universities.Where(x => x.AppUserId == universityParameters.AppUserId);
+                universities = universities.Where(x => x.AppUserId == universityParameters.ManagedByAppUserId);
             }
 
-            if (universityParameters.MinBirthday != null)
+            if (universityParameters.showValidatedOnesOnly)
             {
-                universities = universities.Where(x => x.Birthday >= universityParameters.MinBirthday);
+                universities = universities.Where(x => x.ValiddatedAt !=null);
             }
 
+            /*
             if (universityParameters.MaxBirthday != null)
             {
                 universities = universities.Where(x => x.Birthday < universityParameters.MaxBirthday);
@@ -116,6 +120,7 @@ namespace Repository
             {
                 universities = universities.Where(x => x.CreateAt < universityParameters.MaxCreateAt);
             }
+            */
         }
 
         private void PerformSearch(ref IQueryable<University> universities, string searchTerm)
