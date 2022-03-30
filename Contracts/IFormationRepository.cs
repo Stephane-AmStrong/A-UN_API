@@ -8,7 +8,7 @@ namespace Contracts
 {
     public interface IFormationRepository
     {
-        Task<PagedList<Entity>> GetFormationsAsync(FormationParameters formationParameters);
+        Task<PagedList<Formation>> GetFormationsAsync(FormationQueryParameters formationParameters);
 
         Task<Formation> GetFormationByIdAsync(Guid id);
         Task<bool> FormationExistAsync(Formation formation);

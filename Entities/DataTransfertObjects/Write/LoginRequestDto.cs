@@ -10,13 +10,17 @@ namespace Entities.DataTransfertObjects
 {
     public class LoginRequestDto
     {
-        [Required]
         [EmailAddress]
+        [Display(Name = "Email")]
+        [Required(ErrorMessage = "This field is required")]
         public string Email { get; set; }
-        [Required]
+
         [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        [Required(ErrorMessage = "This field is required")]
         public string Password { get; set; }
-        [Display(Name = "Se rappelé de moi")]
+
+        [Display(Name = "Remember me")]
         public bool RememberMe { get; set; } = false;
     }
 }

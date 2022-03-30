@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace Entities.Models
 {
-    public class Banner : IEntity
+    public class Banner
     {
         public Guid Id { get; set; }
+        public int No { get; set; }
         [Required]
         public string ImgLink { get; set; }
     }

@@ -41,6 +41,10 @@ namespace A_UN_API.Controllers
         [AllowAnonymous]
         public async Task<int> GetUsersCount()
         {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var givenName = User.FindFirstValue(ClaimTypes.GivenName);
+            var surname = User.FindFirstValue(ClaimTypes.Surname);
+
             _logger.LogInfo($"Count users of database.");
             return (await _repository.Account.CountUsersAsync());
         }
@@ -80,12 +84,10 @@ namespace A_UN_API.Controllers
                     var userWorkstations = await _repository.Account.GetUsersWorkstationsAsync(userWithoutWorkstation);
                     //if (userWorkstations.Any()) userReadDto.Workstation = _mapper.Map<Workstation, WorkstationReadDto>(await _repository.Workstation.GetWorkstationByNameAsync(userWorkstations.First()));
 
-                    //await SendVerificationEmail(userReadDto.Id);
-
                     _logger.LogInfo($"Registration was successful");
 
                     //email verification should be enable later
-                    //await SendVerificationEmail(userReadDto.Id);
+                    await SendVerificationEmail(userReadDto.Id);
                     return Ok(userReadDto);
                 }
                 else
@@ -221,15 +223,11 @@ namespace A_UN_API.Controllers
 
             string url = $"{_baseURL}/api/authentications/confirmemail?userId={userId}&token={encodedToken}";
 
-            var email = new EmailModel
-            {
-                ToEmail = user.Email,
-                ToName = user.Firstname,
-                Subject = "Confirm your email",
-                Body = $"<h1>Welcome to A-UN</h1><p>Please confirm your email by <a href='{url}'>Clicking here</a></p>",
-            };
+            var callback = $"<h1>Welcome to A-UN</h1><p>Please confirm your email by <a href='{url}'>Clicking here</a></p>";
 
-            await _repository.Mail.SendEmailAsync(email);
+            var message = new Message(new string[] { user.Email }, "Reset password token", callback, null);
+
+            await _repository.EmailSender.SendAsync(message);
         }
 
 
@@ -270,15 +268,11 @@ namespace A_UN_API.Controllers
 
                 string url = $"{_baseURL}/api/authentications/resetpassword?email={email}&token={result.Token}";
 
-                var emailData = new EmailModel
-                {
-                    ToEmail = result.UserInfo["Email"],
-                    ToName = result.UserInfo["Name"],
-                    Subject = "Reset Password",
-                    Body = $"<h1>Follow the instruction to reset your password</h1> <p> To reset your password <a href='{url}'>Clicking here</a></p>",
-                };
+                var callback = $"<h1>Follow the instruction to reset your password</h1> <p> To reset your password <a href='{url}'>Clicking here</a></p>";
 
-                await _repository.Mail.SendEmailAsync(emailData);
+                var message = new Message(new string[] { email }, "Reset password token", callback, null);
+
+                await _repository.EmailSender.SendAsync(message);
 
                 return Ok(result);
             }
@@ -289,20 +283,20 @@ namespace A_UN_API.Controllers
 
 
 
-        //POST api/authentications/forgetpassword
-        [HttpPost("ResetPassword")]
-        [AllowAnonymous]
-        //[ApiExplorerSettings(IgnoreApi = true)]
-        public async Task<IActionResult> ResetPassword([FromForm] ResetPasswordViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var result = await _repository.Account.ResetPasswordAsync(model);
+        ////POST api/authentications/forgetpassword
+        //[HttpPost("ResetPassword")]
+        //[AllowAnonymous]
+        ////[ApiExplorerSettings(IgnoreApi = true)]
+        //public async Task<IActionResult> ResetPassword([FromForm] ResetPasswordViewModel model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var result = await _repository.Account.ResetPasswordAsync(model.);
 
-                if (result.IsSuccess) return Ok(result);
-            }
+        //        if (result.IsSuccess) return Ok(result);
+        //    }
 
-            return ValidationProblem(ModelState);
-        }
+        //    return ValidationProblem(ModelState);
+        //}
     }
 }

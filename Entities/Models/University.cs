@@ -25,7 +25,6 @@ namespace Entities.Models
         public string AppUserId { get; set; }
         public DateTime Birthday { get; set; }
         public DateTime CreateAt { get; set; }
-        public DateTime? ValiddatedAt { get; set; }
 
         [ForeignKey("AppUserId")]
         public virtual AppUser AppUser { get; set; }

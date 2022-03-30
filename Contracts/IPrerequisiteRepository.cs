@@ -8,9 +8,9 @@ namespace Contracts
 {
     public interface IPrerequisiteRepository
     {
-        Task<PagedList<Entity>> GetPrerequisitesAsync(PrerequisiteParameters registrationFormLineParameters);
+        Task<PagedList<Entity>> GetPrerequisitesAsync(PrerequisiteQueryParameters registrationFormLineParameters);
 
-        Task<int> GetNextNumberAsync(PrerequisiteParameters registrationFormLineParameters);
+        Task<int> GetNextNumberAsync(PrerequisiteQueryParameters registrationFormLineParameters);
         Task<Prerequisite> GetPrerequisiteByIdAsync(Guid id);
         Task<bool> PrerequisiteExistAsync(Prerequisite registrationFormLine);
 

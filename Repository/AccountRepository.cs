@@ -114,15 +114,15 @@ namespace Repository
 
         public async Task<string> EncodeTokenAsync(string token)
         {
-            var encodedEmailToken = await Task.Run(()=>Encoding.UTF8.GetBytes(token));
-            return await Task.Run(()=> WebEncoders.Base64UrlEncode(encodedEmailToken));
+            var encodedEmailToken = await Task.Run(() => Encoding.UTF8.GetBytes(token));
+            return await Task.Run(() => WebEncoders.Base64UrlEncode(encodedEmailToken));
         }
 
 
         public async Task<string> DecodeTokenAsync(string encodedToken)
         {
-            var decodedToken = await Task.Run(()=> WebEncoders.Base64UrlDecode(encodedToken));
-            return await Task.Run(()=> Encoding.UTF8.GetString(decodedToken));
+            var decodedToken = await Task.Run(() => WebEncoders.Base64UrlDecode(encodedToken));
+            return await Task.Run(() => Encoding.UTF8.GetString(decodedToken));
         }
 
 
@@ -157,7 +157,7 @@ namespace Repository
             {
                 IsSuccess = false,
                 Message = "Email confirmation failed",
-                ErrorDetails = result.Errors.Select(ex=>ex.Description)
+                ErrorDetails = result.Errors.Select(ex => ex.Description)
             };
         }
 
@@ -176,6 +176,20 @@ namespace Repository
                     IsSuccess = false,
                 };
             }
+
+
+            var isEmailConfirmed = await _userManager.IsEmailConfirmedAsync(user);
+
+            if (!isEmailConfirmed)
+            {
+                return new AuthenticationResponse
+                {
+                    Message = "Cannot sign in without a confirmed email",
+                    AppUser = user,
+                    IsSuccess = false,
+                };
+            }
+
 
             var resultSucceeded = await _userManager.CheckPasswordAsync(user, password);
 
@@ -293,7 +307,7 @@ namespace Repository
             {
                 IsSuccess = false,
                 Message = "Something went wrong",
-                ErrorDetails = result.Errors.Select(e=>e.Description),
+                ErrorDetails = result.Errors.Select(e => e.Description),
             };
         }
 
@@ -362,6 +376,26 @@ namespace Repository
         {
             return await (Task.Run(() => _userManager.GetUserId(user)));
             //return await _userManager.GetUserIdAsync(user);
+        }
+
+        public async Task<AppUser> FindByEmailAsync(string email)
+        {
+            return await _userManager.FindByEmailAsync(email);
+        }
+
+        public async Task<string> GeneratePasswordResetTokenAsync(AppUser appUser)
+        {
+            return await _userManager.GeneratePasswordResetTokenAsync(appUser);
+        }
+
+        public async Task<IdentityResult> ResetPasswordAsync(AppUser appUser, string token, string password)
+        {
+            return await _userManager.ResetPasswordAsync(appUser, token, password);
+        }
+
+        public async Task<bool> IsEmailConfirmedAsync(AppUser appUser)
+        {
+            return await _userManager.IsEmailConfirmedAsync(appUser);
         }
     }
 

@@ -29,121 +29,122 @@ namespace Repository
             _dataShaper = dataShaper;
         }
 
-        public async Task<PagedList<Entity>> GetPrerequisitesAsync(PrerequisiteParameters registrationFormLineParameters)
+        public async Task<PagedList<Entity>> GetPrerequisitesAsync(PrerequisiteQueryParameters rrerequisiteParameters)
         {
-            var registrationFormLines = Enumerable.Empty<Prerequisite>().AsQueryable();
+            var rrerequisites = Enumerable.Empty<Prerequisite>().AsQueryable();
 
-            ApplyFilters(ref registrationFormLines, registrationFormLineParameters);
+            ApplyFilters(ref rrerequisites, rrerequisiteParameters);
 
-            PerformSearch(ref registrationFormLines, registrationFormLineParameters.SearchTerm);
+            PerformSearch(ref rrerequisites, rrerequisiteParameters.SearchTerm);
 
-            var sortedPrerequisites = _sortHelper.ApplySort(registrationFormLines, registrationFormLineParameters.OrderBy);
-            var shapedPrerequisites = _dataShaper.ShapeData(sortedPrerequisites, registrationFormLineParameters.Fields);
+            var sortedPrerequisites = _sortHelper.ApplySort(rrerequisites, rrerequisiteParameters.OrderBy);
+            var shapedPrerequisites = _dataShaper.ShapeData(sortedPrerequisites, rrerequisiteParameters.Fields);
 
             return await Task.Run(() =>
                 PagedList<Entity>.ToPagedList
                 (
                     shapedPrerequisites,
-                    registrationFormLineParameters.PageNumber,
-                    registrationFormLineParameters.PageSize)
+                    rrerequisiteParameters.PageNumber,
+                    rrerequisiteParameters.PageSize)
                 );
         }
 
-        public async Task<int> GetNextNumberAsync(PrerequisiteParameters registrationFormLineParameters)
+        public async Task<int> GetNextNumberAsync(PrerequisiteQueryParameters rrerequisiteParameters)
         {
-            var registrationFormLinesCount = 0;
+            var rrerequisitesCount = 0;
 
-            var registrationFormLines = Enumerable.Empty<Prerequisite>().AsQueryable();
-            ApplyFilters(ref registrationFormLines, registrationFormLineParameters);
+            var rrerequisites = Enumerable.Empty<Prerequisite>().AsQueryable();
+            ApplyFilters(ref rrerequisites, rrerequisiteParameters);
 
-            if (registrationFormLines.Any())
+            if (rrerequisites.Any())
             {
-                registrationFormLinesCount = await registrationFormLines.MaxAsync(x=>x.NumOrder);
+                rrerequisitesCount = await rrerequisites.MaxAsync(x=>x.NumOrder);
             }
 
-            registrationFormLinesCount++;
+            rrerequisitesCount++;
 
-            return registrationFormLinesCount;
+            return rrerequisitesCount;
         }
 
 
         public async Task<Entity> GetPrerequisiteByIdAsync(Guid id, string fields)
         {
-            var registrationFormLine = FindByCondition(registrationFormLine => registrationFormLine.Id.Equals(id))
-                .Include(x => x.FormationLevel).ThenInclude(x => x.Formation).ThenInclude(x => x.University)
+            var rrerequisite = FindByCondition(rrerequisite => rrerequisite.Id.Equals(id))
+                .Include(x => x.Formation).ThenInclude(x => x.University)
                 .DefaultIfEmpty(new Prerequisite())
                 .FirstOrDefault();
 
             return await Task.Run(() =>
-                _dataShaper.ShapeData(registrationFormLine, fields)
+                _dataShaper.ShapeData(rrerequisite, fields)
             );
         }
 
         public async Task<Prerequisite> GetPrerequisiteByIdAsync(Guid id)
         {
-            return await FindByCondition(registrationFormLine => registrationFormLine.Id.Equals(id))
-                .Include(x => x.FormationLevel).ThenInclude(x => x.Formation).ThenInclude(x => x.University)
+            return await FindByCondition(rrerequisite => rrerequisite.Id.Equals(id))
+                .Include(x => x.Formation).ThenInclude(x => x.University)
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<bool> PrerequisiteExistAsync(Prerequisite registrationFormLine)
+        public async Task<bool> PrerequisiteExistAsync(Prerequisite rrerequisite)
         {
-            return await FindByCondition(x => x.Name == registrationFormLine.Name &&  x.FormationLevelId == registrationFormLine.FormationLevelId)
+            return await FindByCondition(x => x.Name == rrerequisite.Name &&  x.FormationId == rrerequisite.FormationId)
                 .AnyAsync();
         }
 
-        public async Task CreatePrerequisiteAsync(Prerequisite registrationFormLine)
+        public async Task CreatePrerequisiteAsync(Prerequisite rrerequisite)
         {
-            await CreateAsync(registrationFormLine);
+            await CreateAsync(rrerequisite);
         }
 
-        public async Task UpdatePrerequisiteAsync(Prerequisite registrationFormLine)
+        public async Task UpdatePrerequisiteAsync(Prerequisite rrerequisite)
         {
-            await UpdateAsync(registrationFormLine);
+            await UpdateAsync(rrerequisite);
         }
 
-        public async Task DeletePrerequisiteAsync(Prerequisite registrationFormLine)
+        public async Task DeletePrerequisiteAsync(Prerequisite rrerequisite)
         {
-            await DeleteAsync(registrationFormLine);
+            await DeleteAsync(rrerequisite);
         }
 
         #region ApplyFilters and PerformSearch Region
-        private void ApplyFilters(ref IQueryable<Prerequisite> registrationFormLines, PrerequisiteParameters registrationFormLineParameters)
+        private void ApplyFilters(ref IQueryable<Prerequisite> rrerequisites, PrerequisiteQueryParameters rrerequisiteParameters)
         {
-            registrationFormLines = FindAll().Include(x=>x.FormationLevel).ThenInclude(x=>x.Formation).ThenInclude(x=>x.University);
-            if (!string.IsNullOrWhiteSpace(registrationFormLineParameters.ManagedByAppUserId))
+            rrerequisites = FindAll().Include(x=>x.Formation).ThenInclude(x=>x.University);
+
+            if (!string.IsNullOrWhiteSpace(rrerequisiteParameters.ManagedByAppUserId))
             {
-                registrationFormLines = registrationFormLines.Where(x => x.FormationLevel.Formation.University.AppUserId == registrationFormLineParameters.ManagedByAppUserId);
+                rrerequisites = rrerequisites.Where(x => x.Formation.University.AppUserId == rrerequisiteParameters.ManagedByAppUserId);
+            }
+
+            if (rrerequisiteParameters.OfFormationId != new Guid())
+            {
+                rrerequisites = rrerequisites.Where(x => x.FormationId == rrerequisiteParameters.OfFormationId);
             }
 
             /*
-            if (registrationFormLineParameters.MinBirthday != null)
+            if (rrerequisiteParameters.MaxBirthday != null)
             {
-                registrationFormLines = registrationFormLines.Where(x => x.Birthday >= registrationFormLineParameters.MinBirthday);
+                rrerequisites = rrerequisites.Where(x => x.Birthday < rrerequisiteParameters.MaxBirthday);
             }
 
-            if (registrationFormLineParameters.MaxBirthday != null)
+            if (rrerequisiteParameters.MinCreateAt != null)
             {
-                registrationFormLines = registrationFormLines.Where(x => x.Birthday < registrationFormLineParameters.MaxBirthday);
+                rrerequisites = rrerequisites.Where(x => x.CreateAt >= rrerequisiteParameters.MinCreateAt);
             }
 
-            if (registrationFormLineParameters.MinCreateAt != null)
+            if (rrerequisiteParameters.MaxCreateAt != null)
             {
-                registrationFormLines = registrationFormLines.Where(x => x.CreateAt >= registrationFormLineParameters.MinCreateAt);
-            }
-
-            if (registrationFormLineParameters.MaxCreateAt != null)
-            {
-                registrationFormLines = registrationFormLines.Where(x => x.CreateAt < registrationFormLineParameters.MaxCreateAt);
+                rrerequisites = rrerequisites.Where(x => x.CreateAt < rrerequisiteParameters.MaxCreateAt);
             }
             */
         }
 
-        private void PerformSearch(ref IQueryable<Prerequisite> registrationFormLines, string searchTerm)
+        private void PerformSearch(ref IQueryable<Prerequisite> rrerequisites, string searchTerm)
         {
-            if (!registrationFormLines.Any() || string.IsNullOrWhiteSpace(searchTerm)) return;
+            if (!rrerequisites.Any() || string.IsNullOrWhiteSpace(searchTerm)) return;
 
-            registrationFormLines = registrationFormLines.Where(x => x.Name.ToLower().Contains(searchTerm.Trim().ToLower()));
+            rrerequisites = rrerequisites.Where(x => x.Name.ToLower().Contains(searchTerm.Trim().ToLower()));
         }
 
         #endregion

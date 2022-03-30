@@ -10,7 +10,91 @@ namespace Entities.Models
 {
     public class DbInitializer
     {
-        public static void Seed(RepositoryContext context)
+        public static void SeedCategories(RepositoryContext context)
+        {
+            context.Database.EnsureCreated();
+
+            if (!context.Categories.Any(x => x.Name == "Accounting"))
+            {
+                var category = new Category
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Accounting"
+                };
+
+                context.Categories.Add(category);
+            }
+            
+            if (!context.Categories.Any(x => x.Name == "Data Science & Analytics"))
+            {
+                var category = new Category
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Data Science & Analytics"
+                };
+
+                context.Categories.Add(category);
+            }
+            
+            if (!context.Categories.Any(x => x.Name == "Design & Creative"))
+            {
+                var category = new Category
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Design & Creative"
+                };
+
+                context.Categories.Add(category);
+            }
+            
+            if (!context.Categories.Any(x => x.Name == "Engineering & Architecture"))
+            {
+                var category = new Category
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Engineering & Architecture"
+                };
+
+                context.Categories.Add(category);
+            }
+            
+            if (!context.Categories.Any(x => x.Name == "IT & Networking"))
+            {
+                var category = new Category
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "IT & Networking"
+                };
+
+                context.Categories.Add(category);
+            }
+            
+            if (!context.Categories.Any(x => x.Name == "Legal"))
+            {
+                var category = new Category
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Legal"
+                };
+
+                context.Categories.Add(category);
+            }
+            
+            if (!context.Categories.Any(x => x.Name == "Marketing"))
+            {
+                var category = new Category
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Marketing"
+                };
+
+                context.Categories.Add(category);
+            }
+            
+            context.SaveChanges();
+        }
+
+        public static void SeedRoles(RepositoryContext context)
         {
             context.Database.EnsureCreated();
 
@@ -35,7 +119,7 @@ namespace Entities.Models
                     context.RoleClaims.Add(claimWrapper);
                 });
             }
-            
+
             if (!context.Roles.Any(x => x.Name == "Administrator"))
             {
                 var AdminRole = new Workstation
@@ -77,7 +161,7 @@ namespace Entities.Models
                     context.RoleClaims.Add(claimWrapper);
                 });
             }
-            
+
             if (!context.Roles.Any(x => x.Name == "Administrateur d'université"))
             {
                 var UniversityAdministratorRole = new Workstation
@@ -98,7 +182,7 @@ namespace Entities.Models
                     context.RoleClaims.Add(claimWrapper);
                 });
             }
-            
+
             if (!context.Roles.Any(x => x.Name == "Conseiller pédagogique"))
             {
                 var educationalConsultantRole = new Workstation

@@ -23,6 +23,8 @@ namespace Entities.Models
         public string Name { get; set; }
         [Required]
         public string Gender { get; set; }
+        [NotMapped]
+        public string Role { get; set; }
         public DateTime? Birthday { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }

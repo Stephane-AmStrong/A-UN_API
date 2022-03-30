@@ -17,19 +17,17 @@ namespace Repository
     public class PartnerRepository : RepositoryBase<Partner>, IPartnerRepository
     {
         private ISortHelper<Partner> _sortHelper;
-        private IDataShaper<Partner> _dataShaper;
 
-        public PartnerRepository(
+        public PartnerRepository
+        (
             RepositoryContext repositoryContext, 
-            ISortHelper<Partner> sortHelper,
-            IDataShaper<Partner> dataShaper
-            ) : base(repositoryContext)
+            ISortHelper<Partner> sortHelper
+        ) : base(repositoryContext)
         {
             _sortHelper = sortHelper;
-            _dataShaper = dataShaper;
         }
 
-        public async Task<PagedList<Entity>> GetPartnersAsync(PartnerParameters partnerParameters)
+        public async Task<PagedList<Partner>> GetPartnersAsync(PartnerQueryParameters partnerParameters)
         {
             var partners = Enumerable.Empty<Partner>().AsQueryable();
 
@@ -38,26 +36,14 @@ namespace Repository
             PerformSearch(ref partners, partnerParameters.SearchTerm);
 
             var sortedPartners = _sortHelper.ApplySort(partners, partnerParameters.OrderBy);
-            var shapedPartners = _dataShaper.ShapeData(sortedPartners, partnerParameters.Fields);
 
             return await Task.Run(() =>
-                PagedList<Entity>.ToPagedList
+                PagedList<Partner>.ToPagedList
                 (
-                    shapedPartners,
+                    sortedPartners,
                     partnerParameters.PageNumber,
                     partnerParameters.PageSize)
                 );
-        }
-
-        public async Task<Entity> GetPartnerByIdAsync(Guid id, string fields)
-        {
-            var partner = FindByCondition(partner => partner.Id.Equals(id))
-                .DefaultIfEmpty(new Partner())
-                .FirstOrDefault();
-
-            return await Task.Run(() =>
-                _dataShaper.ShapeData(partner, fields)
-            );
         }
 
         public async Task<Partner> GetPartnerByIdAsync(Guid id)
@@ -88,7 +74,7 @@ namespace Repository
         }
 
         #region ApplyFilters and PerformSearch Region
-        private void ApplyFilters(ref IQueryable<Partner> partners, PartnerParameters partnerParameters)
+        private void ApplyFilters(ref IQueryable<Partner> partners, PartnerQueryParameters partnerParameters)
         {
             partners = FindAll();
             /*

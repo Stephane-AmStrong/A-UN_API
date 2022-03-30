@@ -29,7 +29,7 @@ namespace Repository
             _dataShaper = dataShaper;
         }
 
-        public async Task<PagedList<Entity>> GetPersonalFilesAsync(PersonalFileParameters personalFileParameters)
+        public async Task<PagedList<Entity>> GetPersonalFilesAsync(PersonalFileQueryParameters personalFileParameters)
         {
             var personalFiles = Enumerable.Empty<PersonalFile>().AsQueryable();
 
@@ -89,7 +89,7 @@ namespace Repository
         }
 
         #region ApplyFilters and PerformSearch Region
-        private void ApplyFilters(ref IQueryable<PersonalFile> personalFiles, PersonalFileParameters personalFileParameters)
+        private void ApplyFilters(ref IQueryable<PersonalFile> personalFiles, PersonalFileQueryParameters personalFileParameters)
         {
             personalFiles = FindAll()
                 .Include(x=>x.AppUser);

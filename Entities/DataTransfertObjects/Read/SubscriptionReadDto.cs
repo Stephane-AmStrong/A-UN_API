@@ -12,26 +12,31 @@ namespace Entities.DataTransfertObjects
     {
         public Guid Id { get; set; }
         [Required]
-        [Display(Name = "Inscrit le")]
+        [Display(Name = "Registered on")]
         public DateTime SubscribedAt { get; set; }
-        [Display(Name = "Crée le")]
+        [Required]
+        [Display(Name = "Created on")]
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
-        [Display(Name = "Validé le")]
-        public DateTime? ValiddatedAt { get; set; }
+        [Display(Name = "Validated on")]
+        public DateTime? ValidatedAt { get; set; }
         [Required]
+        [Display(Name = "Academic Year")]
         public Guid AcademicYearId { get; set; }
         [Required]
         public string AppUserId { get; set; }
         [Required]
-        public Guid FormationLevelId { get; set; }
+        [Display(Name = "Training")]
+        public Guid FormationId { get; set; }
 
 
+        [Display(Name = "Academic Year")]
         public virtual AcademicYearReadDto AcademicYear { get; set; }
 
         public virtual AppUserReadDto AppUser { get; set; }
 
-        public virtual FormationLevelReadDto FormationLevel { get; set; }
+        [Display(Name = "Training")]
+        public virtual FormationReadDto Formation { get; set; }
 
         public virtual SubscriptionLineReadDto[] SubscriptionLines { get; set; }
     }

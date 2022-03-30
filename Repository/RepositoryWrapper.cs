@@ -24,11 +24,13 @@ namespace Repository
         private IAuthorizationService _authorization;
         private IAcademicYearRepository _academicYearRepository;
 
+        private IAboutRepository _about;
         private IAppUserRepository _appUser;
-        private IFormationRepository _formatione;
-        private IFormationLevelRepository _formationLevel;
+        private IBannerRepository _banner;
+        private ICategoryRepository _category;
+        private IFormationRepository _formation;
         private IPersonalFileRepository _personalFile;
-        private IMailRepository _mail;
+        private IEmailSenderRepository _emailSender;
         private IPartnerRepository _partner;
         private IPaymentRepository _payment;
         private IPrerequisiteRepository _prerequisite;
@@ -40,12 +42,14 @@ namespace Repository
 
         private readonly IConfiguration _configuration;
         private IHttpContextAccessor _httpContextAccessor;
-        private IOptions<EmailSettings> _emailSettings;
+        private readonly EmailConfiguration _emailConfig;
 
+        private readonly ISortHelper<About> _aboutSortHelper;
         private readonly ISortHelper<AcademicYear> _academicYearSortHelper;
         private readonly ISortHelper<AppUser> _appUserSortHelper;
+        private readonly ISortHelper<Banner> _bannerSortHelper;
+        private readonly ISortHelper<Category> _categorySortHelper;
         private readonly ISortHelper<Formation> _formationSortHelper;
-        private readonly ISortHelper<FormationLevel> _formationLevelSortHelper;
         private readonly ISortHelper<Partner> _partnerSortHelper;
         private readonly ISortHelper<Payment> _paymentSortHelper;
         private readonly ISortHelper<PersonalFile> _personalFileSortHelper;
@@ -56,14 +60,10 @@ namespace Repository
         private readonly ISortHelper<Workstation> _workstationSortHelper;
 
         private readonly IDataShaper<AcademicYear> _academicYearDataShaper;
-        private readonly IDataShaper<Formation> _formationDataShaper;
-        private readonly IDataShaper<FormationLevel> _formationLevelDataShaper;
         private readonly IDataShaper<Partner> _partnerDataShaper;
-        private readonly IDataShaper<Payment> _paymentDataShaper;
         private readonly IDataShaper<PersonalFile> _personalFileDataShaper;
         private readonly IDataShaper<Prerequisite> _registrationFormDataShaper;
         private readonly IDataShaper<Prerequisite> _prerequisiteDataShaper;
-        private readonly IDataShaper<Subscription> _subscriptionDataShaper;
         private readonly IDataShaper<SubscriptionLine> _subscriptionLineDataShaper;
         private readonly IDataShaper<University> _universityDataShaper;
 
@@ -87,6 +87,18 @@ namespace Repository
                     _fileRepository = new FileRepository(_webHostEnvironment, filePath);
                 }
                 return _fileRepository;
+            }
+        }
+
+        public IAboutRepository About
+        {
+            get
+            {
+                if (_about == null)
+                {
+                    _about = new AboutRepository(_repoContext, _aboutSortHelper);
+                }
+                return _about;
             }
         }
 
@@ -134,27 +146,39 @@ namespace Repository
             }
         }
 
+        public IBannerRepository Banner
+        {
+            get
+            {
+                if (_banner == null)
+                {
+                    _banner = new BannerRepository(_repoContext, _bannerSortHelper);
+                }
+                return _banner;
+            }
+        }
+
+        public ICategoryRepository Category
+        {
+            get
+            {
+                if (_category == null)
+                {
+                    _category = new CategoryRepository(_repoContext, _categorySortHelper);
+                }
+                return _category;
+            }
+        }
+
         public IFormationRepository Formation
         {
             get
             {
-                if (_formatione == null)
+                if (_formation == null)
                 {
-                    _formatione = new FormationRepository(_repoContext, _formationSortHelper, _formationDataShaper);
+                    _formation = new FormationRepository(_repoContext, _formationSortHelper);
                 }
-                return _formatione;
-            }
-        }
-
-        public IFormationLevelRepository FormationLevel
-        {
-            get
-            {
-                if (_formationLevel == null)
-                {
-                    _formationLevel = new FormationLevelRepository(_repoContext, _formationLevelSortHelper, _formationLevelDataShaper);
-                }
-                return _formationLevel;
+                return _formation;
             }
         }
 
@@ -170,15 +194,15 @@ namespace Repository
             }
         }
 
-        public IMailRepository Mail
+        public IEmailSenderRepository EmailSender
         {
             get
             {
-                if (_mail == null)
+                if (_emailSender == null)
                 {
-                    _mail = new MailRepository(_emailSettings);
+                    _emailSender = new EmailSenderRepository(_emailConfig);
                 }
-                return _mail;
+                return _emailSender;
             }
         }
 
@@ -188,7 +212,7 @@ namespace Repository
             {
                 if (_partner == null)
                 {
-                    _partner = new PartnerRepository(_repoContext, _partnerSortHelper, _partnerDataShaper);
+                    _partner = new PartnerRepository(_repoContext, _partnerSortHelper);
                 }
                 return _partner;
             }
@@ -200,7 +224,7 @@ namespace Repository
             {
                 if (_payment == null)
                 {
-                    _payment = new PaymentRepository(_repoContext, _paymentSortHelper, _paymentDataShaper);
+                    _payment = new PaymentRepository(_repoContext, _paymentSortHelper);
                 }
                 return _payment;
             }
@@ -224,7 +248,7 @@ namespace Repository
             {
                 if (_subscription == null)
                 {
-                    _subscription = new SubscriptionRepository(_repoContext, _subscriptionSortHelper, _subscriptionDataShaper);
+                    _subscription = new SubscriptionRepository(_repoContext, _subscriptionSortHelper);
                 }
                 return _subscription;
             }
@@ -269,30 +293,29 @@ namespace Repository
 
 
 
-        public RepositoryWrapper(
+        public RepositoryWrapper
+        (
             IAuthorizationService authorization,
             UserManager<AppUser> userManager,
             RoleManager<Workstation> roleManager,
             RepositoryContext repositoryContext,
-            IOptions<EmailSettings> options,
+            EmailConfiguration emailConfig,
             IWebHostEnvironment webHostEnvironment,
             IConfiguration configuration,
             IDataShaper<AcademicYear> academicYearDataShaper,
-            IDataShaper<Formation> formationDataShaper,
-            IDataShaper<FormationLevel> formationLevelDataShaper,
             IDataShaper<Partner> partnerDataShaper,
-            IDataShaper<Payment> paymentDataShaper,
             IDataShaper<PersonalFile> personalFileDataShaper,
             IDataShaper<Prerequisite> registrationFormDataShaper,
             IDataShaper<Prerequisite> prerequisiteDataShaper,
-            IDataShaper<Subscription> subscriptionDataShaper,
             IDataShaper<SubscriptionLine> subscriptionLineDataShaper,
             IDataShaper<University> universityDataShaper,
 
+            ISortHelper<About> aboutSortHelper,
             ISortHelper<AcademicYear> academicYearSortHelper,
             ISortHelper<AppUser> appUserSortHelper,
+            ISortHelper<Banner> bannerSortHelper,
+            ISortHelper<Category> categorySortHelper,
             ISortHelper<Formation> formationSortHelper,
-            ISortHelper<FormationLevel> formationLevelSortHelper,
             ISortHelper<Partner> partnerSortHelper,
             ISortHelper<Payment> paymentSortHelper,
             ISortHelper<PersonalFile> personalFileSortHelper,
@@ -301,7 +324,8 @@ namespace Repository
             ISortHelper<SubscriptionLine> subscriptionLineSortHelper,
             ISortHelper<University> universitySortHelper,
             ISortHelper<Workstation> workstationSortHelper,
-            IHttpContextAccessor httpContextAccessor)
+            IHttpContextAccessor httpContextAccessor
+        )
         {
             _authorization = authorization;
             _userManager = userManager;
@@ -310,22 +334,20 @@ namespace Repository
             _repoContext = repositoryContext;
 
             _academicYearDataShaper = academicYearDataShaper;
-            _formationDataShaper = formationDataShaper;
-            _formationLevelDataShaper = formationLevelDataShaper;
             _partnerDataShaper = partnerDataShaper;
-            _paymentDataShaper = paymentDataShaper;
             _personalFileDataShaper = personalFileDataShaper;
             _registrationFormDataShaper = registrationFormDataShaper;
             _prerequisiteDataShaper = prerequisiteDataShaper;
-            _subscriptionDataShaper = subscriptionDataShaper;
             _subscriptionLineDataShaper = subscriptionLineDataShaper;
             _universityDataShaper = universityDataShaper;
             _workstationSortHelper = workstationSortHelper;
 
+            _aboutSortHelper = aboutSortHelper;
             _academicYearSortHelper = academicYearSortHelper;
             _appUserSortHelper = appUserSortHelper;
+            _bannerSortHelper = bannerSortHelper;
+            _categorySortHelper = categorySortHelper;
             _formationSortHelper = formationSortHelper;
-            _formationLevelSortHelper = formationLevelSortHelper;
             _partnerSortHelper = partnerSortHelper;
             _paymentSortHelper = paymentSortHelper;
             _personalFileSortHelper = personalFileSortHelper;
@@ -334,7 +356,7 @@ namespace Repository
             _subscriptionLineSortHelper = subscriptionLineSortHelper;
             _universitySortHelper = universitySortHelper;
 
-            _emailSettings = options;
+            _emailConfig = emailConfig;
             _webHostEnvironment = webHostEnvironment;
             _httpContextAccessor = httpContextAccessor;
         }

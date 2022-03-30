@@ -19,10 +19,10 @@ namespace Entities.Models
         [Required]
         public string Name { get; set; }
         public int NumOrder { get; set; }
-        public Guid FormationLevelId { get; set; }
+        public Guid FormationId { get; set; }
 
-        [ForeignKey("FormationLevelId")]
-        public virtual FormationLevel FormationLevel { get; set; }
+        [ForeignKey("FormationId")]
+        public virtual Formation Formation { get; set; }
         public virtual ICollection<SubscriptionLine> SubscriptionLines { get; set; }
     }
 }

@@ -14,17 +14,18 @@ namespace Entities.DataTransfertObjects
         [Required]
         [Display(Name = "Souscrit le")]
         public DateTime SubscribedAt { get; set; }
+        [Required]
         [Display(Name = "Créé le")]
         public DateTime CreatedAt { get; set; }
         [Display(Name = "Mise à jour le")]
         public DateTime? UpdatedAt { get; set; }
         [Display(Name = "Validé le")]
-        public DateTime? ValiddatedAt { get; set; }
+        public DateTime? ValidatedAt { get; set; }
         [Required]
         public Guid AcademicYearId { get; set; }
         [Required]
         public string AppUserId { get; set; }
         [Required]
-        public Guid FormationLevelId { get; set; }
+        public Guid FormationId { get; set; }
     }
 }

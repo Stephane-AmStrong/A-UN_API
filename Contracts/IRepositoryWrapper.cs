@@ -10,12 +10,14 @@ namespace Contracts
     {
         IFileRepository File { get; }
 
+        IAboutRepository About { get; }
         IAccountRepository Account { get; }
         IAuthorizationService Authorization { get; }
         IAcademicYearRepository AcademicYear { get; }
         IAppUserRepository AppUser { get; }
+        ICategoryRepository Category { get; }
+        IBannerRepository Banner { get; }
         IFormationRepository Formation { get; }
-        IFormationLevelRepository FormationLevel { get; }
         IPersonalFileRepository PersonalFile { get; }
         IPartnerRepository Partner { get; }
         IPaymentRepository Payment { get; }
@@ -24,7 +26,7 @@ namespace Contracts
         ISubscriptionLineRepository SubscriptionLine { get; }
         IUniversityRepository University { get; }
         IWorkstationRepository Workstation { get; }
-        IMailRepository Mail { get; }
+        IEmailSenderRepository EmailSender { get; }
 
         string Path { set; }
 

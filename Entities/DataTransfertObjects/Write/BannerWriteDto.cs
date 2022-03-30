@@ -4,14 +4,22 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Entities.DataTransfertObjects
 {
     public class BannerWriteDto
     {
-        [Required]
+        
+        [Display(Name = "Numéro d'ordre")]
+        [Range(1, Int16.MaxValue, ErrorMessage = "Le champ {0} doit être supérieur à {1}.")] 
+        public int No { get; set; }
+
         [Display(Name = "Bannière")]
         public IFormFile File { get; set; }
+
+        [JsonIgnore]
+        public string ImgLink { get; set; }
     }
 }

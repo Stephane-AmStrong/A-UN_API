@@ -8,39 +8,40 @@ using System.Threading.Tasks;
 
 namespace Entities.DataTransfertObjects
 {
-    public class UniversityReadDto : IEntity, IComparable<UniversityReadDto>
+    public class UniversityReadDto : IComparable<UniversityReadDto>
     {
         public Guid Id { get; set; }
-        [Display(Name = "Nom")]
+        [Display(Name = "Name")]
         public string Name { get; set; }
 
         [Display(Name = "Description")]
         public string Description { get; set; }
         public string ImgLink { get; set; }
         public string AppUserId { get; set; }
+        [Display(Name = "Creation date")]
         public DateTime Birthday { get; set; }
+        [Display(Name = "Created on")]
         public DateTime CreateAt { get; set; }
-        [Display(Name = "Validé le")]
-        public DateTime? ValiddatedAt { get; set; }
         public virtual AppUserReadDto AppUser { get; set; }
 
+        [Display(Name = "Trainings")]
         public virtual FormationReadDto[] Formations { get; set; }
 
         public int CompareTo(UniversityReadDto universityReadDto)
         {
             /*
-                if (this.Salary < other.Salary)
-                {
-                    return 1;
-                }
-                else if (this.Salary > other.Salary)
-                {
-                    return -1;
-                }
-                else
-                {
-                    return 0;
-                } 
+            if (this.Salary < other.Salary)
+            {
+                return 1;
+            }
+            else if (this.Salary > other.Salary)
+            {
+                return -1;
+            }
+            else
+            {
+                return 0;
+            } 
              */
 
 

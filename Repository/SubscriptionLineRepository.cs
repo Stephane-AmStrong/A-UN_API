@@ -29,7 +29,7 @@ namespace Repository
             _dataShaper = dataShaper;
         }
 
-        public async Task<PagedList<Entity>> GetSubscriptionLinesAsync(SubscriptionLineParameters subscriptionLineParameters)
+        public async Task<PagedList<Entity>> GetSubscriptionLinesAsync(SubscriptionLineQueryParameters subscriptionLineParameters)
         {
             var subscriptionLines = Enumerable.Empty<SubscriptionLine>().AsQueryable();
 
@@ -88,7 +88,7 @@ namespace Repository
         }
 
         #region ApplyFilters and PerformSearch Region
-        private void ApplyFilters(ref IQueryable<SubscriptionLine> subscriptionLines, SubscriptionLineParameters subscriptionLineParameters)
+        private void ApplyFilters(ref IQueryable<SubscriptionLine> subscriptionLines, SubscriptionLineQueryParameters subscriptionLineParameters)
         {
             subscriptionLines = FindAll();
             /*

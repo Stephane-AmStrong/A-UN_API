@@ -8,7 +8,7 @@ namespace Contracts
 {
     public interface IAppUserRepository /*: IRepositoryBase<AppUser>*/
     {
-        Task<PagedList<AppUser>> GetAppUsersAsync(AppUserParameters appUserParameters);
+        Task<PagedList<AppUser>> GetAppUsersAsync(AppUserQueryParameters appUserParameters);
 
         Task<AppUser> GetAppUserByIdAsync(string id);
         Task<bool> AppUserExistAsync(AppUser appUser);

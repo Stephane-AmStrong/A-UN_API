@@ -6,11 +6,14 @@ using Entities.RequestFeatures;
 using LoggerServices;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using Repository;
 using System;
 using System.Collections.Generic;
@@ -60,14 +63,16 @@ namespace A_UN_API.Extensions
 
         public static void ConfigureRepositoryWrapper(this IServiceCollection services)
         {
+            services.AddScoped<ISortHelper<About>, SortHelper<About>>();
             services.AddScoped<ISortHelper<AcademicYear>, SortHelper<AcademicYear>>();
             services.AddScoped<ISortHelper<AppUser>, SortHelper<AppUser>>();
+            services.AddScoped<ISortHelper<Banner>, SortHelper<Banner>>();
+            services.AddScoped<ISortHelper<Category>, SortHelper<Category>>();
             services.AddScoped<ISortHelper<Formation>, SortHelper<Formation>>();
-            services.AddScoped<ISortHelper<FormationLevel>, SortHelper<FormationLevel>>();
+            services.AddScoped<ISortHelper<Prerequisite>, SortHelper<Prerequisite>>();
             services.AddScoped<ISortHelper<Partner>, SortHelper<Partner>>();
             services.AddScoped<ISortHelper<Payment>, SortHelper<Payment>>();
             services.AddScoped<ISortHelper<PersonalFile>, SortHelper<PersonalFile>>();
-            services.AddScoped<ISortHelper<Prerequisite>, SortHelper<Prerequisite>>();
             services.AddScoped<ISortHelper<Subscription>, SortHelper<Subscription>>();
             services.AddScoped<ISortHelper<SubscriptionLine>, SortHelper<SubscriptionLine>>();
             services.AddScoped<ISortHelper<University>, SortHelper<University>>();
@@ -76,7 +81,6 @@ namespace A_UN_API.Extensions
             services.AddScoped<IDataShaper<AcademicYear>, DataShaper<AcademicYear>>();
             services.AddScoped<IDataShaper<AppUser>, DataShaper<AppUser>>();
             services.AddScoped<IDataShaper<Formation>, DataShaper<Formation>>();
-            services.AddScoped<IDataShaper<FormationLevel>, DataShaper<FormationLevel>>();
             services.AddScoped<IDataShaper<Partner>, DataShaper<Partner>>();
             services.AddScoped<IDataShaper<Payment>, DataShaper<Payment>>();
             services.AddScoped<IDataShaper<PersonalFile>, DataShaper<PersonalFile>>();
@@ -90,7 +94,7 @@ namespace A_UN_API.Extensions
         }
 
 
-        public static void ConfigureJWTAuthenticationService(this IServiceCollection services, IConfiguration config)
+        public static void ConfigureJWTAuthenticationService(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddIdentity<AppUser, Workstation>(option =>
             {
@@ -118,9 +122,9 @@ namespace A_UN_API.Extensions
                     RequireExpirationTime = true,
                     ValidateIssuerSigningKey = true,
 
-                    ValidAudience = config["AuthSettings:Audience"],
-                    ValidIssuer = config["AuthSettings:Issuer"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["AuthSettings:Key"])),
+                    ValidAudience = configuration["AuthSettings:Audience"],
+                    ValidIssuer = configuration["AuthSettings:Issuer"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["AuthSettings:Key"])),
                 };
             });
 
@@ -189,7 +193,18 @@ namespace A_UN_API.Extensions
 
         public static void ConfigureMailService(this IServiceCollection services, IConfiguration config)
         {
-            services.Configure<EmailSettings>(config.GetSection("EmailSettings"));
+            var emailConfig = config
+                .GetSection("EmailConfiguration")
+                .Get<EmailConfiguration>();
+            services.AddSingleton(emailConfig);
+
+
+            services.Configure<FormOptions>(o =>
+            {
+                o.ValueLengthLimit = int.MaxValue;
+                o.MultipartBodyLengthLimit = int.MaxValue;
+                o.MemoryBufferThreshold = int.MaxValue;
+            });
         }
     }
 }

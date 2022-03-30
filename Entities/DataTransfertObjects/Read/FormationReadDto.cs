@@ -11,18 +11,27 @@ namespace Entities.DataTransfertObjects
     public class FormationReadDto
     {
         public Guid Id { get; set; }
+        [Display(Name = "Picture")]
         public string ImgLink { get; set; }
-        public string ImgLink2 { get; set; }
-        public string Code { get; set; }
-        [Display(Name = "Nom")]
+        [Display(Name = "Name")]
         public string Name { get; set; }
-        [Display(Name = "Validé le")]
-        public DateTime? ValiddatedAt { get; set; }
+        [Display(Name = "Price")]
+        public long Price { get; set; }
+        [Required]
+        [Display(Name = "Description")]
+        public string Description { get; set; }
+        [Required]
+        public Guid CategoryId { get; set; }
+        [Required]
         public Guid UniversityId { get; set; }
+        [Display(Name = "Validated on")]
+        public DateTime? ValidatedAt { get; set; }
 
 
+        public virtual CategoryReadDto Category { get; set; }
         public virtual UniversityReadDto University { get; set; }
 
-        public virtual FormationLevelReadDto[] FormationLevels { get; set; }
+        public virtual PrerequisiteReadDto[] Prerequisites { get; set; }
+        public virtual SubscriptionReadDto[] Subscriptions { get; set; }
     }
 }

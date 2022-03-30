@@ -17,19 +17,16 @@ namespace Repository
     public class FormationRepository : RepositoryBase<Formation>, IFormationRepository
     {
         private ISortHelper<Formation> _sortHelper;
-        private IDataShaper<Formation> _dataShaper;
 
         public FormationRepository(
             RepositoryContext repositoryContext,
-            ISortHelper<Formation> sortHelper,
-            IDataShaper<Formation> dataShaper
+            ISortHelper<Formation> sortHelper
             ) : base(repositoryContext)
         {
             _sortHelper = sortHelper;
-            _dataShaper = dataShaper;
         }
 
-        public async Task<PagedList<Entity>> GetFormationsAsync(FormationParameters formationParameters)
+        public async Task<PagedList<Formation>> GetFormationsAsync(FormationQueryParameters formationParameters)
         {
             var formations = Enumerable.Empty<Formation>().AsQueryable();
 
@@ -38,39 +35,26 @@ namespace Repository
             PerformSearch(ref formations, formationParameters.SearchTerm);
 
             var sortedFormations = _sortHelper.ApplySort(formations, formationParameters.OrderBy);
-            var shapedFormations = _dataShaper.ShapeData(sortedFormations, formationParameters.Fields);
 
             return await Task.Run(() =>
-                PagedList<Entity>.ToPagedList
+                PagedList<Formation>.ToPagedList
                 (
-                    shapedFormations,
+                    sortedFormations,
                     formationParameters.PageNumber,
                     formationParameters.PageSize)
                 );
         }
 
-        public async Task<Entity> GetFormationByIdAsync(Guid id, string fields)
-        {
-            var formation = FindByCondition(formation => formation.Id.Equals(id))
-                .Include(x => x.University)
-                .DefaultIfEmpty(new Formation())
-                .FirstOrDefault();
-
-            return await Task.Run(() =>
-                _dataShaper.ShapeData(formation, fields)
-            );
-        }
-
         public async Task<Formation> GetFormationByIdAsync(Guid id)
         {
             return await FindByCondition(formation => formation.Id.Equals(id))
-                .Include(x => x.University).Include(x => x.FormationLevels).ThenInclude(x => x.Subscriptions).ThenInclude(x => x.AppUser)
+                .Include(x => x.Category).Include(x => x.University).Include(x => x.Prerequisites.OrderBy(x=>x.NumOrder)).Include(x => x.Subscriptions).ThenInclude(x => x.AppUser)
                 .FirstOrDefaultAsync();
         }
 
         public async Task<bool> FormationExistAsync(Formation formation)
         {
-            return await FindByCondition(x => x.UniversityId == formation.UniversityId &&  x.Code == formation.Code && x.Name == formation.Name)
+            return await FindByCondition(x => x.UniversityId == formation.UniversityId && x.Name == formation.Name)
                 .AnyAsync();
         }
 
@@ -90,19 +74,19 @@ namespace Repository
         }
 
         #region ApplyFilters and PerformSearch Region
-        private void ApplyFilters(ref IQueryable<Formation> formations, FormationParameters formationParameters)
+        private void ApplyFilters(ref IQueryable<Formation> formations, FormationQueryParameters formationParameters)
         {
             formations = FindAll()
-                .Include(x => x.University).Include(x => x.FormationLevels).ThenInclude(x => x.Subscriptions).ThenInclude(x => x.AppUser);
+                .Include(x => x.Category).Include(x => x.University).Include(x => x.Prerequisites).Include(x => x.Subscriptions).ThenInclude(x => x.AppUser);
 
             if (!string.IsNullOrWhiteSpace(formationParameters.ManagedByAppUserId))
             {
                 formations = formations.Where(x => x.University.AppUserId == formationParameters.ManagedByAppUserId);
             }
 
-            if (formationParameters.showValidatedOnesOnly)
+            if (formationParameters.ValidatedOnly)
             {
-                formations = formations.Where(x => x.University.ValiddatedAt != null);
+                formations = formations.Where(x => x.ValidatedAt != null);
             }
 
             if (formationParameters.FromUniversityId != new Guid())

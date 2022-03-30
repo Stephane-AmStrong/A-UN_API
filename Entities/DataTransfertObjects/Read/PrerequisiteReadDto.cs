@@ -12,13 +12,14 @@ namespace Entities.DataTransfertObjects
     {
         public Guid Id { get; set; }
         [Required]
-        [Display(Name = "Nom")]
+        [Display(Name = "Name")]
         public string Name { get; set; }
         [Display(Name = "N°")]
         public int NumOrder { get; set; }
-        public Guid FormationLevelId { get; set; }
+        [Display(Name = "Training")]
+        public Guid FormationId { get; set; }
 
-        public virtual FormationLevelReadDto FormationLevel { get; set; }
+        public virtual FormationReadDto Formation { get; set; }
         public virtual SubscriptionLineReadDto[] SubscriptionLines { get; set; }
     }
 }

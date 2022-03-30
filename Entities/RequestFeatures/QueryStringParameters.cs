@@ -8,9 +8,9 @@ namespace Entities.RequestFeatures
 {
     public abstract class QueryStringParameters
     {
-        const int maxPageSize = 999999999;
+        const int maxPageSize = 50;
         public int PageNumber { get; set; } = 1;
-        private int _pageSize = 1000;
+        private int _pageSize = 10;
         public int PageSize
         {
             get

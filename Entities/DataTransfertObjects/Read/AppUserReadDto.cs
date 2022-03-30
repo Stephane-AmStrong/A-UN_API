@@ -12,20 +12,22 @@ namespace Entities.DataTransfertObjects
     {
         public string Id { get; set; }
         public string ImgLink { get; set; }
-        [Display(Name = "Prénoms")]
+        [Display(Name = "First Name")]
         public string Firstname { get; set; }
-        [Display(Name = "Nom")]
+        [Display(Name = "Last Name")]
         public string Name { get; set; }
+        [Display(Name = "Email")]
         public string Email { get; set; }
-        [Display(Name = "Sexe")]
+        [Display(Name = "Gender")]
         public string Gender { get; set; }
+        public string Role { get; set; }
         public WorkstationReadDto Workstation { get; set; }
-        public DateTime? Birthday { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public DateTime? DisabledAt { get; set; }
 
         public virtual PersonalFileReadDto[] PersonalFiles { get; set; }
         public virtual SubscriptionReadDto[] Subscriptions { get; set; }
+        public virtual PaymentReadDto[] Payments { get; set; }
     }
 }

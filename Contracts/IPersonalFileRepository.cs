@@ -8,7 +8,7 @@ namespace Contracts
 {
     public interface IPersonalFileRepository
     {
-        Task<PagedList<Entity>> GetPersonalFilesAsync(PersonalFileParameters personalfileParameters);
+        Task<PagedList<Entity>> GetPersonalFilesAsync(PersonalFileQueryParameters personalfileParameters);
 
         Task<PersonalFile> GetPersonalFileByIdAsync(Guid id);
         Task<bool> PersonalFileExistAsync(PersonalFile personalFile);

@@ -22,13 +22,13 @@ namespace Entities.Models
         [Required]
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }       
-        public DateTime? ValiddatedAt { get; set; }
+        public DateTime? ValidatedAt { get; set; }
         [Required]
         public Guid AcademicYearId { get; set; }          
         [Required]
         public string AppUserId { get; set; }        
         [Required]
-        public Guid FormationLevelId { get; set; }
+        public Guid FormationId { get; set; }
 
 
         [ForeignKey("AcademicYearId")]
@@ -37,8 +37,8 @@ namespace Entities.Models
         [ForeignKey("AppUserId")]
         public virtual AppUser AppUser { get; set; }
 
-        [ForeignKey("FormationLevelId")]
-        public virtual FormationLevel FormationLevel { get; set; }
+        [ForeignKey("FormationId")]
+        public virtual Formation Formation { get; set; }
 
         public virtual ICollection<SubscriptionLine> SubscriptionLines { get; set; }
     }

@@ -8,7 +8,7 @@ namespace Contracts
 {
     public interface ISubscriptionRepository
     {
-        Task<PagedList<Entity>> GetSubscriptionsAsync(SubscriptionParameters subscriptionParameters);
+        Task<PagedList<Subscription>> GetSubscriptionsAsync(SubscriptionQueryParameters subscriptionParameters);
 
         Task<Subscription> GetSubscriptionByIdAsync(Guid id);
         Task<bool> SubscriptionExistAsync(Subscription subscription);

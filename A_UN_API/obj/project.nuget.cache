@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "8ufGimQM+AFYjLuvay6hGxW3FrpPv3Z5dg4kY6QS2VoFbAlvLO/RbODOFIxJ1Pr+bUKG357eDH0+gmHyQitvuw==",
+  "dgSpecHash": "fxlsPRND2/dGO9n1wNt0UkGTKladl7KLz5xYQjJzcjMr32jTZympuD07ml9xlDhxJTneS1r5kuJaxmehMiE/tQ==",
   "success": true,
-  "projectFilePath": "D:\\Visual Studio 2019\\source\\A_UN_API\\A_UN_API\\A_UN_API.csproj",
+  "projectFilePath": "D:\\WORKSPACE\\DotNet\\COMPLETED\\A_UN_API\\A_UN_API\\A_UN_API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\AmStrong\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\AmStrong\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",
@@ -48,6 +48,7 @@
     "C:\\Users\\AmStrong\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\AmStrong\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
     "C:\\Users\\AmStrong\\.nuget\\packages\\mimekit\\2.15.0\\mimekit.2.15.0.nupkg.sha512",
+    "C:\\Users\\AmStrong\\.nuget\\packages\\netcore.mailkit\\2.0.2\\netcore.mailkit.2.0.2.nupkg.sha512",
     "C:\\Users\\AmStrong\\.nuget\\packages\\newtonsoft.json\\12.0.2\\newtonsoft.json.12.0.2.nupkg.sha512",
     "C:\\Users\\AmStrong\\.nuget\\packages\\newtonsoft.json.bson\\1.0.2\\newtonsoft.json.bson.1.0.2.nupkg.sha512",
     "C:\\Users\\AmStrong\\.nuget\\packages\\nlog\\4.7.10\\nlog.4.7.10.nupkg.sha512",

@@ -8,7 +8,7 @@ namespace Contracts
 {
     public interface IPartnerRepository
     {
-        Task<PagedList<Entity>> GetPartnersAsync(PartnerParameters partnerParameters);
+        Task<PagedList<Partner>> GetPartnersAsync(PartnerQueryParameters partnerParameters);
 
         Task<Partner> GetPartnerByIdAsync(Guid id);
         Task<bool> PartnerExistAsync(Partner partner);

@@ -83,3 +83,39 @@ D:\Visual Studio 2019\source\A_UN_API\Repository\obj\Debug\net5.0\Repository.csp
 D:\Visual Studio 2019\source\A_UN_API\Repository\obj\Debug\net5.0\Repository.dll
 D:\Visual Studio 2019\source\A_UN_API\Repository\obj\Debug\net5.0\ref\Repository.dll
 D:\Visual Studio 2019\source\A_UN_API\Repository\obj\Debug\net5.0\Repository.pdb
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\Repository\bin\Debug\net5.0\Repository.deps.json
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\Repository\bin\Debug\net5.0\Repository.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\Repository\bin\Debug\net5.0\ref\Repository.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\Repository\bin\Debug\net5.0\Repository.pdb
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\Repository\bin\Debug\net5.0\Contracts.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\Repository\bin\Debug\net5.0\Entities.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\Repository\bin\Debug\net5.0\Contracts.pdb
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\Repository\bin\Debug\net5.0\Entities.pdb
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\Repository\obj\Debug\net5.0\Repository.csprojAssemblyReference.cache
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\Repository\obj\Debug\net5.0\Repository.GeneratedMSBuildEditorConfig.editorconfig
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\Repository\obj\Debug\net5.0\Repository.AssemblyInfoInputs.cache
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\Repository\obj\Debug\net5.0\Repository.AssemblyInfo.cs
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\Repository\obj\Debug\net5.0\Repository.csproj.CoreCompileInputs.cache
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\Repository\obj\Debug\net5.0\Repository.csproj.CopyComplete
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\Repository\obj\Debug\net5.0\Repository.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\Repository\obj\Debug\net5.0\ref\Repository.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\Repository\obj\Debug\net5.0\Repository.pdb
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\Repository\bin\Debug\net5.0\Repository.deps.json
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\Repository\bin\Debug\net5.0\Repository.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\Repository\bin\Debug\net5.0\Repository.pdb
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\Repository\bin\Debug\net5.0\Contracts.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\Repository\bin\Debug\net5.0\Entities.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\Repository\bin\Debug\net5.0\Contracts.pdb
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\Repository\bin\Debug\net5.0\Entities.pdb
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\Repository\bin\Debug\net5.0\es\Entities.resources.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\Repository\bin\Debug\net5.0\fr\Entities.resources.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\Repository\obj\Debug\net5.0\Repository.csproj.AssemblyReference.cache
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\Repository\obj\Debug\net5.0\Repository.GeneratedMSBuildEditorConfig.editorconfig
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\Repository\obj\Debug\net5.0\Repository.AssemblyInfoInputs.cache
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\Repository\obj\Debug\net5.0\Repository.AssemblyInfo.cs
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\Repository\obj\Debug\net5.0\Repository.csproj.CoreCompileInputs.cache
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\Repository\obj\Debug\net5.0\Repository.csproj.CopyComplete
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\Repository\obj\Debug\net5.0\Repository.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\Repository\obj\Debug\net5.0\refint\Repository.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\Repository\obj\Debug\net5.0\Repository.pdb
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\Repository\obj\Debug\net5.0\ref\Repository.dll

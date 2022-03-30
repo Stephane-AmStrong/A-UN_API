@@ -83,3 +83,39 @@ D:\Visual Studio 2019\source\A_UN_API\LoggerServices\obj\Debug\net5.0\LoggerServ
 D:\Visual Studio 2019\source\A_UN_API\LoggerServices\obj\Debug\net5.0\LoggerServices.dll
 D:\Visual Studio 2019\source\A_UN_API\LoggerServices\obj\Debug\net5.0\ref\LoggerServices.dll
 D:\Visual Studio 2019\source\A_UN_API\LoggerServices\obj\Debug\net5.0\LoggerServices.pdb
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\LoggerServices\bin\Debug\net5.0\LoggerServices.deps.json
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\LoggerServices\bin\Debug\net5.0\LoggerServices.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\LoggerServices\bin\Debug\net5.0\ref\LoggerServices.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\LoggerServices\bin\Debug\net5.0\LoggerServices.pdb
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\LoggerServices\bin\Debug\net5.0\Contracts.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\LoggerServices\bin\Debug\net5.0\Entities.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\LoggerServices\bin\Debug\net5.0\Contracts.pdb
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\LoggerServices\bin\Debug\net5.0\Entities.pdb
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\LoggerServices\obj\Debug\net5.0\LoggerServices.csprojAssemblyReference.cache
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\LoggerServices\obj\Debug\net5.0\LoggerServices.GeneratedMSBuildEditorConfig.editorconfig
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\LoggerServices\obj\Debug\net5.0\LoggerServices.AssemblyInfoInputs.cache
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\LoggerServices\obj\Debug\net5.0\LoggerServices.AssemblyInfo.cs
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\LoggerServices\obj\Debug\net5.0\LoggerServices.csproj.CoreCompileInputs.cache
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\LoggerServices\obj\Debug\net5.0\LoggerServices.csproj.CopyComplete
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\LoggerServices\obj\Debug\net5.0\LoggerServices.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\LoggerServices\obj\Debug\net5.0\ref\LoggerServices.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\LoggerServices\obj\Debug\net5.0\LoggerServices.pdb
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\LoggerServices\bin\Debug\net5.0\LoggerServices.deps.json
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\LoggerServices\bin\Debug\net5.0\LoggerServices.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\LoggerServices\bin\Debug\net5.0\LoggerServices.pdb
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\LoggerServices\bin\Debug\net5.0\Contracts.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\LoggerServices\bin\Debug\net5.0\Entities.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\LoggerServices\bin\Debug\net5.0\Contracts.pdb
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\LoggerServices\bin\Debug\net5.0\Entities.pdb
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\LoggerServices\bin\Debug\net5.0\es\Entities.resources.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\LoggerServices\bin\Debug\net5.0\fr\Entities.resources.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\LoggerServices\obj\Debug\net5.0\LoggerServices.csproj.AssemblyReference.cache
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\LoggerServices\obj\Debug\net5.0\LoggerServices.GeneratedMSBuildEditorConfig.editorconfig
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\LoggerServices\obj\Debug\net5.0\LoggerServices.AssemblyInfoInputs.cache
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\LoggerServices\obj\Debug\net5.0\LoggerServices.AssemblyInfo.cs
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\LoggerServices\obj\Debug\net5.0\LoggerServices.csproj.CoreCompileInputs.cache
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\LoggerServices\obj\Debug\net5.0\LoggerServices.csproj.CopyComplete
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\LoggerServices\obj\Debug\net5.0\LoggerServices.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\LoggerServices\obj\Debug\net5.0\refint\LoggerServices.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\LoggerServices\obj\Debug\net5.0\LoggerServices.pdb
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\LoggerServices\obj\Debug\net5.0\ref\LoggerServices.dll

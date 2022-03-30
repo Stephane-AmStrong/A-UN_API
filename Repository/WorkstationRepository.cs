@@ -33,7 +33,7 @@ namespace Repository
         }
 
 
-        public async Task<PagedList<Workstation>> GetWorkstationsAsync(WorkstationParameters workstationParameters)
+        public async Task<PagedList<Workstation>> GetWorkstationsAsync(WorkstationQueryParameters workstationParameters)
         {
             var workstations = Enumerable.Empty<Workstation>().AsQueryable();
 
@@ -121,7 +121,7 @@ namespace Repository
 
 
         #region ApplyFilters and PerformSearch Region
-        private void ApplyFilters(ref IQueryable<Workstation> workstations, WorkstationParameters workstationParameters)
+        private void ApplyFilters(ref IQueryable<Workstation> workstations, WorkstationQueryParameters workstationParameters)
         {
             workstations = _roleManager.Roles;
 

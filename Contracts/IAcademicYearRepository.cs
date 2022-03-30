@@ -9,7 +9,7 @@ namespace Contracts
 {
     public interface IAcademicYearRepository
     {
-        Task<PagedList<AcademicYear>> GetAcademicYearsAsync(AcademicYearParameters academicYearParameters);
+        Task<PagedList<AcademicYear>> GetAcademicYearsAsync(AcademicYearQueryParameters academicYearParameters);
 
         Task<AcademicYear> GetAcademicYearByIdAsync(Guid id);
         Task<AcademicYear> GetOpenAcademicYearAsync();

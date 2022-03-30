@@ -24,7 +24,7 @@ namespace A_UN_API
                 try
                 {
                     var context = services.GetRequiredService<RepositoryContext>();
-                    DbInitializer.Seed(context);
+                    DbInitializer.SeedRoles(context);
                 }
                 catch (Exception ex)
                 {

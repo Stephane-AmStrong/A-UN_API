@@ -37,9 +37,9 @@ namespace A_UN_API.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<PartnerReadDto>>> GetPartners([FromQuery] PartnerParameters partnerParameters)
+        public async Task<ActionResult<IEnumerable<PartnerReadDto>>> GetPartners([FromQuery] PartnerQueryParameters partnerQueryParameters)
         {
-            var partners = await _repository.Partner.GetPartnersAsync(partnerParameters);
+            var partners = await _repository.Partner.GetPartnersAsync(partnerQueryParameters);
 
             Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(partners.MetaData));
 

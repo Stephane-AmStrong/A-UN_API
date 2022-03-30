@@ -8,7 +8,7 @@ namespace Contracts
 {
     public interface IUniversityRepository
     {
-        Task<PagedList<University>> GetUniversitiesAsync(UniversityParameters universityParameters);
+        Task<PagedList<University>> GetUniversitiesAsync(UniversityQueryParameters universityParameters);
 
         Task<University> GetUniversityByIdAsync(Guid id);
         Task<bool> UniversityExistAsync(University university);

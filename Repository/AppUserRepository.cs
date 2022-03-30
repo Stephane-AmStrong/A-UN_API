@@ -25,17 +25,7 @@ namespace Repository
             _sortHelper = sortHelper;
         }
 
-        public async Task<PagedList<AppUser>> GetAppUsersAsync_old(AppUserParameters appUserParameters)
-        {
-            return await Task.Run(() =>
-                PagedList<AppUser>.ToPagedList(_userManager.Users,
-                    appUserParameters.PageNumber,
-                    appUserParameters.PageSize)
-                );
-        }
-
-
-        public async Task<PagedList<AppUser>> GetAppUsersAsync(AppUserParameters appUserParameters)
+        public async Task<PagedList<AppUser>> GetAppUsersAsync(AppUserQueryParameters appUserParameters)
         {
             var appUsers = Enumerable.Empty<AppUser>().AsQueryable();
 
@@ -44,6 +34,12 @@ namespace Repository
             PerformSearch(ref appUsers, appUserParameters.SearchTerm);
 
             var sortedAppUsers = _sortHelper.ApplySort(appUsers, appUserParameters.OrderBy);
+
+            //foreach (var appUser in sortedAppUsers)
+            //{
+            //    var roleName = (await _userManager.GetRolesAsync(appUser))[0];
+            //    appUser.Role = roleName;
+            //}
 
             return await Task.Run(() =>
                 PagedList<AppUser>.ToPagedList
@@ -82,15 +78,16 @@ namespace Repository
         }
 
         #region ApplyFilters and PerformSearch Region
-        private void ApplyFilters(ref IQueryable<AppUser> appUsers, AppUserParameters appUserParameters)
+
+        private void ApplyFilters(ref IQueryable<AppUser> appUsers, AppUserQueryParameters appUserParameters)
         {
             appUsers = FindAll()
-                .Include(x => x.Subscriptions).ThenInclude(x => x.FormationLevel).ThenInclude(x => x.Formation).ThenInclude(x => x.University);
+                .Include(x=> x.Payments)
+                .Include(x => x.Subscriptions).ThenInclude(x => x.Formation).ThenInclude(x => x.University);
 
             //var userWorkstations = await Task.Run(() => _userManager.Users.Join(_repositoryContext.AppUserWorkstations, user => user.Id, role => role.UserId, (user, role) => role).Where(x => x.RoleId == id).OrderBy(x => x.User.Name).ThenBy(x => x.User.FirstName));
 
             //var userWorkstations = await _userManager.Users.Join(_repositoryContext.AppUserWorkstations, user => user.Id, role => role.UserId, (user, role) => role).Where(x => x.RoleId == id).Include(x=>x.User).OrderBy(x => x.User.Name).ThenBy(x => x.User.FirstName).ToListAsync();
-
 
             if (!string.IsNullOrEmpty(appUserParameters.WithRoleName))
             {
@@ -98,29 +95,42 @@ namespace Repository
                 appUsers = taskAppUsers.Result.AsQueryable();
             }
 
-            if (appUserParameters.OfFormationLevelId != new Guid())
+            if (appUserParameters.OfFormationId != new Guid())
             {
-                appUsers = appUsers.Where(x => x.Subscriptions.Any(x=>x.FormationLevelId == appUserParameters.OfFormationLevelId));
+                appUsers = appUsers.Where(x => x.Subscriptions.Any(x=>x.FormationId == appUserParameters.OfFormationId));
             }
             
             if (appUserParameters.OfFormationId != new Guid())
             {
-                appUsers = appUsers.Where(x => x.Subscriptions.Any(x=>x.FormationLevel.FormationId == appUserParameters.OfFormationId));
+                appUsers = appUsers.Where(x => x.Subscriptions.Any(x=>x.FormationId == appUserParameters.OfFormationId));
             }
             
             if (appUserParameters.FromUniversityId != new Guid())
             {
-                appUsers = appUsers.Where(x => x.Subscriptions.Any(x=>x.FormationLevel.Formation.UniversityId == appUserParameters.FromUniversityId));
+                appUsers = appUsers.Where(x => x.Subscriptions.Any(x=>x.Formation.UniversityId == appUserParameters.FromUniversityId));
             }
             
             if (!string.IsNullOrEmpty(appUserParameters.ManagedByAppUserId))
             {
-                appUsers = appUsers.Where(x => x.Subscriptions.Any(x=>x.FormationLevel.Formation.University.AppUserId == appUserParameters.ManagedByAppUserId));
+                appUsers = appUsers.Where(x => x.Subscriptions.Any(x=>x.Formation.University.AppUserId == appUserParameters.ManagedByAppUserId));
             }
             
             if (appUserParameters.DisplayStudentOnly)
             {
-                appUsers = appUsers.Where(x => x.Subscriptions.Any(x=>x.AppUserId != null));
+                var taskAppUsers = Task.Run(async () => await _userManager.GetUsersInRoleAsync("Etudiant"));
+                appUsers = taskAppUsers.Result.AsQueryable();
+            }
+            
+            if (!string.IsNullOrEmpty(appUserParameters.WhitchPaidFrom))
+            {
+                var paidFrom = DateTime.Parse(appUserParameters.WhitchPaidFrom);
+                appUsers = appUsers.Where(x => x.Payments.Any(x => x.PaidAt >= paidFrom));
+            }
+
+            if (!string.IsNullOrEmpty(appUserParameters.WhitchPaidTo))
+            {
+                var paidTo = DateTime.Parse(appUserParameters.WhitchPaidTo);
+                appUsers = appUsers.Where(x => x.Payments.Any(x => x.PaidAt <= paidTo));
             }
         }
 

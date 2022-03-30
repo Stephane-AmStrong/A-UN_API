@@ -29,7 +29,7 @@ namespace Repository
             _dataShaper = dataShaper;
         }
 
-        public async Task<PagedList<University>> GetUniversitiesAsync(UniversityParameters universityParameters)
+        public async Task<PagedList<University>> GetUniversitiesAsync(UniversityQueryParameters universityParameters)
         {
             var universities = Enumerable.Empty<University>().AsQueryable();
 
@@ -63,7 +63,7 @@ namespace Repository
         public async Task<University> GetUniversityByIdAsync(Guid id)
         {
             return await FindByCondition(university => university.Id.Equals(id))
-                .Include(x=>x.Formations).ThenInclude(x=>x.FormationLevels).ThenInclude(x=>x.Subscriptions).ThenInclude(x=>x.AppUser)
+                .Include(x=>x.Formations).ThenInclude(x=>x.Subscriptions).ThenInclude(x=>x.AppUser)
                 .FirstOrDefaultAsync();
         }
 
@@ -90,37 +90,20 @@ namespace Repository
         }
 
         #region ApplyFilters and PerformSearch Region
-        private void ApplyFilters(ref IQueryable<University> universities, UniversityParameters universityParameters)
+        private void ApplyFilters(ref IQueryable<University> universities, UniversityQueryParameters universityParameters)
         {
             universities = FindAll()
-                .Include(x => x.Formations).ThenInclude(x => x.FormationLevels).ThenInclude(x => x.Subscriptions).ThenInclude(x => x.AppUser);
+                .Include(x => x.Formations).ThenInclude(x => x.Subscriptions).ThenInclude(x => x.AppUser);
 
             if (!string.IsNullOrWhiteSpace(universityParameters.ManagedByAppUserId))
             {
                 universities = universities.Where(x => x.AppUserId == universityParameters.ManagedByAppUserId);
             }
 
-            if (universityParameters.showValidatedOnesOnly)
+            if (universityParameters.ValidatedOnly)
             {
-                universities = universities.Where(x => x.ValiddatedAt !=null);
+                universities = universities.Include(x => x.Formations.Where(x => x.ValidatedAt != null)).Where(x => x.Formations.Any(x=>x.ValidatedAt != null));
             }
-
-            /*
-            if (universityParameters.MaxBirthday != null)
-            {
-                universities = universities.Where(x => x.Birthday < universityParameters.MaxBirthday);
-            }
-
-            if (universityParameters.MinCreateAt != null)
-            {
-                universities = universities.Where(x => x.CreateAt >= universityParameters.MinCreateAt);
-            }
-
-            if (universityParameters.MaxCreateAt != null)
-            {
-                universities = universities.Where(x => x.CreateAt < universityParameters.MaxCreateAt);
-            }
-            */
         }
 
         private void PerformSearch(ref IQueryable<University> universities, string searchTerm)

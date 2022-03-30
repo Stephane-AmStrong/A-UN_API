@@ -26,7 +26,7 @@ namespace Repository
             _sortHelper = sortHelper;
         }
 
-        public async Task<PagedList<AcademicYear>> GetAcademicYearsAsync(AcademicYearParameters academicYearParameters)
+        public async Task<PagedList<AcademicYear>> GetAcademicYearsAsync(AcademicYearQueryParameters academicYearParameters)
         {
             var academicYears = Enumerable.Empty<AcademicYear>().AsQueryable();
 
@@ -84,7 +84,7 @@ namespace Repository
         }
 
         #region ApplyFilters and PerformSearch Region
-        private void ApplyFilters(ref IQueryable<AcademicYear> academicYears, AcademicYearParameters academicYearParameters)
+        private void ApplyFilters(ref IQueryable<AcademicYear> academicYears, AcademicYearQueryParameters academicYearParameters)
         {
             academicYears = FindAll();
             if (academicYearParameters.DisplaysTheOpenOneOnly)

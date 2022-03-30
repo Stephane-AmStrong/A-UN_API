@@ -1,6 +1,7 @@
 ﻿using Entities;
 using Entities.Models;
 using Entities.RequestFeatures;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,8 +23,12 @@ namespace Contracts
         Task<string> DecodeTokenAsync(string encodedToken);
         Task<AuthenticationResponse> SignInAsync(LoginRequest loginRequest, string password);
         Task SignOutAsync();
+        Task<AppUser> FindByEmailAsync(string email);
+        Task<string> GeneratePasswordResetTokenAsync(AppUser appUser);
         Task<AuthenticationResponse> ForgetPasswordAsync(string email);
-        Task<AuthenticationResponse> ResetPasswordAsync(ResetPasswordViewModel model);
+        Task<IdentityResult> ResetPasswordAsync(AppUser appUser, string token, string password);
+        Task<bool> IsEmailConfirmedAsync(AppUser appUser);
+        //Task<AuthenticationResponse> ResetPasswordAsync(ResetPasswordViewModel model);
         Task<string> GetUserId (ClaimsPrincipal user);
 
         Task<ICollection<string>> GetUsersWorkstationsAsync(AppUser user);

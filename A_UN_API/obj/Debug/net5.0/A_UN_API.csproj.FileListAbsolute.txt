@@ -194,3 +194,201 @@ D:\Visual Studio 2019\source\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.dll
 D:\Visual Studio 2019\source\A_UN_API\A_UN_API\obj\Debug\net5.0\ref\A_UN_API.dll
 D:\Visual Studio 2019\source\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.pdb
 D:\Visual Studio 2019\source\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.genruntimeconfig.cache
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\appsettings.Development.json
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\appsettings.json
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\A_UN_API.exe
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\A_UN_API.deps.json
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\A_UN_API.runtimeconfig.json
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\A_UN_API.runtimeconfig.dev.json
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\A_UN_API.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\ref\A_UN_API.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\A_UN_API.pdb
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\A_UN_API.Views.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\A_UN_API.Views.pdb
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\AutoMapper.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Humanizer.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\MailKit.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.OpenIdConnect.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Microsoft.AspNetCore.JsonPatch.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Microsoft.Data.SqlClient.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Design.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Relational.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Microsoft.Extensions.Identity.Core.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Microsoft.Extensions.Identity.Stores.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Microsoft.Identity.Client.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Microsoft.IdentityModel.Logging.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Microsoft.OpenApi.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\MimeKit.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Newtonsoft.Json.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\NLog.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\NLog.Extensions.Logging.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\NLog.Web.AspNetCore.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\BouncyCastle.Crypto.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\System.Configuration.ConfigurationManager.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\System.Diagnostics.DiagnosticSource.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\System.IdentityModel.Tokens.Jwt.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\System.Linq.Dynamic.Core.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\System.Runtime.Caching.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\System.Security.Cryptography.ProtectedData.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.pdb
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.pdb
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.pdb
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.pdb
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Contracts.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Entities.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\LoggerServices.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Repository.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\LoggerServices.pdb
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Repository.pdb
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Contracts.pdb
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Entities.pdb
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.csprojAssemblyReference.cache
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.GeneratedMSBuildEditorConfig.editorconfig
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.AssemblyInfoInputs.cache
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.AssemblyInfo.cs
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.csproj.CoreCompileInputs.cache
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.MvcApplicationPartsAssemblyInfo.cs
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.MvcApplicationPartsAssemblyInfo.cache
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.RazorAssemblyInfo.cache
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.RazorAssemblyInfo.cs
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\obj\Debug\net5.0\staticwebassets\A_UN_API.StaticWebAssets.Manifest.cache
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\obj\Debug\net5.0\staticwebassets\A_UN_API.StaticWebAssets.xml
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\obj\Debug\net5.0\scopedcss\bundle\A_UN_API.styles.css
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.TagHelpers.input.cache
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.TagHelpers.output.cache
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.RazorCoreGenerate.cache
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\obj\Debug\net5.0\Razor\Pages\ResetPassword.cshtml.g.cs
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.RazorTargetAssemblyInfo.cache
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.RazorTargetAssemblyInfo.cs
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.Views.pdb
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.csproj.CopyComplete
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\obj\Debug\net5.0\ref\A_UN_API.dll
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.pdb
+D:\Visual Studio 2019\source\COMPLETED\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.genruntimeconfig.cache
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\appsettings.Development.json
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\appsettings.json
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\A_UN_API.exe
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\A_UN_API.deps.json
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\A_UN_API.runtimeconfig.json
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\A_UN_API.runtimeconfig.dev.json
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\A_UN_API.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\A_UN_API.pdb
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\A_UN_API.Views.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\A_UN_API.Views.pdb
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\AutoMapper.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Humanizer.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\MailKit.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.OpenIdConnect.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Microsoft.AspNetCore.JsonPatch.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Microsoft.Data.SqlClient.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Design.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Relational.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Microsoft.Extensions.Identity.Core.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Microsoft.Extensions.Identity.Stores.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Microsoft.Identity.Client.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Microsoft.IdentityModel.Logging.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Microsoft.OpenApi.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\MimeKit.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\NETCore.MailKit.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Newtonsoft.Json.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\NLog.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\NLog.Extensions.Logging.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\NLog.Web.AspNetCore.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\BouncyCastle.Crypto.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\System.Configuration.ConfigurationManager.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\System.Diagnostics.DiagnosticSource.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\System.IdentityModel.Tokens.Jwt.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\System.Linq.Dynamic.Core.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\System.Runtime.Caching.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\System.Security.Cryptography.ProtectedData.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.pdb
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.pdb
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.pdb
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.pdb
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Contracts.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Entities.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\LoggerServices.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Repository.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\LoggerServices.pdb
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Repository.pdb
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Contracts.pdb
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\Entities.pdb
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\es\Entities.resources.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\bin\Debug\net5.0\fr\Entities.resources.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.csproj.AssemblyReference.cache
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.GeneratedMSBuildEditorConfig.editorconfig
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.AssemblyInfoInputs.cache
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.AssemblyInfo.cs
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.csproj.CoreCompileInputs.cache
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.MvcApplicationPartsAssemblyInfo.cs
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.MvcApplicationPartsAssemblyInfo.cache
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.RazorAssemblyInfo.cache
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.RazorAssemblyInfo.cs
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\obj\Debug\net5.0\scopedcss\bundle\A_UN_API.styles.css
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\obj\Debug\net5.0\staticwebassets\A_UN_API.StaticWebAssets.Manifest.cache
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.TagHelpers.input.cache
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.TagHelpers.output.cache
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.RazorCoreGenerate.cache
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\obj\Debug\net5.0\Razor\Pages\ResetPassword.cshtml.g.cs
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.RazorTargetAssemblyInfo.cache
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.RazorTargetAssemblyInfo.cs
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.Views.pdb
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.csproj.CopyComplete
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\obj\Debug\net5.0\refint\A_UN_API.dll
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.pdb
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\obj\Debug\net5.0\A_UN_API.genruntimeconfig.cache
+D:\WORKSPACE\DotNet\COMPLETED\A_UN_API\A_UN_API\obj\Debug\net5.0\ref\A_UN_API.dll

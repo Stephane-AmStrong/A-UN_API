@@ -37,9 +37,9 @@ namespace A_UN_API.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<FormationReadDto>>> GetFormations([FromQuery] FormationParameters queryParameters)
+        public async Task<ActionResult<IEnumerable<FormationReadDto>>> GetFormations([FromQuery] FormationQueryParameters formationQueryParameters)
         {
-            var formations = await _repository.Formation.GetFormationsAsync(queryParameters);
+            var formations = await _repository.Formation.GetFormationsAsync(formationQueryParameters);
 
             Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(formations.MetaData));
 

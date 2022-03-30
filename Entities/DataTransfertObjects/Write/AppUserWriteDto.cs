@@ -11,27 +11,30 @@ namespace Entities.DataTransfertObjects
 {
     public class AppUserWriteDto
     {
-        [Required]
-        [Display(Name = "Prénoms")]
+        [Required(ErrorMessage = "This field is required")]
+        [Display(Name = "First Name")]
         public string Firstname { get; set; }
-        [Required]
-        [Display(Name = "Nom")]
+        [Required(ErrorMessage = "This field is required")]
+        [Display(Name = "Last Name")]
         public string Name { get; set; }
-        [Display(Name = "Sexe")]
+        [Display(Name = "Gender")]
         public string Gender { get; set; }
-        public DateTime? Birthday { get; set; }
-        [Display(Name = "Rôle")]
+        [Display(Name = "Role")]
         public string WorkstationName { get; set; }
-        
-        [Required]
+
         [EmailAddress]
+        [Required(ErrorMessage = "This field is required")]
         public string Email { get; set; }
 
-        [Required]
+        
+        [Required(ErrorMessage = "This field is required")]
         [DataType(DataType.Password)]
+        [Display(Name = "Password")]
         public string Password { get; set; }
+        
         [Required]
         [DataType(DataType.Password)]
+        [Display(Name = "Confirm Password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }

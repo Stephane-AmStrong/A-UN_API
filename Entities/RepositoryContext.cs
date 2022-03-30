@@ -14,10 +14,11 @@ namespace Entities
         }
 
         public DbSet<AcademicYear> AcademicYears { get; set; }
+        public DbSet<About> Abouts { get; set; }
         public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<Banner> Banners { get; set; }
+        public DbSet<Category> Categories { get; set; }
         public DbSet<Formation> Formations { get; set; }
-        public DbSet<FormationLevel> FormationLevels { get; set; }
         public DbSet<PersonalFile> PersonalFiles { get; set; }
         public DbSet<Partner> Partners { get; set; }
         public DbSet<Payment> Payments { get; set; }
@@ -32,6 +33,11 @@ namespace Entities
         {
             base.OnModelCreating(builder);
             //builder.Entity<MemberSkill>().HasKey(x => new { x.MemberId, x.SkillId, });
+
+            builder.Entity<Banner>()
+                .HasIndex(x => x.No)
+                .IsUnique();
+
 
             //builder.Entity<Workstation>().HasData(
             //    new Workstation { Name = "SuperAdmin" },

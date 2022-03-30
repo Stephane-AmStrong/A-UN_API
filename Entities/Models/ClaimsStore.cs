@@ -12,6 +12,10 @@ namespace Entities.RequestFeatures
     {
         public static List<Claim> AllClaims = new List<Claim>
         {
+            new Claim("readAbout", "Read Abouts"),
+            new Claim("writeAbout", "Write Abouts"),
+            new Claim("manageAbout", "Manage Abouts"),
+            
             new Claim("readAcademicYear", "Read AcademicYears"),
             new Claim("writeAcademicYear", "Write AcademicYears"),
             new Claim("manageAcademicYear", "Manage AcademicYears"),
@@ -19,6 +23,12 @@ namespace Entities.RequestFeatures
             new Claim("readAppUser", "Read AppUsers"),
             new Claim("writeAppUser", "Write AppUsers"),
             new Claim("manageAppUser", "Manage AppUsers"),
+
+            new Claim("readBanner", "Read Banners"),
+            new Claim("writeBanner", "Write Banners"),
+
+            new Claim("readCategory", "Read Categories"),
+            new Claim("writeCategory", "Write Categories"),
 
             new Claim("readFormation", "Read Formations"),
             new Claim("writeFormation", "Write Formations"),
@@ -68,6 +78,7 @@ namespace Entities.RequestFeatures
         public static List<Claim> EtudiantClaims = new List<Claim>
         {
             new Claim("readAcademicYear", "Read AcademicYears"),
+            new Claim("readCategory", "Read Categories"),
 
             new Claim("readAppUser", "Read AppUsers"),
             new Claim("writeAppUser", "Write AppUsers"),
@@ -99,6 +110,8 @@ namespace Entities.RequestFeatures
 
         public static List<Claim> UniversityClaims = new List<Claim>
         {
+            new Claim("readCategory", "Read Categories"),
+            
             new Claim("readAppUser", "Read AppUsers"),
             new Claim("writeAppUser", "Write AppUsers"),
 
@@ -138,6 +151,8 @@ namespace Entities.RequestFeatures
             new Claim("writeAcademicYear", "Write AcademicYears"),
             new Claim("manageAcademicYear", "Manage AcademicYears"),
 
+            new Claim("readCategory", "Read Categories"),
+            
             new Claim("readAppUser", "Read AppUsers"),
             new Claim("writeAppUser", "Write AppUsers"),
             new Claim("manageAppUser", "Manage AppUsers"),

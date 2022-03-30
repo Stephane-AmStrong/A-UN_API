@@ -37,9 +37,9 @@ namespace A_UN_API.Controllers
 
         [HttpGet]
         [MultiplePoliciesAuthorize("readWorkstationPolicy; writeWorkstationPolicy")]
-        public async Task<ActionResult<IEnumerable<WorkstationReadDto>>> GetWorkstations([FromQuery] WorkstationParameters queryParameters)
+        public async Task<ActionResult<IEnumerable<WorkstationReadDto>>> GetWorkstations([FromQuery] WorkstationQueryParameters workstationQueryParameters)
         {
-            var workstations = await _repository.Workstation.GetWorkstationsAsync(queryParameters);
+            var workstations = await _repository.Workstation.GetWorkstationsAsync(workstationQueryParameters);
 
             //var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 

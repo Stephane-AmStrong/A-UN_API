@@ -8,11 +8,11 @@ namespace Contracts
 {
     public interface IPaymentRepository
     {
-        Task<PagedList<Entity>> GetPaymentsAsync(PaymentParameters paymentParameters);
+        Task<PagedList<Payment>> GetPaymentsAsync(PaymentQueryParameters paymentParameters);
 
         Task<Payment> GetPaymentByIdAsync(Guid id);
+        Task<Payment> GetLastPaymentByUserIdAsync(string id);
         Task<bool> PaymentExistAsync(Payment payment);
-
         Task CreatePaymentAsync(Payment payment);
         Task UpdatePaymentAsync(Payment payment);
         Task DeletePaymentAsync(Payment payment);

@@ -1,29 +1,36 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Entities.DataTransfertObjects
 {
     public class FormationWriteDto
     {
         public string ImgLink { get; set; }
-        public string ImgLink2 { get; set; }
-        public string Code { get; set; }
+
         [Required]
-        [Display(Name = "Nom")]
+        [Display(Name = "Name")]
         public string Name { get; set; }
+
+        [Display(Name = "Price")] 
+        [Range(10.0, double.MaxValue, ErrorMessage = "The field {0} must be greater than {1}.")]
+        public long Price { get; set; }
+
         [Required]
+        [Display(Name = "Description")]
+        public string Description { get; set; }
+
+        [Required]
+        [Display(Name = "Category")]
+        public Guid CategoryId { get; set; }
+
+        [Required]
+        [Display(Name = "University")]
         public Guid UniversityId { get; set; }
 
-        [Display(Name = "Photo")]
-        public IFormFile File { get; set; }
-        public IFormFile File2 { get; set; }
+        public DateTime? ValidatedAt { get; set; }
 
-        //public virtual FormationLevelWriteDto[] FormationLevels { get; set; }
+        [Display(Name = "Picture")]
+        public IFormFile File { get; set; }
     }
 }

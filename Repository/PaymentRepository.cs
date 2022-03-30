@@ -17,19 +17,16 @@ namespace Repository
     public class PaymentRepository : RepositoryBase<Payment>, IPaymentRepository
     {
         private ISortHelper<Payment> _sortHelper;
-        private IDataShaper<Payment> _dataShaper;
 
         public PaymentRepository(
-            RepositoryContext repositoryContext, 
-            ISortHelper<Payment> sortHelper,
-            IDataShaper<Payment> dataShaper
+            RepositoryContext repositoryContext,
+            ISortHelper<Payment> sortHelper
             ) : base(repositoryContext)
         {
             _sortHelper = sortHelper;
-            _dataShaper = dataShaper;
         }
 
-        public async Task<PagedList<Entity>> GetPaymentsAsync(PaymentParameters paymentParameters)
+        public async Task<PagedList<Payment>> GetPaymentsAsync(PaymentQueryParameters paymentParameters)
         {
             var payments = Enumerable.Empty<Payment>().AsQueryable();
 
@@ -38,26 +35,14 @@ namespace Repository
             PerformSearch(ref payments, paymentParameters.SearchTerm);
 
             var sortedPayments = _sortHelper.ApplySort(payments, paymentParameters.OrderBy);
-            var shapedPayments = _dataShaper.ShapeData(sortedPayments, paymentParameters.Fields);
 
             return await Task.Run(() =>
-                PagedList<Entity>.ToPagedList
+                PagedList<Payment>.ToPagedList
                 (
-                    shapedPayments,
+                    sortedPayments,
                     paymentParameters.PageNumber,
                     paymentParameters.PageSize)
                 );
-        }
-
-        public async Task<Entity> GetPaymentByIdAsync(Guid id, string fields)
-        {
-            var payment = FindByCondition(payment => payment.Id.Equals(id))
-                .DefaultIfEmpty(new Payment())
-                .FirstOrDefault();
-
-            return await Task.Run(() =>
-                _dataShaper.ShapeData(payment, fields)
-            );
         }
 
         public async Task<Payment> GetPaymentByIdAsync(Guid id)
@@ -67,10 +52,18 @@ namespace Repository
                 .FirstOrDefaultAsync();
         }
 
+        public async Task<Payment> GetLastPaymentByUserIdAsync(string id)
+        {
+            return await FindByCondition(payment => payment.AppUserId.Equals(id))
+                .Include(x => x.AppUser).Include(x => x.AcademicYear)
+                .OrderByDescending(x=>x.AcademicYear.EndsOn)
+                .FirstOrDefaultAsync();
+        }
+
+
         public async Task<bool> PaymentExistAsync(Payment payment)
         {
-            return await FindByCondition(x => x.AcademicYearId == payment.AcademicYearId)
-                .AnyAsync();
+            return false;
         }
 
         public async Task CreatePaymentAsync(Payment payment)
@@ -89,10 +82,10 @@ namespace Repository
         }
 
         #region ApplyFilters and PerformSearch Region
-        private void ApplyFilters(ref IQueryable<Payment> payments, PaymentParameters paymentParameters)
+        private void ApplyFilters(ref IQueryable<Payment> payments, PaymentQueryParameters paymentParameters)
         {
             payments = FindAll()
-                .Include(x=>x.AppUser).Include(x=>x.AcademicYear);
+                .Include(x => x.AppUser).Include(x => x.AcademicYear);
             /*
             if (!string.IsNullOrWhiteSpace(paymentParameters.AppUserId))
             {

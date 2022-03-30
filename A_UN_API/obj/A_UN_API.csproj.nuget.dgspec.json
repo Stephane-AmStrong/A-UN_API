@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Visual Studio 2019\\source\\A_UN_API\\A_UN_API\\A_UN_API.csproj": {}
+    "D:\\WORKSPACE\\DotNet\\COMPLETED\\A_UN_API\\A_UN_API\\A_UN_API.csproj": {}
   },
   "projects": {
-    "D:\\Visual Studio 2019\\source\\A_UN_API\\A_UN_API\\A_UN_API.csproj": {
+    "D:\\WORKSPACE\\DotNet\\COMPLETED\\A_UN_API\\A_UN_API\\A_UN_API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Visual Studio 2019\\source\\A_UN_API\\A_UN_API\\A_UN_API.csproj",
+        "projectUniqueName": "D:\\WORKSPACE\\DotNet\\COMPLETED\\A_UN_API\\A_UN_API\\A_UN_API.csproj",
         "projectName": "A_UN_API",
-        "projectPath": "D:\\Visual Studio 2019\\source\\A_UN_API\\A_UN_API\\A_UN_API.csproj",
+        "projectPath": "D:\\WORKSPACE\\DotNet\\COMPLETED\\A_UN_API\\A_UN_API\\A_UN_API.csproj",
         "packagesPath": "C:\\Users\\AmStrong\\.nuget\\packages\\",
-        "outputPath": "D:\\Visual Studio 2019\\source\\A_UN_API\\A_UN_API\\obj\\",
+        "outputPath": "D:\\WORKSPACE\\DotNet\\COMPLETED\\A_UN_API\\A_UN_API\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
           "C:\\Users\\AmStrong\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -28,11 +32,11 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "D:\\Visual Studio 2019\\source\\A_UN_API\\LoggerServices\\LoggerServices.csproj": {
-                "projectPath": "D:\\Visual Studio 2019\\source\\A_UN_API\\LoggerServices\\LoggerServices.csproj"
+              "D:\\WORKSPACE\\DotNet\\COMPLETED\\A_UN_API\\LoggerServices\\LoggerServices.csproj": {
+                "projectPath": "D:\\WORKSPACE\\DotNet\\COMPLETED\\A_UN_API\\LoggerServices\\LoggerServices.csproj"
               },
-              "D:\\Visual Studio 2019\\source\\A_UN_API\\Repository\\Repository.csproj": {
-                "projectPath": "D:\\Visual Studio 2019\\source\\A_UN_API\\Repository\\Repository.csproj"
+              "D:\\WORKSPACE\\DotNet\\COMPLETED\\A_UN_API\\Repository\\Repository.csproj": {
+                "projectPath": "D:\\WORKSPACE\\DotNet\\COMPLETED\\A_UN_API\\Repository\\Repository.csproj"
               }
             }
           }
@@ -98,21 +102,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Visual Studio 2019\\source\\A_UN_API\\Contracts\\Contracts.csproj": {
+    "D:\\WORKSPACE\\DotNet\\COMPLETED\\A_UN_API\\Contracts\\Contracts.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Visual Studio 2019\\source\\A_UN_API\\Contracts\\Contracts.csproj",
+        "projectUniqueName": "D:\\WORKSPACE\\DotNet\\COMPLETED\\A_UN_API\\Contracts\\Contracts.csproj",
         "projectName": "Contracts",
-        "projectPath": "D:\\Visual Studio 2019\\source\\A_UN_API\\Contracts\\Contracts.csproj",
+        "projectPath": "D:\\WORKSPACE\\DotNet\\COMPLETED\\A_UN_API\\Contracts\\Contracts.csproj",
         "packagesPath": "C:\\Users\\AmStrong\\.nuget\\packages\\",
-        "outputPath": "D:\\Visual Studio 2019\\source\\A_UN_API\\Contracts\\obj\\",
+        "outputPath": "D:\\WORKSPACE\\DotNet\\COMPLETED\\A_UN_API\\Contracts\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
           "C:\\Users\\AmStrong\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -126,8 +134,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "D:\\Visual Studio 2019\\source\\A_UN_API\\Entities\\Entities.csproj": {
-                "projectPath": "D:\\Visual Studio 2019\\source\\A_UN_API\\Entities\\Entities.csproj"
+              "D:\\WORKSPACE\\DotNet\\COMPLETED\\A_UN_API\\Entities\\Entities.csproj": {
+                "projectPath": "D:\\WORKSPACE\\DotNet\\COMPLETED\\A_UN_API\\Entities\\Entities.csproj"
               }
             }
           }
@@ -152,28 +160,29 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
-            "Microsoft.AspNetCore.App": {
-              "privateAssets": "none"
-            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Visual Studio 2019\\source\\A_UN_API\\Entities\\Entities.csproj": {
+    "D:\\WORKSPACE\\DotNet\\COMPLETED\\A_UN_API\\Entities\\Entities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Visual Studio 2019\\source\\A_UN_API\\Entities\\Entities.csproj",
+        "projectUniqueName": "D:\\WORKSPACE\\DotNet\\COMPLETED\\A_UN_API\\Entities\\Entities.csproj",
         "projectName": "Entities",
-        "projectPath": "D:\\Visual Studio 2019\\source\\A_UN_API\\Entities\\Entities.csproj",
+        "projectPath": "D:\\WORKSPACE\\DotNet\\COMPLETED\\A_UN_API\\Entities\\Entities.csproj",
         "packagesPath": "C:\\Users\\AmStrong\\.nuget\\packages\\",
-        "outputPath": "D:\\Visual Studio 2019\\source\\A_UN_API\\Entities\\obj\\",
+        "outputPath": "D:\\WORKSPACE\\DotNet\\COMPLETED\\A_UN_API\\Entities\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
           "C:\\Users\\AmStrong\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -223,6 +232,10 @@
               "target": "Package",
               "version": "[5.0.11, )"
             },
+            "NETCore.MailKit": {
+              "target": "Package",
+              "version": "[2.0.2, )"
+            },
             "System.Linq.Dynamic.Core": {
               "target": "Package",
               "version": "[1.2.13, )"
@@ -239,28 +252,29 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
-            "Microsoft.AspNetCore.App": {
-              "privateAssets": "none"
-            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Visual Studio 2019\\source\\A_UN_API\\LoggerServices\\LoggerServices.csproj": {
+    "D:\\WORKSPACE\\DotNet\\COMPLETED\\A_UN_API\\LoggerServices\\LoggerServices.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Visual Studio 2019\\source\\A_UN_API\\LoggerServices\\LoggerServices.csproj",
+        "projectUniqueName": "D:\\WORKSPACE\\DotNet\\COMPLETED\\A_UN_API\\LoggerServices\\LoggerServices.csproj",
         "projectName": "LoggerServices",
-        "projectPath": "D:\\Visual Studio 2019\\source\\A_UN_API\\LoggerServices\\LoggerServices.csproj",
+        "projectPath": "D:\\WORKSPACE\\DotNet\\COMPLETED\\A_UN_API\\LoggerServices\\LoggerServices.csproj",
         "packagesPath": "C:\\Users\\AmStrong\\.nuget\\packages\\",
-        "outputPath": "D:\\Visual Studio 2019\\source\\A_UN_API\\LoggerServices\\obj\\",
+        "outputPath": "D:\\WORKSPACE\\DotNet\\COMPLETED\\A_UN_API\\LoggerServices\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
           "C:\\Users\\AmStrong\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -274,8 +288,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "D:\\Visual Studio 2019\\source\\A_UN_API\\Contracts\\Contracts.csproj": {
-                "projectPath": "D:\\Visual Studio 2019\\source\\A_UN_API\\Contracts\\Contracts.csproj"
+              "D:\\WORKSPACE\\DotNet\\COMPLETED\\A_UN_API\\Contracts\\Contracts.csproj": {
+                "projectPath": "D:\\WORKSPACE\\DotNet\\COMPLETED\\A_UN_API\\Contracts\\Contracts.csproj"
               }
             }
           }
@@ -306,28 +320,29 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
-            "Microsoft.AspNetCore.App": {
-              "privateAssets": "none"
-            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Visual Studio 2019\\source\\A_UN_API\\Repository\\Repository.csproj": {
+    "D:\\WORKSPACE\\DotNet\\COMPLETED\\A_UN_API\\Repository\\Repository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Visual Studio 2019\\source\\A_UN_API\\Repository\\Repository.csproj",
+        "projectUniqueName": "D:\\WORKSPACE\\DotNet\\COMPLETED\\A_UN_API\\Repository\\Repository.csproj",
         "projectName": "Repository",
-        "projectPath": "D:\\Visual Studio 2019\\source\\A_UN_API\\Repository\\Repository.csproj",
+        "projectPath": "D:\\WORKSPACE\\DotNet\\COMPLETED\\A_UN_API\\Repository\\Repository.csproj",
         "packagesPath": "C:\\Users\\AmStrong\\.nuget\\packages\\",
-        "outputPath": "D:\\Visual Studio 2019\\source\\A_UN_API\\Repository\\obj\\",
+        "outputPath": "D:\\WORKSPACE\\DotNet\\COMPLETED\\A_UN_API\\Repository\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
           "C:\\Users\\AmStrong\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -341,11 +356,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "D:\\Visual Studio 2019\\source\\A_UN_API\\Contracts\\Contracts.csproj": {
-                "projectPath": "D:\\Visual Studio 2019\\source\\A_UN_API\\Contracts\\Contracts.csproj"
-              },
-              "D:\\Visual Studio 2019\\source\\A_UN_API\\Entities\\Entities.csproj": {
-                "projectPath": "D:\\Visual Studio 2019\\source\\A_UN_API\\Entities\\Entities.csproj"
+              "D:\\WORKSPACE\\DotNet\\COMPLETED\\A_UN_API\\Contracts\\Contracts.csproj": {
+                "projectPath": "D:\\WORKSPACE\\DotNet\\COMPLETED\\A_UN_API\\Contracts\\Contracts.csproj"
               }
             }
           }
@@ -376,14 +388,11 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
-            "Microsoft.AspNetCore.App": {
-              "privateAssets": "none"
-            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }

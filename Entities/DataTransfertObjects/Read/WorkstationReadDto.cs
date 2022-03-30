@@ -16,7 +16,8 @@ namespace Entities.DataTransfertObjects
         public string Name { get; set; }
         public string NormalizedName { get; set; }
         public string ConcurrencyStamp { get; set; }
-        //public virtual AppUserReadDto[] AppUsers { get; set; }
+        public IList<ClaimReadDto> Claims { get; set; }
+        public virtual AppUserReadDto[] AppUsers { get; set; }
 
     }
 }

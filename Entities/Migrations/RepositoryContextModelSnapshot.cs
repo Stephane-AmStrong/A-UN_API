@@ -19,6 +19,25 @@ namespace Entities.Migrations
                 .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Entities.Models.About", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImgLink")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Abouts");
+                });
+
             modelBuilder.Entity("Entities.Models.AcademicYear", b =>
                 {
                     b.Property<Guid>("Id")
@@ -144,9 +163,36 @@ namespace Entities.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("No")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("No")
+                        .IsUnique();
+
                     b.ToTable("Banners");
+                });
+
+            modelBuilder.Entity("Entities.Models.Category", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImgLink")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("Entities.Models.Formation", b =>
@@ -155,45 +201,12 @@ namespace Entities.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ImgLink")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ImgLink2")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("UniversityId")
+                    b.Property<Guid>("CategoryId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime?>("ValiddatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UniversityId");
-
-                    b.ToTable("Formations");
-                });
-
-            modelBuilder.Entity("Entities.Models.FormationLevel", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Code")
+                    b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("FormationId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ImgLink")
                         .HasColumnType("nvarchar(max)");
@@ -205,14 +218,19 @@ namespace Entities.Migrations
                     b.Property<long>("Price")
                         .HasColumnType("bigint");
 
-                    b.Property<DateTime?>("ValiddatedAt")
+                    b.Property<Guid>("UniversityId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ValidatedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FormationId");
+                    b.HasIndex("CategoryId");
 
-                    b.ToTable("FormationLevels");
+                    b.HasIndex("UniversityId");
+
+                    b.ToTable("Formations");
                 });
 
             modelBuilder.Entity("Entities.Models.Partner", b =>
@@ -321,7 +339,7 @@ namespace Entities.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("FormationLevelId")
+                    b.Property<Guid>("FormationId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
@@ -333,7 +351,7 @@ namespace Entities.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FormationLevelId");
+                    b.HasIndex("FormationId");
 
                     b.ToTable("Prerequisites");
                 });
@@ -354,7 +372,7 @@ namespace Entities.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("FormationLevelId")
+                    b.Property<Guid>("FormationId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("SubscribedAt")
@@ -363,7 +381,7 @@ namespace Entities.Migrations
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("ValiddatedAt")
+                    b.Property<DateTime?>("ValidatedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -372,7 +390,7 @@ namespace Entities.Migrations
 
                     b.HasIndex("AppUserId");
 
-                    b.HasIndex("FormationLevelId");
+                    b.HasIndex("FormationId");
 
                     b.ToTable("Subscriptions");
                 });
@@ -433,9 +451,6 @@ namespace Entities.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("ValiddatedAt")
-                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -590,24 +605,21 @@ namespace Entities.Migrations
 
             modelBuilder.Entity("Entities.Models.Formation", b =>
                 {
+                    b.HasOne("Entities.Models.Category", "Category")
+                        .WithMany("Formations")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Entities.Models.University", "University")
                         .WithMany("Formations")
                         .HasForeignKey("UniversityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Category");
+
                     b.Navigation("University");
-                });
-
-            modelBuilder.Entity("Entities.Models.FormationLevel", b =>
-                {
-                    b.HasOne("Entities.Models.Formation", "Formation")
-                        .WithMany("FormationLevels")
-                        .HasForeignKey("FormationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Formation");
                 });
 
             modelBuilder.Entity("Entities.Models.Payment", b =>
@@ -642,13 +654,13 @@ namespace Entities.Migrations
 
             modelBuilder.Entity("Entities.Models.Prerequisite", b =>
                 {
-                    b.HasOne("Entities.Models.FormationLevel", "FormationLevel")
+                    b.HasOne("Entities.Models.Formation", "Formation")
                         .WithMany("Prerequisites")
-                        .HasForeignKey("FormationLevelId")
+                        .HasForeignKey("FormationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("FormationLevel");
+                    b.Navigation("Formation");
                 });
 
             modelBuilder.Entity("Entities.Models.Subscription", b =>
@@ -665,9 +677,9 @@ namespace Entities.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Entities.Models.FormationLevel", "FormationLevel")
+                    b.HasOne("Entities.Models.Formation", "Formation")
                         .WithMany("Subscriptions")
-                        .HasForeignKey("FormationLevelId")
+                        .HasForeignKey("FormationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -675,7 +687,7 @@ namespace Entities.Migrations
 
                     b.Navigation("AppUser");
 
-                    b.Navigation("FormationLevel");
+                    b.Navigation("Formation");
                 });
 
             modelBuilder.Entity("Entities.Models.SubscriptionLine", b =>
@@ -776,12 +788,12 @@ namespace Entities.Migrations
                     b.Navigation("Subscriptions");
                 });
 
-            modelBuilder.Entity("Entities.Models.Formation", b =>
+            modelBuilder.Entity("Entities.Models.Category", b =>
                 {
-                    b.Navigation("FormationLevels");
+                    b.Navigation("Formations");
                 });
 
-            modelBuilder.Entity("Entities.Models.FormationLevel", b =>
+            modelBuilder.Entity("Entities.Models.Formation", b =>
                 {
                     b.Navigation("Prerequisites");
 

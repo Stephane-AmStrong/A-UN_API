@@ -15,6 +15,6 @@ namespace Entities.DataTransfertObjects
         public string Name { get; set; }
         [Display(Name = "N°")]
         public int NumOrder { get; set; }
-        public Guid FormationLevelId { get; set; }
+        public Guid FormationId { get; set; }
     }
 }

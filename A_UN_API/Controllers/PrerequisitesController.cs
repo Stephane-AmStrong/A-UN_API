@@ -34,9 +34,9 @@ namespace A_UN_API.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<PrerequisiteReadDto>>> GetPrerequisites([FromQuery] PrerequisiteParameters queryParameters)
+        public async Task<ActionResult<IEnumerable<PrerequisiteReadDto>>> GetPrerequisites([FromQuery] PrerequisiteQueryParameters prerequisiteQueryParameters)
         {
-            var registrationForms = await _repository.Prerequisite.GetPrerequisitesAsync(queryParameters);
+            var registrationForms = await _repository.Prerequisite.GetPrerequisitesAsync(prerequisiteQueryParameters);
 
             Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(registrationForms.MetaData));
 

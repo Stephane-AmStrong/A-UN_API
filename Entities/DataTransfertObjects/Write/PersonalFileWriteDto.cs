@@ -13,14 +13,15 @@ namespace Entities.DataTransfertObjects
     public class PersonalFileWriteDto
     {
         [Required]
-        [Display(Name = "Nom")]
+        [Display(Name = "Name")]
         public string Name { get; set; }
+        [Display(Name = "Name")]
         public string Link { get; set; }
         [JsonIgnore]
         public string AppUserId { get; set; }
 
-        [Display(Name = "Document")]
         [Required]
+        [Display(Name = "Document")]
         public IFormFile File { get; set; }
     }
 }

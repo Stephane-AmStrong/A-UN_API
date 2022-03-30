@@ -13,7 +13,7 @@ namespace Entities.DataTransfertObjects
     public class UniversityWriteDto
     {
         [Required]
-        [Display(Name = "Nom")]
+        [Display(Name = "Name")]
         public string Name { get; set; }
         [Required]
         [Display(Name = "Description")]
@@ -21,7 +21,7 @@ namespace Entities.DataTransfertObjects
         [JsonIgnore]
         public string ImgLink { get; set; }
         public string AppUserId { get; set; }
-        [Display(Name = "Photo")]
+        [Display(Name = "Picture")]
         public IFormFile File { get; set; }
     }
 }

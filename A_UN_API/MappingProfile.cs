@@ -1,10 +1,8 @@
 ﻿using AutoMapper;
 using Entities.DataTransfertObjects;
 using Entities.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Security.Claims;
+
 
 namespace A_UN_API
 {
@@ -27,48 +25,51 @@ namespace A_UN_API
             CreateMap<LoginRequestDto, LoginRequest>();
             CreateMap<AuthenticationResponse, AuthenticationResponseReadDto>();
 
-            CreateMap<AcademicYear, AcademicYearReadDto>();
-            CreateMap<AcademicYearWriteDto, AcademicYear>();
+            CreateMap<About, AboutReadDto>().ReverseMap();
+            CreateMap<About, AboutWriteDto>().ReverseMap();
+            CreateMap<AboutWriteDto, About>().ReverseMap();
 
-            CreateMap<Formation, FormationReadDto>();
-            CreateMap<FormationWriteDto, Formation>();
+            CreateMap<AcademicYear, AcademicYearReadDto>().ReverseMap();
+            CreateMap<AcademicYearWriteDto, AcademicYear>().ReverseMap();
 
-            CreateMap<FormationLevel, FormationLevelReadDto>();
-            CreateMap<FormationLevelWriteDto, FormationLevel>();
+            CreateMap<Banner, BannerReadDto>().ReverseMap();
+            CreateMap<BannerWriteDto, Banner>().ReverseMap();
 
-            CreateMap<Partner, PartnerReadDto>();
-            CreateMap<PartnerWriteDto, Partner>();
+            CreateMap<Category, CategoryReadDto>().ReverseMap();
+            CreateMap<CategoryWriteDto, Category>().ReverseMap();
 
-            CreateMap<Payment, PaymentReadDto>();
-            CreateMap<PaymentWriteDto, Payment>();
+            CreateMap<Claim, ClaimReadDto>().ReverseMap();
+            CreateMap<ClaimWriteDto, Claim>().ReverseMap();
 
-            CreateMap<PersonalFile, PersonalFileReadDto>();
-            CreateMap<PersonalFileWriteDto, PersonalFile>();
+            CreateMap<Formation, FormationReadDto>().ReverseMap();
+            CreateMap<FormationWriteDto, Formation>().ReverseMap();
 
-            CreateMap<Prerequisite, PrerequisiteReadDto>();
-            CreateMap<PrerequisiteWriteDto, Prerequisite>();
+            CreateMap<Prerequisite, PrerequisiteReadDto>().ReverseMap();
+            CreateMap<PrerequisiteWriteDto, Prerequisite>().ReverseMap();
 
-            CreateMap<Subscription, SubscriptionReadDto>();
-            CreateMap<SubscriptionWriteDto, Subscription>();
+            CreateMap<Partner, PartnerReadDto>().ReverseMap();
+            CreateMap<PartnerWriteDto, Partner>().ReverseMap();
 
-            CreateMap<SubscriptionLine, SubscriptionLineReadDto>();
-            CreateMap<SubscriptionLineWriteDto, SubscriptionLine>();
+            CreateMap<Payment, PaymentReadDto>().ReverseMap();
+            CreateMap<PaymentWriteDto, Payment>().ReverseMap();
 
-            CreateMap<University, UniversityReadDto>()
-                .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
+            CreateMap<PersonalFile, PersonalFileReadDto>().ReverseMap();
+            CreateMap<PersonalFileWriteDto, PersonalFile>().ReverseMap();
 
-            CreateMap<UniversityWriteDto, University>();
+            CreateMap<Subscription, SubscriptionReadDto>().ReverseMap();
+            CreateMap<SubscriptionWriteDto, Subscription>().ReverseMap();
 
-            CreateMap<Workstation, WorkstationReadDto>();
-            CreateMap<WorkstationWriteDto, Workstation>();
-
+            CreateMap<SubscriptionLine, SubscriptionLineReadDto>().ReverseMap();
+            CreateMap<SubscriptionLineWriteDto, SubscriptionLine>().ReverseMap();
 
             //CreateMap<University, UniversityReadDto>()
             //    .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
 
+            CreateMap<University, UniversityReadDto>().ReverseMap();
+            CreateMap<UniversityWriteDto, University>().ReverseMap();
 
-
-
+            CreateMap<Workstation, WorkstationReadDto>().ReverseMap();
+            CreateMap<WorkstationWriteDto, Workstation>().ReverseMap();
         }
     }
 }
